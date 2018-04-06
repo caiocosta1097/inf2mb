@@ -7,10 +7,5 @@
 	<classpathentry kind="lib" path="C:/Users/17259196/Downloads/UCanAccess-4.0.3-bin/UCanAccess-4.0.3-bin/lib/commons-logging-1.1.3.jar"/>
 	<classpathentry kind="lib" path="C:/Users/17259196/Downloads/UCanAccess-4.0.3-bin/UCanAccess-4.0.3-bin/lib/hsqldb.jar"/>
 	<classpathentry kind="lib" path="C:/Users/17259196/Downloads/UCanAccess-4.0.3-bin/UCanAccess-4.0.3-bin/lib/jackcess-2.1.9.jar"/>
-	<classpathentry kind="lib" path="C:/Users/caioc/OneDrive/Documentos/UCanAccess-4.0.3-bin/UCanAccess-4.0.3-bin/ucanaccess-4.0.3.jar"/>
-	<classpathentry kind="lib" path="C:/Users/caioc/OneDrive/Documentos/UCanAccess-4.0.3-bin/UCanAccess-4.0.3-bin/lib/commons-lang-2.6.jar"/>
-	<classpathentry kind="lib" path="C:/Users/caioc/OneDrive/Documentos/UCanAccess-4.0.3-bin/UCanAccess-4.0.3-bin/lib/commons-logging-1.1.3.jar"/>
-	<classpathentry kind="lib" path="C:/Users/caioc/OneDrive/Documentos/UCanAccess-4.0.3-bin/UCanAccess-4.0.3-bin/lib/hsqldb.jar"/>
-	<classpathentry kind="lib" path="C:/Users/caioc/OneDrive/Documentos/UCanAccess-4.0.3-bin/UCanAccess-4.0.3-bin/lib/jackcess-2.1.9.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
