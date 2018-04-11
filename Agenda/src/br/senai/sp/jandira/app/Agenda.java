@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 
 import br.senai.sp.jandira.dbUtils.Conexao;
+import br.senai.sp.jandira.view.FrmAgenda;
 
 public class Agenda {
 
@@ -25,7 +26,7 @@ public class Agenda {
 				while (rs.next()){
 					System.out.println("ID: " + rs.getString("id"));
 					System.out.println("Nome: " + rs.getString("nome"));
-					System.out.println("Data de nascimento: " + data.format(rs.getDate("dtNasc")));
+					System.out.println("Data de nascimento: " + data.format(rs.getDate("dataNascimento")));
 					System.out.println("Endereço: " + rs.getString("endereco"));
 					System.out.println("Telefone: " + rs.getString("telefone"));
 					System.out.println("Celular: " + rs.getString("celular"));
@@ -35,6 +36,8 @@ public class Agenda {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
+		FrmAgenda agenda = new FrmAgenda();
+		agenda.setVisible(true);
 		
 	}
 
