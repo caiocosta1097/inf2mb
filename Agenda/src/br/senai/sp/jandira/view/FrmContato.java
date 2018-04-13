@@ -11,12 +11,20 @@ import java.awt.Font;
 import javax.swing.ImageIcon;
 import java.awt.Toolkit;
 import javax.swing.border.EtchedBorder;
+
+import br.senai.sp.jandira.dao.ContatoDAO;
+import br.senai.sp.jandira.model.Contato;
+
 import java.awt.Color;
 import javax.swing.JTextField;
 import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class FrmContato extends JFrame {
 
@@ -48,12 +56,12 @@ public class FrmContato extends JFrame {
 		lblContatos.setBounds(10, 11, 215, 40);
 		painelTitulo.add(lblContatos);
 		
-		JLabel lblNovo = new JLabel(operacao);
-		lblNovo.setForeground(new Color(0, 128, 0));
-		lblNovo.setFont(new Font("Verdana", Font.BOLD, 16));
-		lblNovo.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNovo.setBounds(253, 11, 98, 36);
-		painelTitulo.add(lblNovo);
+		JLabel lblOperacao = new JLabel(operacao);
+		lblOperacao.setForeground(new Color(0, 128, 0));
+		lblOperacao.setFont(new Font("Verdana", Font.BOLD, 16));
+		lblOperacao.setHorizontalAlignment(SwingConstants.CENTER);
+		lblOperacao.setBounds(253, 11, 98, 36);
+		painelTitulo.add(lblOperacao);
 		
 		JPanel painelDados = new JPanel();
 		painelDados.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
@@ -136,6 +144,16 @@ public class FrmContato extends JFrame {
 		txtArea.setWrapStyleWord(true);
 		scrollEndereco.setViewportView(txtArea);
 		
+		JComboBox cbSexo = new JComboBox();
+		cbSexo.setModel(new DefaultComboBoxModel(new String[] {"F", "M"}));
+		cbSexo.setBounds(294, 100, 37, 20);
+		painelDados.add(cbSexo);
+		
+		JLabel lblSexo = new JLabel("Sexo:");
+		lblSexo.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblSexo.setBounds(252, 103, 40, 14);
+		painelDados.add(lblSexo);
+		
 		JPanel painelBotao = new JPanel();
 		painelBotao.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		painelBotao.setBounds(10, 297, 341, 68);
@@ -143,6 +161,24 @@ public class FrmContato extends JFrame {
 		painelBotao.setLayout(null);
 		
 		JButton btnSalvar = new JButton("");
+		btnSalvar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Contato contato = new Contato();
+				contato.setNome(txtNome.getText());
+				contato.setEmail(txtEmail.getText());
+				contato.setCelular(txtCelular.getText());
+				contato.setDtNascimento(txtDataNascimento.getText());
+				contato.setTelefone(txtTelefone.getText());
+				contato.setSexo(cbSexo.getSelectedItem().toString());
+				
+				ContatoDAO contatoDao = new ContatoDAO();
+				
+				if (lblOperacao.getText().equals("NOVO")){
+					contatoDao.gravar();
+				}
+				
+			}
+		});
 		btnSalvar.setBackground(new Color(255, 228, 225));
 		btnSalvar.setIcon(new ImageIcon(FrmContato.class.getResource("/br/senai/sp/jandira/view/salvar.png")));
 		btnSalvar.setBounds(10, 11, 59, 46);

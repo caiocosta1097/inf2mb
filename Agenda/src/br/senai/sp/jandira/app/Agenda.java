@@ -26,11 +26,12 @@ public class Agenda {
 				while (rs.next()){
 					System.out.println("ID: " + rs.getString("id"));
 					System.out.println("Nome: " + rs.getString("nome"));
-					System.out.println("Data de nascimento: " + data.format(rs.getDate("dataNascimento")));
+					System.out.println("Data de nascimento: " + data.format(rs.getDate("dtNasc")));
 					System.out.println("Endereço: " + rs.getString("endereco"));
 					System.out.println("Telefone: " + rs.getString("telefone"));
 					System.out.println("Celular: " + rs.getString("celular"));
 					System.out.println("E-mail: " + rs.getString("email"));
+					System.out.println("Sexo: " + rs.getString("sexo"));
 					System.out.println("---------------------------");
 				}
 			} catch (SQLException e) {

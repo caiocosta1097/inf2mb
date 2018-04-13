@@ -8,6 +8,7 @@ public class Contato {
 	private String telefone;
 	private String celular;
 	private String email;
+	private String sexo;
 	
 	public int getId() {
 		return id;
@@ -51,8 +52,11 @@ public class Contato {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
-	
-	
+	public String getSexo() {
+		return sexo;
+	}
+	public void setSexo(String sexo) {
+		this.sexo = sexo;
+	}
 	
 }

@@ -29,6 +29,8 @@ public class FrmAgenda extends JFrame {
 
 	private JPanel painelPrincipal;
 	private JTable tabelaContatos;
+	private JScrollPane scrollTabela;
+	private JPanel painelTabela;
 
 	public FrmAgenda() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(FrmAgenda.class.getResource("/br/senai/sp/jandira/view/calendar (1).png")));
@@ -54,30 +56,13 @@ public class FrmAgenda extends JFrame {
 		lblTitulo.setBounds(10, 11, 438, 40);
 		painelTitulo.add(lblTitulo);
 		
-		JPanel painelTabela = new JPanel();
+		painelTabela = new JPanel();
 		painelTabela.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "Contatos:", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 255)));
 		painelTabela.setBounds(10, 73, 438, 190);
 		painelPrincipal.add(painelTabela);
 		painelTabela.setLayout(null);
 		
-		JScrollPane scrollTabela = new JScrollPane();
-		scrollTabela.setBounds(10, 21, 418, 158);
-		painelTabela.add(scrollTabela);
-		
-		tabelaContatos = new JTable();
-		tabelaContatos.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null, null},
-				{null, null, null},
-			},
-			new String[] {
-				"ID", "Nome", "E-mail"
-			}
-		));
-		tabelaContatos.getColumnModel().getColumn(0).setPreferredWidth(22);
-		tabelaContatos.getColumnModel().getColumn(1).setPreferredWidth(195);
-		tabelaContatos.getColumnModel().getColumn(2).setPreferredWidth(220);
-		scrollTabela.setViewportView(tabelaContatos);
+		montarTabela();
 		
 		JPanel painelBotoes = new JPanel();
 		painelBotoes.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
@@ -134,5 +119,27 @@ public class FrmAgenda extends JFrame {
 		});
 		btnSair.setBounds(363, 11, 65, 41);
 		painelBotoes.add(btnSair);
+		
+	}
+	
+	public void montarTabela(){
+		scrollTabela = new JScrollPane();
+		scrollTabela.setBounds(10, 21, 418, 158);
+		painelTabela.add(scrollTabela);
+		
+		tabelaContatos = new JTable();
+		tabelaContatos.setModel(new DefaultTableModel(
+			new Object[][] {
+				{null, null, null},
+				{null, null, null},
+			},
+			new String[] {
+				"ID", "Nome", "E-mail"
+			}
+		));
+		tabelaContatos.getColumnModel().getColumn(0).setPreferredWidth(25);
+		tabelaContatos.getColumnModel().getColumn(1).setPreferredWidth(200);
+		tabelaContatos.getColumnModel().getColumn(2).setPreferredWidth(220);
+		scrollTabela.setViewportView(tabelaContatos);
 	}
 }
