@@ -7,6 +7,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.ImageIcon;
 import java.awt.Toolkit;
@@ -35,7 +37,8 @@ public class FrmContato extends JFrame {
 	private JTextField txtCelular;
 	private JTextField txtDataNascimento;
 	private JTextField txtTelefone;
-
+	private JTextArea txtEndereco; 
+	
 	public FrmContato(String operacao) {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(FrmContato.class.getResource("/br/senai/sp/jandira/view/calendar (1).png")));
 		setBounds(100, 100, 377, 415);
@@ -139,10 +142,10 @@ public class FrmContato extends JFrame {
 		scrollEndereco.setBounds(70, 128, 157, 77);
 		painelDados.add(scrollEndereco);
 		
-		JTextArea txtArea = new JTextArea();
-		txtArea.setLineWrap(true);
-		txtArea.setWrapStyleWord(true);
-		scrollEndereco.setViewportView(txtArea);
+		txtEndereco = new JTextArea();
+		txtEndereco.setLineWrap(true);
+		txtEndereco.setWrapStyleWord(true);
+		scrollEndereco.setViewportView(txtEndereco);
 		
 		JComboBox cbSexo = new JComboBox();
 		cbSexo.setModel(new DefaultComboBoxModel(new String[] {"F", "M"}));
@@ -169,12 +172,15 @@ public class FrmContato extends JFrame {
 				contato.setCelular(txtCelular.getText());
 				contato.setDtNascimento(txtDataNascimento.getText());
 				contato.setTelefone(txtTelefone.getText());
+				contato.setEndereco(txtEndereco.getText());
 				contato.setSexo(cbSexo.getSelectedItem().toString());
 				
 				ContatoDAO contatoDao = new ContatoDAO();
+				contatoDao.setContato(contato);
 				
 				if (lblOperacao.getText().equals("NOVO")){
 					contatoDao.gravar();
+					limpar();
 				}
 				
 			}
@@ -189,5 +195,15 @@ public class FrmContato extends JFrame {
 		btnSair.setIcon(new ImageIcon(FrmContato.class.getResource("/br/senai/sp/jandira/view/sair.png")));
 		btnSair.setBounds(272, 11, 59, 46);
 		painelBotao.add(btnSair);
+	}
+	
+	private void limpar(){
+		txtNome.setText("");
+		txtEmail.setText("");
+		txtCelular.setText("");
+		txtTelefone.setText("");
+		txtDataNascimento.setText("");
+		txtEndereco.setText("");
+		txtNome.requestFocus();
 	}
 }

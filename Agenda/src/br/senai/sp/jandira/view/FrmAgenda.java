@@ -16,12 +16,17 @@ import javax.swing.border.LineBorder;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
+import br.senai.sp.jandira.dao.ContatoDAO;
+import br.senai.sp.jandira.model.Contato;
+
 import java.awt.SystemColor;
 import javax.swing.UIManager;
 import javax.swing.border.MatteBorder;
 import javax.swing.border.EtchedBorder;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import java.awt.Toolkit;
 
@@ -128,15 +133,26 @@ public class FrmAgenda extends JFrame {
 		painelTabela.add(scrollTabela);
 		
 		tabelaContatos = new JTable();
-		tabelaContatos.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null, null},
-				{null, null, null},
-			},
-			new String[] {
-				"ID", "Nome", "E-mail"
-			}
-		));
+		
+		DefaultTableModel modeloTabela = new DefaultTableModel();
+		String[] nomesColunas = {"ID", "NOME", "E-MAIL"};
+		modeloTabela.setColumnIdentifiers(nomesColunas);
+		
+		ContatoDAO contatoDAO = new ContatoDAO();
+		ArrayList<Contato> contatos = new ArrayList<>();
+		
+		contatos = contatoDAO.getContatos();
+		
+		Object[] linha = new Object[3];
+		
+		for(Contato contato : contatos){
+			linha[0] = contato.getId();
+			linha[1] = contato.getNome();
+			linha[2] = contato.getEmail();
+			modeloTabela.addRow(linha);
+		}
+		
+		tabelaContatos.setModel(modeloTabela);
 		tabelaContatos.getColumnModel().getColumn(0).setPreferredWidth(25);
 		tabelaContatos.getColumnModel().getColumn(1).setPreferredWidth(200);
 		tabelaContatos.getColumnModel().getColumn(2).setPreferredWidth(220);

@@ -5,13 +5,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 
+import javax.xml.crypto.Data;
+
 import br.senai.sp.jandira.dbUtils.Conexao;
 import br.senai.sp.jandira.view.FrmAgenda;
 
 public class Agenda {
 
-	static SimpleDateFormat data = new SimpleDateFormat( "dd/MM/yyyy" );
 	public static void main(String[] args) {
+		
+		SimpleDateFormat data = new SimpleDateFormat("dd/MM/yyyy");
 		
 		PreparedStatement stm = null;
 		ResultSet rs = null;
@@ -28,11 +31,7 @@ public class Agenda {
 					System.out.println("Nome: " + rs.getString("nome"));
 					System.out.println("Data de nascimento: " + data.format(rs.getDate("dtNasc")));
 					System.out.println("Endereço: " + rs.getString("endereco"));
-					System.out.println("Telefone: " + rs.getString("telefone"));
-					System.out.println("Celular: " + rs.getString("celular"));
-					System.out.println("E-mail: " + rs.getString("email"));
-					System.out.println("Sexo: " + rs.getString("sexo"));
-					System.out.println("---------------------------");
+					System.out.println("-------------------------------");
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
