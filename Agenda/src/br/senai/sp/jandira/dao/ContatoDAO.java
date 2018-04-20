@@ -48,6 +48,33 @@ public class ContatoDAO {
 	}
 	
 	public Contato getContato (int id){
+		
+		contato = new Contato();
+		
+		String sql = "SELECT * FROM contatos WHERE id = ?";
+		
+		try{
+			stm = Conexao.abrirConexao().prepareStatement(sql);
+			stm.setInt(1, id);
+			rs = stm.executeQuery();
+			
+			rs.next();
+			
+			contato.setId(rs.getInt("id"));
+			contato.setNome(rs.getString("nome"));
+			contato.setCelular(rs.getString("celular"));
+			contato.setTelefone(rs.getString("telefone"));
+			contato.setEmail(rs.getString("email"));
+			contato.setSexo(rs.getString("sexo"));
+			contato.setEndereco(rs.getString("endereco"));
+			contato.setDtNascimento(rs.getString("dtNasc"));
+			
+			Conexao.abrirConexao().close();
+		}
+		catch(Exception erro){
+			System.out.println(erro.getMessage());
+		}
+		
 		return contato;
 	}
 	public void setContato(Contato contato){
@@ -57,7 +84,7 @@ public class ContatoDAO {
 	public ArrayList<Contato> getContatos (){
 		ArrayList<Contato> contatos = new ArrayList<>();
 		
-		String sql = "SELECT * FROM contatos";
+		String sql = "SELECT * FROM contatos ORDER BY nome";
 		stm = null;
 		rs = null;
 		
