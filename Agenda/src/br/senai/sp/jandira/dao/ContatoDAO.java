@@ -3,6 +3,7 @@ package br.senai.sp.jandira.dao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
@@ -49,6 +50,8 @@ public class ContatoDAO {
 	
 	public Contato getContato (int id){
 		
+		SimpleDateFormat data = new SimpleDateFormat("dd/MM/yyyy");
+		
 		contato = new Contato();
 		
 		String sql = "SELECT * FROM contatos WHERE id = ?";
@@ -67,7 +70,7 @@ public class ContatoDAO {
 			contato.setEmail(rs.getString("email"));
 			contato.setSexo(rs.getString("sexo"));
 			contato.setEndereco(rs.getString("endereco"));
-			contato.setDtNascimento(rs.getString("dtNasc"));
+			contato.setDtNascimento(data.format(rs.getDate("dtNasc")));
 			
 			Conexao.abrirConexao().close();
 		}

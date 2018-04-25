@@ -14,7 +14,7 @@ public class Agenda {
 
 	public static void main(String[] args) {
 		
-		SimpleDateFormat data = new SimpleDateFormat("dd/MM/yyyy");
+		/* SimpleDateFormat data = new SimpleDateFormat("dd/MM/yyyy");
 		
 		PreparedStatement stm = null;
 		ResultSet rs = null;
@@ -35,7 +35,7 @@ public class Agenda {
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
-			}
+			} */
 		FrmAgenda agenda = new FrmAgenda();
 		agenda.setVisible(true);
 		

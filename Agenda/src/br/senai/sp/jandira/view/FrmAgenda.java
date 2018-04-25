@@ -28,7 +28,9 @@ import javax.swing.border.MatteBorder;
 import javax.swing.border.EtchedBorder;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.awt.event.ActionEvent;
 import java.awt.Toolkit;
 
@@ -40,11 +42,13 @@ public class FrmAgenda extends JFrame {
 	private JPanel painelTabela;
 
 	public FrmAgenda() {
+		setBackground(new Color(255, 228, 225));
 		setIconImage(Toolkit.getDefaultToolkit().getImage(FrmAgenda.class.getResource("/br/senai/sp/jandira/view/calendar (1).png")));
 		setTitle("Agenda de Contatos");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 474, 387);
 		painelPrincipal = new JPanel();
+		painelPrincipal.setBackground(new Color(255, 228, 225));
 		painelPrincipal.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(painelPrincipal);
 		painelPrincipal.setLayout(null);
@@ -56,6 +60,7 @@ public class FrmAgenda extends JFrame {
 		painelTitulo.setLayout(null);
 		
 		JLabel lblTitulo = new JLabel(" Agenda");
+		lblTitulo.setBackground(new Color(255, 228, 225));
 		lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTitulo.setForeground(new Color(0, 0, 0));
 		lblTitulo.setIcon(new ImageIcon(FrmAgenda.class.getResource("/br/senai/sp/jandira/view/calendar (1).png")));
@@ -63,7 +68,16 @@ public class FrmAgenda extends JFrame {
 		lblTitulo.setBounds(10, 11, 438, 40);
 		painelTitulo.add(lblTitulo);
 		
+		SimpleDateFormat data = new SimpleDateFormat("dd/MM/yyyy");
+		
+		JLabel lblData = new JLabel();
+		lblData.setBounds(385, 11, 63, 14);
+		Date dataAtual = new Date();
+		lblData.setText(data.format(dataAtual));
+		painelTitulo.add(lblData);
+		
 		painelTabela = new JPanel();
+		painelTabela.setBackground(new Color(255, 228, 225));
 		painelTabela.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "Contatos:", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 255)));
 		painelTabela.setBounds(10, 73, 438, 190);
 		painelPrincipal.add(painelTabela);
@@ -72,6 +86,7 @@ public class FrmAgenda extends JFrame {
 		montarTabela();
 		
 		JPanel painelBotoes = new JPanel();
+		painelBotoes.setBackground(new Color(255, 228, 225));
 		painelBotoes.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		painelBotoes.setBounds(10, 274, 438, 63);
 		painelPrincipal.add(painelBotoes);
@@ -85,7 +100,7 @@ public class FrmAgenda extends JFrame {
 			}
 		});
 		btnNovo.setToolTipText("Adicionar contato");
-		btnNovo.setBackground(new Color(255, 228, 225));
+		btnNovo.setBackground(Color.WHITE);
 		btnNovo.setIcon(new ImageIcon(FrmAgenda.class.getResource("/br/senai/sp/jandira/view/adicionar.png")));
 		btnNovo.setBounds(10, 11, 80, 41);
 		painelBotoes.add(btnNovo);
@@ -98,7 +113,7 @@ public class FrmAgenda extends JFrame {
 			}
 		});
 		btnExcluir.setToolTipText("Excluir contato");
-		btnExcluir.setBackground(new Color(255, 228, 225));
+		btnExcluir.setBackground(Color.WHITE);
 		btnExcluir.setIcon(new ImageIcon(FrmAgenda.class.getResource("/br/senai/sp/jandira/view/deletar.png")));
 		btnExcluir.setBounds(220, 11, 80, 41);
 		painelBotoes.add(btnExcluir);
@@ -107,27 +122,42 @@ public class FrmAgenda extends JFrame {
 		btnEditar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				int linha;
-				linha = tabelaContatos.getSelectedRow();
-				
-				int id;
-				id = (int) tabelaContatos.getValueAt(linha, 0);
-				
-				ContatoDAO contatoDAO = new ContatoDAO();
-				
-				FrmContato contato = new FrmContato("EDITAR");
-				//contato.setVisible(true);
+				try{
+					int linha;
+					linha = tabelaContatos.getSelectedRow();
+					
+					int id;
+					id = (int) tabelaContatos.getValueAt(linha, 0);
+					
+					ContatoDAO contatoDAO = new ContatoDAO();
+					Contato contato = contatoDAO.getContato(id);
+					
+					FrmContato frmContato = new FrmContato("EDITAR");
+					frmContato.setTxtId(String.valueOf(contato.getId()));
+					frmContato.setTxtNome(contato.getNome());
+					frmContato.setTxtCelular(contato.getCelular());
+					frmContato.setTxtTelefone(contato.getTelefone());
+					frmContato.setTxtDataNascimento(contato.getDtNascimento());
+					frmContato.setTxtEmail(contato.getEmail());
+					frmContato.setTxtEndereco(contato.getEndereco());
+					frmContato.setCbSexo(contato.getSexo());
+					
+					frmContato.setVisible(true);
+				}
+				catch(Exception erro){
+					JOptionPane.showMessageDialog(null, "Selecione um contato!", "Atenção", JOptionPane.INFORMATION_MESSAGE);
+				}
 			}
 		});
 		btnEditar.setToolTipText("Editar contato");
-		btnEditar.setBackground(new Color(255, 228, 225));
+		btnEditar.setBackground(Color.WHITE);
 		btnEditar.setIcon(new ImageIcon(FrmAgenda.class.getResource("/br/senai/sp/jandira/view/editar.png")));
 		btnEditar.setBounds(115, 11, 80, 41);
 		painelBotoes.add(btnEditar);
 		
 		JButton btnSair = new JButton("");
 		btnSair.setToolTipText("Sair da Aplica\u00E7\u00E3o");
-		btnSair.setBackground(new Color(255, 228, 225));
+		btnSair.setBackground(Color.WHITE);
 		btnSair.setIcon(new ImageIcon(FrmAgenda.class.getResource("/br/senai/sp/jandira/view/sair.png")));
 		btnSair.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
