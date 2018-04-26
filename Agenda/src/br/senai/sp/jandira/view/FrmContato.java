@@ -26,6 +26,7 @@ import javax.swing.SwingConstants;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.event.ActionListener;
+import java.sql.Date;
 import java.awt.event.ActionEvent;
 
 public class FrmContato extends JFrame {
@@ -216,6 +217,13 @@ public class FrmContato extends JFrame {
 					contatoDao.gravar();
 					limpar();
 				}
+				else if (lblOperacao.getText().equals("EDITAR")) {
+					contatoDao.atualizar();
+				}
+				else if (lblOperacao.getText().equals("EXCLUIR")){
+					contatoDao.excluir();
+					limpar();
+				}
 
 			}
 		});
@@ -232,6 +240,7 @@ public class FrmContato extends JFrame {
 	}
 
 	private void limpar() {
+		txtId.setText("");
 		txtNome.setText("");
 		txtEmail.setText("");
 		txtCelular.setText("");

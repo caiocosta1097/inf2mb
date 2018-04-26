@@ -108,8 +108,31 @@ public class FrmAgenda extends JFrame {
 		JButton btnExcluir = new JButton("");
 		btnExcluir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				FrmContato contato = new FrmContato("EXCLUIR");
-				contato.setVisible(true);
+				try{
+					int linha;
+					linha = tabelaContatos.getSelectedRow();
+					
+					int id;
+					id = (int) tabelaContatos.getValueAt(linha, 0);
+					
+					ContatoDAO contatoDAO = new ContatoDAO();
+					Contato contato = contatoDAO.getContato(id);
+					
+					FrmContato frmContato = new FrmContato("EXCLUIR");
+					frmContato.setTxtId(String.valueOf(contato.getId()));
+					frmContato.setTxtNome(contato.getNome());
+					frmContato.setTxtCelular(contato.getCelular());
+					frmContato.setTxtTelefone(contato.getTelefone());
+					frmContato.setTxtDataNascimento(String.valueOf(contato.getDtNascimento()));
+					frmContato.setTxtEmail(contato.getEmail());
+					frmContato.setTxtEndereco(contato.getEndereco());
+					frmContato.setCbSexo(contato.getSexo());
+					
+					frmContato.setVisible(true);
+				}
+				catch(Exception erro){
+					JOptionPane.showMessageDialog(null, "Selecione um contato!", "Atenção", JOptionPane.INFORMATION_MESSAGE);
+				}
 			}
 		});
 		btnExcluir.setToolTipText("Excluir contato");
@@ -137,7 +160,7 @@ public class FrmAgenda extends JFrame {
 					frmContato.setTxtNome(contato.getNome());
 					frmContato.setTxtCelular(contato.getCelular());
 					frmContato.setTxtTelefone(contato.getTelefone());
-					frmContato.setTxtDataNascimento(contato.getDtNascimento());
+					frmContato.setTxtDataNascimento(String.valueOf(contato.getDtNascimento()));
 					frmContato.setTxtEmail(contato.getEmail());
 					frmContato.setTxtEndereco(contato.getEndereco());
 					frmContato.setCbSexo(contato.getSexo());

@@ -1,5 +1,7 @@
 package br.senai.sp.jandira.model;
 
+import java.sql.Date;
+
 public class Contato {
 	private int id;
 	private String nome;
