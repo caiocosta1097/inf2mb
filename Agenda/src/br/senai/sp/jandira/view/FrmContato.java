@@ -225,7 +225,7 @@ public class FrmContato extends JFrame {
 					limpar();
 				}
 
-			}
+			} 
 		});
 		btnSalvar.setBackground(new Color(255, 228, 225));
 		btnSalvar.setIcon(new ImageIcon(FrmContato.class.getResource("/br/senai/sp/jandira/view/salvar.png")));
