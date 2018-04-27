@@ -35,6 +35,7 @@ public class ContatoDAO {
 			stm.setString(6, contato.getEmail());
 			stm.setString(7, contato.getSexo());
 			stm.execute();
+			stm.close();
 			JOptionPane.showMessageDialog(null, "Contato gravado com sucesso!");
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -42,11 +43,10 @@ public class ContatoDAO {
 
 	}
 
-	public void atualizar() {
+	public void atualizar(int id) {
 		String sql = "UPDATE contatos SET nome = ?, dtNasc = ?, " + "endereco = ?, telefone = ?, celular = ?, "
-				+ "email = ?, sexo = ?";
+				+ "email = ?, sexo = ?  WHERE id = ?";
 		stm = null;
-
 		try {
 			stm = Conexao.abrirConexao().prepareStatement(sql);
 			stm.setString(1, contato.getNome());
@@ -56,20 +56,23 @@ public class ContatoDAO {
 			stm.setString(5, contato.getCelular());
 			stm.setString(6, contato.getEmail());
 			stm.setString(7, contato.getSexo());
+			stm.setInt(8, id);
 			stm.execute();
+			stm.close();
 			JOptionPane.showMessageDialog(null, "Contato atualizado com sucesso!");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
 
-	public void excluir() {
+	public void excluir(int id) {
 		String sql = "DELETE FROM contatos WHERE id = ?";
 		
 		try {
 			stm = Conexao.abrirConexao().prepareStatement(sql);
-			stm.setInt(1, contato.getId());
+			stm.setInt(1, id);
 			stm.execute();
+			stm.close();
 			JOptionPane.showMessageDialog(null, "Contato deletado com sucesso!");
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -100,7 +103,8 @@ public class ContatoDAO {
 			contato.setSexo(rs.getString("sexo"));
 			contato.setEndereco(rs.getString("endereco"));
 			contato.setDtNascimento(data.format(rs.getDate("dtNasc")));
-
+			stm.close();
+			
 			Conexao.abrirConexao().close();
 		} catch (Exception erro) {
 			System.out.println(erro.getMessage());

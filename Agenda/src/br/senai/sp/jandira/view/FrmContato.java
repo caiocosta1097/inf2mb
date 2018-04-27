@@ -218,10 +218,10 @@ public class FrmContato extends JFrame {
 					limpar();
 				}
 				else if (lblOperacao.getText().equals("EDITAR")) {
-					contatoDao.atualizar();
+					contatoDao.atualizar(Integer.parseInt(txtId.getText()));
 				}
 				else if (lblOperacao.getText().equals("EXCLUIR")){
-					contatoDao.excluir();
+					contatoDao.excluir(Integer.parseInt(txtId.getText()));
 					limpar();
 				}
 
