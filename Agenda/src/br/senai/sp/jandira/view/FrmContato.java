@@ -13,6 +13,7 @@ import java.awt.Font;
 import javax.swing.ImageIcon;
 import java.awt.Toolkit;
 import javax.swing.border.EtchedBorder;
+import javax.swing.text.MaskFormatter;
 
 import br.senai.sp.jandira.dao.ContatoDAO;
 import br.senai.sp.jandira.model.Contato;
@@ -26,8 +27,11 @@ import javax.swing.SwingConstants;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.event.ActionListener;
-import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.awt.event.ActionEvent;
+import javax.swing.JFormattedTextField;
 
 public class FrmContato extends JFrame {
 
@@ -36,7 +40,8 @@ public class FrmContato extends JFrame {
 	private JTextField txtNome;
 	private JTextField txtEmail;
 	private JTextField txtCelular;
-	private JTextField txtDataNascimento;
+	private JFormattedTextField txtDataNascimento;
+	//private JTextField txtDataNascimento;
 	private JTextField txtTelefone;
 	private JTextArea txtEndereco;
 	private JComboBox cbSexo;
@@ -78,6 +83,7 @@ public class FrmContato extends JFrame {
 				.getImage(FrmContato.class.getResource("/br/senai/sp/jandira/view/calendar (1).png")));
 		setBounds(100, 100, 377, 415);
 		painelPrincipal = new JPanel();
+		painelPrincipal.setBackground(new Color(255, 228, 225));
 		painelPrincipal.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(painelPrincipal);
 		painelPrincipal.setLayout(null);
@@ -102,6 +108,7 @@ public class FrmContato extends JFrame {
 		painelTitulo.add(lblOperacao);
 
 		JPanel painelDados = new JPanel();
+		painelDados.setBackground(new Color(255, 228, 225));
 		painelDados.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		painelDados.setBounds(10, 70, 341, 216);
 		painelPrincipal.add(painelDados);
@@ -167,9 +174,19 @@ public class FrmContato extends JFrame {
 		lblDataDeNascimento.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblDataDeNascimento.setBounds(10, 103, 122, 14);
 		painelDados.add(lblDataDeNascimento);
-
-		txtDataNascimento = new JTextField();
-		txtDataNascimento.setBounds(133, 100, 86, 20);
+		
+		// DEFINIR MÁSCARA DA DATA
+		MaskFormatter dataMask = null;
+		
+		try {
+			dataMask = new MaskFormatter("##/##/####");
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
+		txtDataNascimento = new JFormattedTextField(dataMask);
+		
+		txtDataNascimento.setBounds(132, 100, 71, 20);
 		painelDados.add(txtDataNascimento);
 		txtDataNascimento.setColumns(10);
 
@@ -193,6 +210,7 @@ public class FrmContato extends JFrame {
 		painelDados.add(lblSexo);
 
 		JPanel painelBotao = new JPanel();
+		painelBotao.setBackground(new Color(255, 228, 225));
 		painelBotao.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		painelBotao.setBounds(10, 297, 341, 68);
 		painelPrincipal.add(painelBotao);
@@ -201,11 +219,25 @@ public class FrmContato extends JFrame {
 		JButton btnSalvar = new JButton("");
 		btnSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				SimpleDateFormat toDate = new SimpleDateFormat("dd/MM/yyyy");
+				SimpleDateFormat toDataBase = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSSSSS");
+				
+				Date usuarioDate = null;
+				String dateBanco = null;
+				
+				try {
+					usuarioDate = toDate.parse(txtDataNascimento.getText());
+					dateBanco = toDataBase.format(usuarioDate);
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+				
+				
 				Contato contato = new Contato();
 				contato.setNome(txtNome.getText());
 				contato.setEmail(txtEmail.getText());
 				contato.setCelular(txtCelular.getText());
-				contato.setDtNascimento(txtDataNascimento.getText());
+				contato.setDtNascimento(dateBanco);
 				contato.setTelefone(txtTelefone.getText());
 				contato.setEndereco(txtEndereco.getText());
 				contato.setSexo(cbSexo.getSelectedItem().toString());
@@ -221,19 +253,36 @@ public class FrmContato extends JFrame {
 					contatoDao.atualizar(Integer.parseInt(txtId.getText()));
 				}
 				else if (lblOperacao.getText().equals("EXCLUIR")){
-					contatoDao.excluir(Integer.parseInt(txtId.getText()));
-					limpar();
+					int resposta = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja excluir "
+							+  contato.getNome() + "?", "Atenção", JOptionPane.YES_NO_OPTION);
+					
+					if(resposta == 0){
+						contatoDao.excluir(Integer.parseInt(txtId.getText()));
+						dispose();
+					}
 				}
 
 			} 
 		});
-		btnSalvar.setBackground(new Color(255, 228, 225));
-		btnSalvar.setIcon(new ImageIcon(FrmContato.class.getResource("/br/senai/sp/jandira/view/salvar.png")));
+		btnSalvar.setBackground(Color.WHITE);
+		
+		if(operacao.equals("EXCLUIR")){
+			btnSalvar.setIcon(new ImageIcon(FrmAgenda.class.getResource("/br/senai/sp/jandira/view/deletar.png")));
+		}
+		else{
+			btnSalvar.setIcon(new ImageIcon(FrmContato.class.getResource("/br/senai/sp/jandira/view/salvar.png")));
+		}
+		
 		btnSalvar.setBounds(10, 11, 59, 46);
 		painelBotao.add(btnSalvar);
 
 		JButton btnSair = new JButton("");
-		btnSair.setBackground(new Color(255, 228, 225));
+		btnSair.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				dispose();
+			}
+		});
+		btnSair.setBackground(Color.WHITE);
 		btnSair.setIcon(new ImageIcon(FrmContato.class.getResource("/br/senai/sp/jandira/view/sair.png")));
 		btnSair.setBounds(272, 11, 59, 46);
 		painelBotao.add(btnSair);

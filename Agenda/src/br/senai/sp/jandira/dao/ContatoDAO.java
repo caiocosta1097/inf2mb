@@ -18,8 +18,6 @@ public class ContatoDAO {
 	private PreparedStatement stm;
 	private ResultSet rs;
 
-	SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSSSSS");
-
 	public void gravar() {
 		String sql = "INSERT INTO contatos" + "(nome, dtNasc, endereco, telefone, celular, email, sexo) "
 				+ "VALUES (?, ?, ?, ?, ?, ?, ?)";
