@@ -41,7 +41,6 @@ public class FrmContato extends JFrame {
 	private JTextField txtEmail;
 	private JTextField txtCelular;
 	private JFormattedTextField txtDataNascimento;
-	//private JTextField txtDataNascimento;
 	private JTextField txtTelefone;
 	private JTextArea txtEndereco;
 	private JComboBox cbSexo;
