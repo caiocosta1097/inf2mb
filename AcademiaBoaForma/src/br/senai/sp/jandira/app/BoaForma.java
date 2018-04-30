@@ -10,7 +10,7 @@ public class BoaForma {
 		
 		Conexao.abrirConexao();
 		FrmAcademia frmAcademia = new FrmAcademia();
-		FrmClientes frmClientes = new FrmClientes();
+		//FrmClientes frmClientes = new FrmClientes();
 		frmAcademia.setVisible(true);
 
 	}

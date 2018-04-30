@@ -16,15 +16,23 @@ import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
+import br.senai.sp.jandira.dao.ClienteDAO;
+import br.senai.sp.jandira.model.Cliente;
 import br.senai.sp.jandira.view.FrmAcademia;
 import java.awt.SystemColor;
 import java.awt.Toolkit;
 import javax.swing.border.EtchedBorder;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.awt.event.ActionEvent;
 
 public class FrmAcademia extends JFrame {
 
 	private JPanel painelPrincipal;
-	private JTable table;
+	private JTable tabelaClientes;
+	private JPanel painelTabela;
+	private JScrollPane scrollTabela;
 
 	public FrmAcademia() {
 		setIconImage(Toolkit.getDefaultToolkit()
@@ -55,34 +63,42 @@ public class FrmAcademia extends JFrame {
 		lblTitulo.setBounds(10, 0, 437, 56);
 		painelTitulo.add(lblTitulo);
 
-		JPanel painelTabela = new JPanel();
+		painelTabela = new JPanel();
 		painelTabela.setBackground(new Color(255, 255, 225));
-		painelTabela.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0), 1, true),
-				"Clientes da Academia:", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(66, 149, 206)));
+		painelTabela.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0), 1, true), "Clientes da Academia:",
+				TitledBorder.LEADING, TitledBorder.TOP, null, new Color(66, 149, 206)));
 		painelTabela.setBounds(10, 78, 437, 178);
 		painelPrincipal.add(painelTabela);
 		painelTabela.setLayout(null);
 
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setFont(new Font("Arial", Font.BOLD, 12));
-		scrollPane.setBounds(10, 22, 417, 145);
-		painelTabela.add(scrollPane);
-
-		table = new JTable();
-		table.setModel(new DefaultTableModel(
-				new Object[][] { { null, null, null, null }, { null, null, null, null }, { null, null, null, null },
-						{ null, null, null, null }, { null, null, null, null }, { null, null, null, null }, },
-				new String[] { "ID", "NOME", "TELEFONE", "E-MAIL" }));
-		table.getColumnModel().getColumn(0).setPreferredWidth(25);
-		table.getColumnModel().getColumn(0).setMinWidth(25);
-		table.getColumnModel().getColumn(1).setPreferredWidth(140);
-		table.getColumnModel().getColumn(1).setMinWidth(25);
-		table.getColumnModel().getColumn(2).setPreferredWidth(85);
-		table.getColumnModel().getColumn(3).setPreferredWidth(160);
-		table.setFont(new Font("Arial", Font.PLAIN, 12));
-		scrollPane.setViewportView(table);
+		scrollTabela = new JScrollPane();
+		scrollTabela.setFont(new Font("Arial", Font.BOLD, 12));
+		scrollTabela.setBounds(10, 22, 417, 145);
+		painelTabela.add(scrollTabela);
+		
+		montarTabela();
 
 		JButton btnAdicionar = new JButton("");
+		btnAdicionar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				// // Data inicial
+				// Calendar dataInicio = Calendar.getInstance();
+				// // Atribui a data de 10/FEV/2008
+				// dataInicio.set(1997, Calendar.FEBRUARY, 10);
+				// // Data de hoje
+				// Calendar dataFinal = Calendar.getInstance();
+				// // Calcula a diferença entre hoje e da data de inicio
+				// Long diferenca = dataFinal.getTimeInMillis() -
+				// dataInicio.getTimeInMillis();
+				// // Quantidade de milissegundos em um dia
+				// int tempoDia = 1000 * 60 * 60 * 24;
+				// Long diasDiferenca = diferenca / tempoDia;
+				// int idade = Integer.valueOf(diasDiferenca.toString());
+				// int anos = idade/365;
+				// System.out.println("Entre a data inicial e final são " +
+				// anos + " dias de diferença.");
+			}
+		});
 		btnAdicionar.setBackground(new Color(255, 255, 255));
 		btnAdicionar.setIcon(new ImageIcon(FrmAcademia.class.getResource("/br/senai/sp/jandira/images/adicionar.png")));
 		btnAdicionar.setFont(new Font("Arial", Font.PLAIN, 11));
@@ -110,6 +126,37 @@ public class FrmAcademia extends JFrame {
 		btnExcluir.setBounds(164, 267, 62, 52);
 		painelPrincipal.add(btnExcluir);
 
-		setVisible(true);
+	}
+	
+	public void montarTabela(){
+		scrollTabela = new JScrollPane();
+		scrollTabela.setBounds(10, 22, 417, 145);
+		painelTabela.add(scrollTabela);
+		
+		tabelaClientes = new JTable();
+		
+		DefaultTableModel modeloTabela = new DefaultTableModel();
+		String[] nomesColunas = {"CPF", "NOME", "SEXO"};
+		modeloTabela.setColumnIdentifiers(nomesColunas);
+		
+		ClienteDAO clienteDAO = new ClienteDAO();
+		ArrayList<Cliente> clientes = new ArrayList<>();
+		
+		clientes = clienteDAO.getContatos();
+		
+		Object[] linha = new Object[3];
+		
+		for(Cliente cliente : clientes){
+			linha[0] = cliente.getCpf();
+			linha[1] = cliente.getNome();
+			linha[2] = cliente.getSexo();
+			modeloTabela.addRow(linha);
+		}
+		
+		tabelaClientes.setModel(modeloTabela);
+		tabelaClientes.getColumnModel().getColumn(0).setPreferredWidth(25);
+		tabelaClientes.getColumnModel().getColumn(1).setPreferredWidth(200);
+		tabelaClientes.getColumnModel().getColumn(2).setPreferredWidth(220);
+		scrollTabela.setViewportView(tabelaClientes);
 	}
 }

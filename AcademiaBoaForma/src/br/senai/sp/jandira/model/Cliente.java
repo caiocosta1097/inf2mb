@@ -1,10 +1,10 @@
 package br.senai.sp.jandira.model;
 
 public class Cliente {
-
+	
 	// Atributos da Classe
 
-	private int cpf;
+	private String cpf;
 	private String nome;
 	private String dtNasc;
 	private double peso;
@@ -23,11 +23,11 @@ public class Cliente {
 
 	// Métodos Getters e Setters
 
-	public int getCpf() {
+	public String getCpf() {
 		return cpf;
 	}
 
-	public void setCpf(int cpf) {
+	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
 
@@ -206,5 +206,5 @@ public class Cliente {
 
 		return fcm;
 	}
-
+	
 }
