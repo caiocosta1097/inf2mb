@@ -15,10 +15,21 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.ImageIcon;
+import javax.swing.JTextField;
+import javax.swing.JRadioButton;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
 
 public class FrmClientes extends JFrame {
 
 	private JPanel painelTabela;
+	private JTextField txtNome;
+	private JTextField txtCpf;
+	private JTextField txtEmail;
+	private JTextField txtDtNasc;
+	private JTextField txtAltura;
+	private JTextField txtPeso;
 
 	public FrmClientes() {
 		setResizable(false);
@@ -57,19 +68,20 @@ public class FrmClientes extends JFrame {
 		painelDados.add(lblNome);
 		
 		JLabel lblCpf = new JLabel("CPF:");
-		lblCpf.setBounds(10, 52, 46, 14);
+		lblCpf.setBounds(201, 27, 46, 14);
 		painelDados.add(lblCpf);
 		
 		JLabel lblEmail = new JLabel("E-mail:");
 		lblEmail.setBounds(10, 77, 46, 14);
 		painelDados.add(lblEmail);
 		
-		JLabel lblSexo = new JLabel("Sexo");
-		lblSexo.setBounds(10, 102, 46, 14);
+		JLabel lblSexo = new JLabel("Sexo:");
+		lblSexo.setBounds(10, 127, 46, 14);
 		painelDados.add(lblSexo);
 		
-		JLabel lblDtNasc = new JLabel("Data de nascimento:");
-		lblDtNasc.setBounds(10, 127, 105, 14);
+		JLabel lblDtNasc = new JLabel("Data Nascimento:");
+		lblDtNasc.setHorizontalAlignment(SwingConstants.CENTER);
+		lblDtNasc.setBounds(201, 77, 105, 14);
 		painelDados.add(lblDtNasc);
 		
 		JLabel lblAltura = new JLabel("Altura:");
@@ -77,8 +89,77 @@ public class FrmClientes extends JFrame {
 		painelDados.add(lblAltura);
 		
 		JLabel lblPeso = new JLabel("Peso:");
-		lblPeso.setBounds(10, 177, 46, 14);
+		lblPeso.setBounds(68, 152, 46, 14);
 		painelDados.add(lblPeso);
+		
+		txtNome = new JTextField();
+		txtNome.setBounds(10, 46, 181, 20);
+		painelDados.add(txtNome);
+		txtNome.setColumns(10);
+		
+		txtCpf = new JTextField();
+		txtCpf.setBounds(201, 46, 99, 20);
+		painelDados.add(txtCpf);
+		txtCpf.setColumns(10);
+		
+		txtEmail = new JTextField();
+		txtEmail.setBounds(10, 96, 181, 20);
+		painelDados.add(txtEmail);
+		txtEmail.setColumns(10);
+		
+		txtDtNasc = new JTextField();
+		txtDtNasc.setBounds(211, 96, 65, 20);
+		painelDados.add(txtDtNasc);
+		txtDtNasc.setColumns(10);
+		
+		JRadioButton btnRadioHomem = new JRadioButton("Homem");
+		btnRadioHomem.setBackground(new Color(255, 255, 225));
+		btnRadioHomem.setBounds(49, 123, 65, 23);
+		painelDados.add(btnRadioHomem);
+		
+		JRadioButton btnRadioMulher = new JRadioButton("Mulher");
+		btnRadioMulher.setBackground(new Color(255, 255, 225));
+		btnRadioMulher.setBounds(125, 123, 65, 23);
+		painelDados.add(btnRadioMulher);
+		
+		txtAltura = new JTextField();
+		txtAltura.setBounds(10, 171, 34, 20);
+		painelDados.add(txtAltura);
+		txtAltura.setColumns(10);
+		
+		txtPeso = new JTextField();
+		txtPeso.setColumns(10);
+		txtPeso.setBounds(68, 171, 46, 20);
+		painelDados.add(txtPeso);
+		
+		JLabel lblCm = new JLabel("cm");
+		lblCm.setBounds(49, 174, 18, 14);
+		painelDados.add(lblCm);
+		
+		JLabel lblQuilos = new JLabel("quilos");
+		lblQuilos.setBounds(118, 174, 34, 14);
+		painelDados.add(lblQuilos);
+		
+		JLabel lblAtividade = new JLabel("N\u00EDvel de Atividade:");
+		lblAtividade.setBounds(151, 152, 99, 14);
+		painelDados.add(lblAtividade);
+		
+		JComboBox comboBox = new JComboBox();
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Sedent\u00E1rio ", "Levemente Ativo", "Moderadamente Ativo", "Bastante Ativo", "Muito Ativo"}));
+		comboBox.setBounds(151, 171, 149, 20);
+		painelDados.add(comboBox);
+		
+		JButton btnDinamico = new JButton("");
+		btnDinamico.setIcon(new ImageIcon(FrmClientes.class.getResource("/br/senai/jandira/sp/images/salvar.png")));
+		btnDinamico.setBackground(new Color(255, 255, 255));
+		btnDinamico.setBounds(10, 202, 58, 52);
+		painelDados.add(btnDinamico);
+		
+		JButton btnSair = new JButton("");
+		btnSair.setBackground(new Color(255, 255, 255));
+		btnSair.setIcon(new ImageIcon(FrmClientes.class.getResource("/br/senai/jandira/sp/images/sair.png")));
+		btnSair.setBounds(242, 202, 58, 52);
+		painelDados.add(btnSair);
 		
 		JPanel painelResultados = new JPanel();
 		painelResultados.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), "Resultados:", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(37, 183, 211)));
@@ -87,5 +168,4 @@ public class FrmClientes extends JFrame {
 		painelTabela.add(painelResultados);
 		painelResultados.setLayout(null);
 	}
-
 }
