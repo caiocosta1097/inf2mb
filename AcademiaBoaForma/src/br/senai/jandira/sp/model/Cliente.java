@@ -6,6 +6,7 @@ public class Cliente {
 	private String email;
 	private String sexo;
 	private String dtNasc;
+	private String atividade;
 	private int idade;
 	private double altura;
 	private double peso;
@@ -48,6 +49,14 @@ public class Cliente {
 
 	public void setDtNasc(String dtNasc) {
 		this.dtNasc = dtNasc;
+	}
+	
+	public String getAtividade() {
+		return atividade;
+	}
+
+	public void setAtividade(String atividade) {
+		this.atividade = atividade;
 	}
 
 	public int getIdade() {

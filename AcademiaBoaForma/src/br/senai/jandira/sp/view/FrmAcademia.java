@@ -26,6 +26,8 @@ import br.senai.jandira.sp.model.Cliente;
 
 import javax.swing.JButton;
 import javax.swing.border.MatteBorder;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class FrmAcademia extends JFrame {
 
@@ -77,6 +79,12 @@ public class FrmAcademia extends JFrame {
 		painelBotoes.setLayout(null);
 		
 		JButton btnAdicionar = new JButton("");
+		btnAdicionar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				FrmClientes frmClientes = new FrmClientes("NOVO");
+				frmClientes.setVisible(true);
+			}
+		});
 		btnAdicionar.setBackground(new Color(255, 255, 255));
 		btnAdicionar.setIcon(new ImageIcon(FrmAcademia.class.getResource("/br/senai/jandira/sp/images/adicionar.png")));
 		btnAdicionar.setBounds(10, 11, 65, 53);
