@@ -7,9 +7,8 @@ public class BoaForma {
 
 	public static void main(String[] args) {
 		
-		Conexao.abrirConexao();
-		FrmAcademia frmAcademia = new FrmAcademia();
-		frmAcademia.setVisible(true);
+		FrmAcademia boaForma = new FrmAcademia();
+		boaForma.setVisible(true);
 
 	}
 
