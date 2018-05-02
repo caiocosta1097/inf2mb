@@ -8,6 +8,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.Toolkit;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 import javax.swing.border.EtchedBorder;
 import java.awt.Color;
@@ -29,6 +31,9 @@ import br.senai.jandira.sp.model.Cliente;
 import javax.swing.JButton;
 import javax.swing.border.MatteBorder;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.awt.event.ActionEvent;
 
 public class FrmAcademia extends JFrame {
@@ -151,16 +156,16 @@ public class FrmAcademia extends JFrame {
 	}
 
 	public void abrirJanelaCliente(String operacao) {
-		try{
+		try {
 			int linha;
 			linha = tabelaClientes.getSelectedRow();
-			
+
 			String cpf;
 			cpf = (String) tabelaClientes.getValueAt(linha, 0);
-			
+
 			ClienteDAO clienteDAO = new ClienteDAO();
 			Cliente cliente = clienteDAO.getCliente(cpf);
-			
+
 			FrmClientes frmClientes = new FrmClientes(operacao);
 			frmClientes.setTxtCpf(cliente.getCpf());
 			frmClientes.setTxtNome(cliente.getNome());
@@ -170,9 +175,9 @@ public class FrmAcademia extends JFrame {
 			frmClientes.setTxtPeso(String.valueOf(cliente.getPeso()));
 			frmClientes.setSexo(cliente.getSexo());
 			frmClientes.setCbAtividade(cliente.getAtividade());
-			
+
 			frmClientes.setVisible(true);
-		} catch (Exception erro){
+		} catch (Exception erro) {
 			JOptionPane.showMessageDialog(null, "Selecione um contato!", "Atenção", JOptionPane.INFORMATION_MESSAGE);
 		}
 	}

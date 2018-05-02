@@ -1,5 +1,9 @@
 package br.senai.jandira.sp.model;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.util.Calendar;
+
 public class Cliente {
 	private String cpf;
 	private String nome;
@@ -50,7 +54,7 @@ public class Cliente {
 	public void setDtNasc(String dtNasc) {
 		this.dtNasc = dtNasc;
 	}
-	
+
 	public String getAtividade() {
 		return atividade;
 	}
@@ -81,6 +85,17 @@ public class Cliente {
 
 	public void setPeso(double peso) {
 		this.peso = peso;
+	}
+	
+	public void idade(){
+		LocalDate atual = LocalDate.now();
+		
+		LocalDate dtBanco = LocalDate.parse(getDtNasc());
+		
+		if (atual.compareTo(dtBanco) < 0){
+			long diferencaAnos = ChronoUnit.YEARS.between(atual, dtBanco);
+			System.out.println(diferencaAnos);
+		}
 	}
 
 }
