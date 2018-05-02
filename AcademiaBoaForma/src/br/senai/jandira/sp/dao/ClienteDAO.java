@@ -18,21 +18,23 @@ public class ClienteDAO {
 	private ResultSet rs;
 
 	public void gravar() {
-		String sql = "INSERT INTO clientes (nome, email, sexo, dtNasc, atividade, altura, peso) "
+		String sql = "INSERT INTO clientes (cpf, nome, email, sexo, dtNasc, atividade, altura, peso) "
 				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 		stm = null;
 		
 		try {
 			stm = Conexao.abrirConexao().prepareStatement(sql);
-			stm.setString(1, cliente.getNome());
-			stm.setString(2, cliente.getEmail());
-			stm.setString(3, cliente.getSexo());
-			stm.setString(4, cliente.getDtNasc());
-			stm.setString(5, cliente.getAtividade());
-			stm.setDouble(6, cliente.getAltura());
-			stm.setDouble(7, cliente.getPeso());
+			stm.setString(1, cliente.getCpf());
+			stm.setString(2, cliente.getNome());
+			stm.setString(3, cliente.getEmail());
+			stm.setString(4, cliente.getSexo());
+			stm.setString(5, cliente.getDtNasc());
+			stm.setString(6, cliente.getAtividade());
+			stm.setDouble(7, cliente.getAltura());
+			stm.setDouble(8, cliente.getPeso());
 			stm.execute();
 			stm.close();
+			
 			JOptionPane.showMessageDialog(null, "Cliente gravado com sucesso!");
 		} catch (SQLException erro) {
 			erro.printStackTrace();
@@ -47,28 +49,28 @@ public class ClienteDAO {
 
 	}
 
-	public Cliente getCliente(int id) {
+	public Cliente getCliente(String cpf) {
 		SimpleDateFormat data = new SimpleDateFormat("dd/MM/yyyy");
 		
 		cliente = new Cliente();
 		
-		String sql = "SELECT * FROM clientes WHERE id = ?";
+		String sql = "SELECT * FROM clientes WHERE cpf = ?";
 		
 		try {
 			stm = Conexao.abrirConexao().prepareStatement(sql);
-			stm.setInt(1, id);
+			stm.setString(1, cpf);
 			rs = stm.executeQuery();
 			
 			rs.next();
 			
-			cliente.setId(rs.getInt("id"));
+			cliente.setCpf(rs.getString("cpf"));
 			cliente.setNome(rs.getString("nome"));
 			cliente.setEmail(rs.getString("email"));
 			cliente.setSexo(rs.getString("sexo"));
 			cliente.setDtNasc(data.format(rs.getDate("dtNasc")));
 			cliente.setAtividade(rs.getString("atividade"));
-			cliente.setAltura(rs.getInt("altura"));
-			cliente.setPeso(rs.getInt("peso"));
+			cliente.setAltura(rs.getDouble("altura"));
+			cliente.setPeso(rs.getDouble("peso"));
 			stm.close();
 			
 			Conexao.abrirConexao().close();
@@ -96,14 +98,14 @@ public class ClienteDAO {
 
 			while (rs.next()) {
 				cliente = new Cliente();
-				cliente.setId(rs.getInt("id"));
+				cliente.setCpf(rs.getString("cpf"));
 				cliente.setNome(rs.getString("nome"));
 				cliente.setEmail(rs.getString("email"));
 				cliente.setSexo(rs.getString("sexo"));
 				cliente.setDtNasc(rs.getString("dtNasc"));
 				cliente.setAtividade(rs.getString("atividade"));
-				cliente.setAltura(rs.getInt("altura"));
-				cliente.setPeso(rs.getInt("peso"));
+				cliente.setAltura(rs.getDouble("altura"));
+				cliente.setPeso(rs.getDouble("peso"));
 				
 				clientes.add(cliente);
 			}

@@ -126,7 +126,7 @@ public class FrmAcademia extends JFrame {
 		tabelaClientes = new JTable();
 
 		DefaultTableModel modeloTabela = new DefaultTableModel();
-		String[] nomesColunas = { "ID", "NOME", "E-MAIL" };
+		String[] nomesColunas = { "CPF", "NOME", "E-MAIL" };
 		modeloTabela.setColumnIdentifiers(nomesColunas);
 
 		ClienteDAO clienteDAO = new ClienteDAO();
@@ -137,7 +137,7 @@ public class FrmAcademia extends JFrame {
 		Object[] linha = new Object[3];
 
 		for (Cliente cliente : clientes) {
-			linha[0] = cliente.getId();
+			linha[0] = cliente.getCpf();
 			linha[1] = cliente.getNome();
 			linha[2] = cliente.getEmail();
 
@@ -155,14 +155,14 @@ public class FrmAcademia extends JFrame {
 			int linha;
 			linha = tabelaClientes.getSelectedRow();
 			
-			int id;
-			id = (int) tabelaClientes.getValueAt(linha, 0);
+			String cpf;
+			cpf = (String) tabelaClientes.getValueAt(linha, 0);
 			
 			ClienteDAO clienteDAO = new ClienteDAO();
-			Cliente cliente = clienteDAO.getCliente(id);
+			Cliente cliente = clienteDAO.getCliente(cpf);
 			
 			FrmClientes frmClientes = new FrmClientes(operacao);
-			frmClientes.setTxtId(String.valueOf(cliente.getId()));
+			frmClientes.setTxtCpf(cliente.getCpf());
 			frmClientes.setTxtNome(cliente.getNome());
 			frmClientes.setTxtEmail(cliente.getEmail());
 			frmClientes.setTxtDtNasc(String.valueOf(cliente.getDtNasc()));

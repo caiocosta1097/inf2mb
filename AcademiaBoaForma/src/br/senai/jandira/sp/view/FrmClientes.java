@@ -27,6 +27,9 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JTextArea;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.awt.event.ActionEvent;
 import java.awt.Toolkit;
 
@@ -48,8 +51,8 @@ public class FrmClientes extends JFrame {
 		this.txtNome.setText(nome);
 	}
 
-	public void setTxtId(String id) {
-		this.txtCpf.setText(id);
+	public void setTxtCpf(String cpf) {
+		this.txtCpf.setText(cpf);
 	}
 
 	public void setTxtEmail(String email) {
@@ -67,16 +70,14 @@ public class FrmClientes extends JFrame {
 	public void setTxtPeso(String peso) {
 		this.txtPeso.setText(peso);
 	}
-	
+
 	public void setSexo(String sexo) {
-		if(sexo.equals("M")){
+		if (sexo.equals("M")) {
 			btnRadioHomem.setSelected(true);
-		}else{
+		} else {
 			btnRadioMulher.setSelected(true);
 		}
 	}
-
-	
 
 	public void setCbAtividade(String atividade) {
 		this.cbAtividade.setSelectedItem(atividade);
@@ -271,14 +272,28 @@ public class FrmClientes extends JFrame {
 		painelPrincipal.add(btnDinamico);
 		btnDinamico.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
+
+				SimpleDateFormat toDate = new SimpleDateFormat("dd/MM/yyyy");
+				SimpleDateFormat toDataBase = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSSSSS");
+
+				Date usuarioDate = null;
+				String dateBanco = null;
+
+				try {
+					usuarioDate = toDate.parse(txtDtNasc.getText());
+					dateBanco = toDataBase.format(usuarioDate);
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+
 				Cliente cliente = new Cliente();
+				cliente.setCpf(txtCpf.getText());
 				cliente.setNome(txtNome.getText());
 				cliente.setEmail(txtEmail.getText());
 				cliente.setSexo(btnGrupoSexo.getSelection().getActionCommand());
-				cliente.setDtNasc(txtDtNasc.getText());
-				cliente.setAltura(Integer.parseInt(txtAltura.getText()));
-				cliente.setPeso(Integer.parseInt(txtPeso.getText()));
+				cliente.setDtNasc(dateBanco);
+				cliente.setAltura(Double.parseDouble(txtAltura.getText()));
+				cliente.setPeso(Double.parseDouble(txtPeso.getText()));
 				cliente.setAtividade(cbAtividade.getSelectedItem().toString());
 
 				ClienteDAO clienteDAO = new ClienteDAO();

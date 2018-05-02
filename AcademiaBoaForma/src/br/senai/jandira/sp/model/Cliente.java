@@ -1,7 +1,7 @@
 package br.senai.jandira.sp.model;
 
 public class Cliente {
-	private int id;
+	private String cpf;
 	private String nome;
 	private String email;
 	private String sexo;
@@ -11,12 +11,12 @@ public class Cliente {
 	private double altura;
 	private double peso;
 
-	public int getId() {
-		return id;
+	public String getCpf() {
+		return cpf;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
 	}
 
 	public String getNome() {
