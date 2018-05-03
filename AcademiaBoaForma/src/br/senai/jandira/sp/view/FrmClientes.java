@@ -226,9 +226,9 @@ public class FrmClientes extends JFrame {
 				Cliente cliente = new Cliente();
 				
 				SubtrairDatas();
-				lblRespostaImc.setText(String.valueOf(cliente.getImc()));
-				lblRespostaTmb.setText(String.valueOf(cliente.getTmb()));
-				lblRespostaFcm.setText(String.valueOf(cliente.getFcm()));
+				lblRespostaImc.setText(String.valueOf(cliente.imc()));
+				lblRespostaTmb.setText(String.valueOf(cliente.tmb()));
+				lblRespostaFcm.setText(String.valueOf(cliente.fcm()));
 			}
 		});
 		btnCalcular
