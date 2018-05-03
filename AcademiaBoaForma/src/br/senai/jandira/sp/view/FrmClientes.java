@@ -46,6 +46,10 @@ public class FrmClientes extends JFrame {
 	private JRadioButton btnRadioMulher;
 	private ButtonGroup btnGrupoSexo;
 	private JComboBox cbAtividade;
+	private JLabel lblRespostaIdade;
+	private JLabel lblRespostaImc;
+	private JLabel lblRespostaFcm;
+	private JLabel lblRespostaTmb;
 
 	public void setTxtNome(String nome) {
 		this.txtNome.setText(nome);
@@ -101,12 +105,12 @@ public class FrmClientes extends JFrame {
 		painelPrincipal.add(painelTitulo);
 		painelTitulo.setLayout(null);
 
-		JLabel lblNewLabel = new JLabel(" Boa Forma");
-		lblNewLabel.setForeground(new Color(37, 183, 211));
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setFont(new Font("Verdana", Font.BOLD, 26));
-		lblNewLabel.setBounds(0, 0, 166, 64);
-		painelTitulo.add(lblNewLabel);
+		JLabel lblTitulo = new JLabel(" Boa Forma");
+		lblTitulo.setForeground(new Color(37, 183, 211));
+		lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTitulo.setFont(new Font("Verdana", Font.BOLD, 26));
+		lblTitulo.setBounds(0, 0, 166, 64);
+		painelTitulo.add(lblTitulo);
 
 		JLabel lblOperacao = new JLabel(operacao);
 		lblOperacao.setHorizontalAlignment(SwingConstants.CENTER);
@@ -217,6 +221,16 @@ public class FrmClientes extends JFrame {
 		painelDados.add(cbAtividade);
 
 		JButton btnCalcular = new JButton("Calcular");
+		btnCalcular.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Cliente cliente = new Cliente();
+				
+				SubtrairDatas();
+				lblRespostaImc.setText(String.valueOf(cliente.getImc()));
+				lblRespostaTmb.setText(String.valueOf(cliente.getTmb()));
+				lblRespostaFcm.setText(String.valueOf(cliente.getFcm()));
+			}
+		});
 		btnCalcular
 				.setIcon(new ImageIcon(FrmClientes.class.getResource("/br/senai/jandira/sp/images/calculadora.png")));
 		btnCalcular.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -233,7 +247,7 @@ public class FrmClientes extends JFrame {
 		painelResultados.setLayout(null);
 
 		JLabel lblImc = new JLabel("IMC:");
-		lblImc.setBounds(10, 22, 37, 14);
+		lblImc.setBounds(10, 22, 38, 14);
 		painelResultados.add(lblImc);
 
 		JLabel lblTmb = new JLabel("TMB:");
@@ -244,22 +258,30 @@ public class FrmClientes extends JFrame {
 		lblFcm.setBounds(10, 115, 39, 14);
 		painelResultados.add(lblFcm);
 
-		JLabel lblRespostaImc = new JLabel("-");
-		lblRespostaImc.setBounds(40, 22, 260, 14);
+		lblRespostaImc = new JLabel("-");
+		lblRespostaImc.setBounds(62, 22, 46, 14);
 		painelResultados.add(lblRespostaImc);
 
-		JLabel lblRespostaTmb = new JLabel("-");
-		lblRespostaTmb.setBounds(40, 115, 260, 14);
-		painelResultados.add(lblRespostaTmb);
-
-		JLabel lblRespostaFcm = new JLabel("-");
-		lblRespostaFcm.setBounds(40, 90, 260, 14);
+		lblRespostaFcm = new JLabel("-");
+		lblRespostaFcm.setBounds(62, 115, 238, 14);
 		painelResultados.add(lblRespostaFcm);
+
+		lblRespostaTmb = new JLabel("-");
+		lblRespostaTmb.setBounds(62, 90, 238, 14);
+		painelResultados.add(lblRespostaTmb);
 
 		JTextArea txtImc = new JTextArea();
 		txtImc.setEditable(false);
 		txtImc.setBounds(40, 37, 260, 42);
 		painelResultados.add(txtImc);
+		
+		JLabel lblIdade = new JLabel("Idade:");
+		lblIdade.setBounds(183, 22, 46, 14);
+		painelResultados.add(lblIdade);
+		
+		lblRespostaIdade = new JLabel("-");
+		lblRespostaIdade.setBounds(239, 22, 61, 14);
+		painelResultados.add(lblRespostaIdade);
 
 		JButton btnSair = new JButton("");
 		btnSair.setBounds(254, 495, 58, 52);
@@ -319,5 +341,27 @@ public class FrmClientes extends JFrame {
 		btnGrupoSexo.clearSelection();
 		cbAtividade.setSelectedIndex(0);
 		txtNome.requestFocus();
+	}
+
+	private void SubtrairDatas() {
+		SimpleDateFormat data = new SimpleDateFormat("dd/MM/yyyy");
+		Date date = new Date();
+		String dataBase;
+		dataBase = data.format(date);
+		try {
+			Date dtAtual = data.parse(dataBase);
+			Date dtBanco = data.parse(txtDtNasc.getText());
+
+			long diferencaDatas = dtAtual.getTime() - dtBanco.getTime();
+			Long diferencaAnos = diferencaDatas / 1000 / 60 / 60 / 24 / 365;
+
+			int idade = Integer.valueOf(diferencaAnos.intValue());
+
+			Cliente cliente = new Cliente();
+			cliente.setIdade(idade);
+			lblRespostaIdade.setText(String.valueOf(cliente.getIdade() + " anos"));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 	}
 }
