@@ -16,6 +16,8 @@ import br.senai.jandira.sp.model.Cliente;
 import javax.swing.UIManager;
 import javax.swing.border.LineBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.ImageIcon;
@@ -27,6 +29,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JTextArea;
 import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -114,7 +117,11 @@ public class FrmClientes extends JFrame {
 
 		JLabel lblOperacao = new JLabel(operacao);
 		lblOperacao.setHorizontalAlignment(SwingConstants.CENTER);
-		lblOperacao.setForeground(new Color(0, 204, 51));
+		if(operacao.equals("EXCLUIR")){
+			lblOperacao.setForeground(new Color(255, 0, 0));
+		}else{
+			lblOperacao.setForeground(new Color(0, 255, 0));
+		}
 		lblOperacao.setFont(new Font("Verdana", Font.BOLD, 20));
 		lblOperacao.setBounds(172, 2, 159, 64);
 		painelTitulo.add(lblOperacao);
@@ -224,11 +231,35 @@ public class FrmClientes extends JFrame {
 		btnCalcular.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Cliente cliente = new Cliente();
-				
-				SubtrairDatas();
-				lblRespostaImc.setText(String.valueOf(cliente.imc()));
-				lblRespostaTmb.setText(String.valueOf(cliente.tmb()));
-				lblRespostaFcm.setText(String.valueOf(cliente.fcm()));
+				DecimalFormat decimal = new DecimalFormat("0.#");
+
+				SimpleDateFormat data = new SimpleDateFormat("dd/MM/yyyy");
+				Date date = new Date();
+				String dataBase;
+				dataBase = data.format(date);
+				try {
+					Date dtAtual = data.parse(dataBase);
+					Date dtBanco = data.parse(txtDtNasc.getText());
+
+					long diferencaDatas = dtAtual.getTime() - dtBanco.getTime();
+					Long diferencaAnos = diferencaDatas / 1000 / 60 / 60 / 24 / 365;
+
+					int idade = Integer.valueOf(diferencaAnos.intValue());
+
+					cliente.setIdade(idade);
+					lblRespostaIdade.setText(String.valueOf(cliente.getIdade() + " anos"));
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+
+				cliente.setAltura(Double.parseDouble(txtAltura.getText()));
+				cliente.setPeso(Double.parseDouble(txtPeso.getText()));
+				cliente.setSexo(btnGrupoSexo.getSelection().getActionCommand());
+				cliente.setAtividade(cbAtividade.getSelectedItem().toString());
+
+				lblRespostaImc.setText(String.valueOf(decimal.format(cliente.imc()) + " kg/m²"));
+				lblRespostaTmb.setText(String.valueOf(decimal.format(cliente.tmb())));
+				lblRespostaFcm.setText(String.valueOf(decimal.format(cliente.fcm())));
 			}
 		});
 		btnCalcular
@@ -259,7 +290,7 @@ public class FrmClientes extends JFrame {
 		painelResultados.add(lblFcm);
 
 		lblRespostaImc = new JLabel("-");
-		lblRespostaImc.setBounds(62, 22, 46, 14);
+		lblRespostaImc.setBounds(62, 22, 111, 14);
 		painelResultados.add(lblRespostaImc);
 
 		lblRespostaFcm = new JLabel("-");
@@ -274,11 +305,11 @@ public class FrmClientes extends JFrame {
 		txtImc.setEditable(false);
 		txtImc.setBounds(40, 37, 260, 42);
 		painelResultados.add(txtImc);
-		
+
 		JLabel lblIdade = new JLabel("Idade:");
 		lblIdade.setBounds(183, 22, 46, 14);
 		painelResultados.add(lblIdade);
-		
+
 		lblRespostaIdade = new JLabel("-");
 		lblRespostaIdade.setBounds(239, 22, 61, 14);
 		painelResultados.add(lblRespostaIdade);
@@ -324,10 +355,28 @@ public class FrmClientes extends JFrame {
 				if (lblOperacao.getText().equals("NOVO")) {
 					clienteDAO.gravar();
 					limpar();
+				} else if (lblOperacao.getText().equals("EDITAR")) {
+					clienteDAO.atualizar(txtCpf.getText());
+				} else if (lblOperacao.getText().equals("EXCLUIR")) {
+					int resposta = JOptionPane.showConfirmDialog(null,
+							"Tem certeza que deseja excluir " + cliente.getNome() + "?", "Atenção",
+							JOptionPane.YES_NO_OPTION);
+
+					if (resposta == 0) {
+						clienteDAO.excluir(txtCpf.getText());
+						dispose();
+					}
 				}
 			}
 		});
-		btnDinamico.setIcon(new ImageIcon(FrmClientes.class.getResource("/br/senai/jandira/sp/images/salvar.png")));
+
+		if (operacao.equals("EXCLUIR")) {
+			btnDinamico
+					.setIcon(new ImageIcon(FrmClientes.class.getResource("/br/senai/jandira/sp/images/deletar.png")));
+		} else {
+			btnDinamico.setIcon(new ImageIcon(FrmClientes.class.getResource("/br/senai/jandira/sp/images/salvar.png")));
+		}
+
 		btnDinamico.setBackground(new Color(255, 255, 255));
 	}
 

@@ -41,12 +41,42 @@ public class ClienteDAO {
 		}
 	}
 
-	public void atualizar() {
+	public void atualizar(String cpf) {
+		String sql = "UPDATE clientes SET nome = ?, email = ?, sexo = ?, "
+				+ "dtNasc = ?, atividade = ?, altura = ?, peso = ? WHERE cpf = ?";
+		stm = null;
 		
+		try {
+			stm = Conexao.abrirConexao().prepareStatement(sql);
+			stm.setString(1, cliente.getNome());
+			stm.setString(2, cliente.getEmail());
+			stm.setString(3, cliente.getSexo());
+			stm.setString(4, cliente.getDtNasc());
+			stm.setString(5, cliente.getAtividade());
+			stm.setDouble(6, cliente.getAltura());
+			stm.setDouble(7, cliente.getPeso());
+			stm.setString(8, cpf);
+			stm.execute();
+			stm.close();
+			JOptionPane.showMessageDialog(null, "Cliente atualizado com sucesso!");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
-	public void excluir() {
-
+	public void excluir(String cpf) {
+		String sql = "DELETE FROM clientes WHERE cpf = ?";
+		stm = null;
+		
+		try {
+			stm = Conexao.abrirConexao().prepareStatement(sql);
+			stm.setString(1, cpf);
+			stm.execute();
+			stm.close();
+			JOptionPane.showMessageDialog(null, "Cliente deletado com sucesso!");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public Cliente getCliente(String cpf) {

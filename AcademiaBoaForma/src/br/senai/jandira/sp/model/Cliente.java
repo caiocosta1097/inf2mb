@@ -1,11 +1,5 @@
 package br.senai.jandira.sp.model;
 
-import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
-import java.util.Calendar;
-
-import br.senai.jandira.sp.view.FrmClientes;
-
 public class Cliente {
 	private String cpf;
 	private String nome;
@@ -16,7 +10,9 @@ public class Cliente {
 	private String respostaImc;
 	private int idade;
 	private double altura;
+	private int intAltura;
 	private double peso;
+	private int intPeso;
 	private double imc;
 	private double tmb;
 	private double fcm;
@@ -85,12 +81,28 @@ public class Cliente {
 		this.altura = altura;
 	}
 
+	public int getIntAltura() {
+		return intAltura;
+	}
+
+	public void setIntAltura(int intAltura) {
+		this.intAltura = intAltura;
+	}
+
 	public double getPeso() {
 		return peso;
 	}
 
 	public void setPeso(double peso) {
 		this.peso = peso;
+	}
+
+	public int getIntPeso() {
+		return intPeso;
+	}
+
+	public void setIntPeso(int intPeso) {
+		this.intPeso = intPeso;
 	}
 
 	public double getImc() {
@@ -116,7 +128,7 @@ public class Cliente {
 	public void setFcm(double fcm) {
 		this.fcm = fcm;
 	}
-	
+
 	public String getRespostaImc() {
 		return respostaImc;
 	}
@@ -124,34 +136,27 @@ public class Cliente {
 	public void setRespostaImc(String respostaImc) {
 		this.respostaImc = respostaImc;
 	}
-	
-	
-public double imc() { 
-		
+
+	public double imc() {
+
 		imc = peso / (altura / 100 * altura / 100);
-		
-		if (imc <= 16.9){
-			respostaImc = "<html><body>Muito abaixo do peso:<br>Queda de cabelo, infertilidade, ausência menstrual."; 
+
+		if (imc <= 16.9) {
+			respostaImc = "<html><body>Muito abaixo do peso:<br>Queda de cabelo, infertilidade, ausência menstrual.";
+		} else if (imc <= 18.4) {
+			respostaImc = "<html><body>Abaixo do peso:<br>Fadiga, stress, ansiedade.";
+		} else if (imc <= 24.9) {
+			respostaImc = "<html><body>Peso normal:<br>Menor risco de doenças cardíacas e vasculares.";
+		} else if (imc <= 29.9) {
+			respostaImc = "<html><body>Acima do peso:<br>Fadiga, má circulação, varizes.";
+		} else if (imc <= 34.9) {
+			respostaImc = "<html><body>Obesidade Grau I:<br>Diabetes, angina, infarto, aterosclerose.";
+		} else if (imc <= 40) {
+			respostaImc = "<html><body>Obesidade Grau II:<br>Apneia do sono, falta de ar.";
+		} else if (imc > 40) {
+			respostaImc = "<html><body>Obesidade Grau III:<br>Refluxo, dificuldade para se mover, escaras, diabetes, infarto, AVC.";
 		}
-		else if (imc <= 18.4){
-			respostaImc = "<html><body>Abaixo do peso:<br>Fadiga, stress, ansiedade."; 
-		}
-		else if (imc <= 24.9){
-			respostaImc = "<html><body>Peso normal:<br>Menor risco de doenças cardíacas e vasculares."; 
-		}
-		else if (imc <= 29.9){
-			respostaImc = "<html><body>Acima do peso:<br>Fadiga, má circulação, varizes."; 
-		}
-		else if (imc <= 34.9){
-			respostaImc = "<html><body>Obesidade Grau I:<br>Diabetes, angina, infarto, aterosclerose."; 
-		}
-		else if (imc <= 40){
-			respostaImc = "<html><body>Obesidade Grau II:<br>Apneia do sono, falta de ar."; 
-		}
-		else if (imc > 40){
-			respostaImc = "<html><body>Obesidade Grau III:<br>Refluxo, dificuldade para se mover, escaras, diabetes, infarto, AVC."; 
-		}
-		
+
 		return imc;
 	}
 

@@ -111,6 +111,11 @@ public class FrmAcademia extends JFrame {
 		painelBotoes.add(btnEditar);
 
 		JButton btnExcluir = new JButton("");
+		btnExcluir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				abrirJanelaCliente("EXCLUIR");
+			}
+		});
 		btnExcluir.setBackground(new Color(255, 255, 255));
 		btnExcluir.setIcon(new ImageIcon(FrmAcademia.class.getResource("/br/senai/jandira/sp/images/deletar.png")));
 		btnExcluir.setBounds(189, 11, 65, 53);
@@ -165,17 +170,19 @@ public class FrmAcademia extends JFrame {
 
 			ClienteDAO clienteDAO = new ClienteDAO();
 			Cliente cliente = clienteDAO.getCliente(cpf);
-
+			cliente.setIntAltura((int) cliente.getAltura());
+			cliente.setIntPeso((int) cliente.getPeso());
+			
 			FrmClientes frmClientes = new FrmClientes(operacao);
 			frmClientes.setTxtCpf(cliente.getCpf());
 			frmClientes.setTxtNome(cliente.getNome());
 			frmClientes.setTxtEmail(cliente.getEmail());
 			frmClientes.setTxtDtNasc(String.valueOf(cliente.getDtNasc()));
-			frmClientes.setTxtAltura(String.valueOf(cliente.getAltura()));
-			frmClientes.setTxtPeso(String.valueOf(cliente.getPeso()));
+			frmClientes.setTxtAltura(String.valueOf(cliente.getIntAltura()));
+			frmClientes.setTxtPeso(String.valueOf(cliente.getIntPeso()));
 			frmClientes.setSexo(cliente.getSexo());
 			frmClientes.setCbAtividade(cliente.getAtividade());
-
+			
 			frmClientes.setVisible(true);
 		} catch (Exception erro) {
 			JOptionPane.showMessageDialog(null, "Selecione um contato!", "Atenção", JOptionPane.INFORMATION_MESSAGE);

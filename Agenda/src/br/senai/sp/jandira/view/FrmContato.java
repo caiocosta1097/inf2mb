@@ -252,10 +252,11 @@ public class FrmContato extends JFrame {
 					contatoDao.atualizar(Integer.parseInt(txtId.getText()));
 				}
 				else if (lblOperacao.getText().equals("EXCLUIR")){
-					int resposta = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja excluir "
-							+  contato.getNome() + "?", "Atenção", JOptionPane.YES_NO_OPTION);
-					
-					if(resposta == 0){
+					int resposta = JOptionPane.showConfirmDialog(null,
+							"Tem certeza que deseja excluir " + contato.getNome() + "?", "Atenção",
+							JOptionPane.YES_NO_OPTION);
+
+					if (resposta == 0) {
 						contatoDao.excluir(Integer.parseInt(txtId.getText()));
 						dispose();
 					}
