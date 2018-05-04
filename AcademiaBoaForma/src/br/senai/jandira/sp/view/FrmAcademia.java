@@ -67,8 +67,16 @@ public class FrmAcademia extends JFrame {
 		lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTitulo.setForeground(new Color(37, 183, 211));
 		lblTitulo.setFont(new Font("Verdana", Font.BOLD, 32));
-		lblTitulo.setBounds(10, 0, 484, 64);
+		lblTitulo.setBounds(10, 0, 389, 64);
 		painelTitulo.add(lblTitulo);
+		
+		SimpleDateFormat data = new SimpleDateFormat("dd/MM/yyyy");
+		
+		JLabel lblData = new JLabel("");
+		lblData.setBounds(409, 11, 75, 14);
+		Date dataAtual = new Date();
+		lblData.setText(data.format(dataAtual));
+		painelTitulo.add(lblData);
 
 		painelTabela = new JPanel();
 		painelTabela.setBorder(new TitledBorder(new LineBorder(null), "Clientes:", TitledBorder.LEADING,
@@ -122,6 +130,17 @@ public class FrmAcademia extends JFrame {
 		painelBotoes.add(btnExcluir);
 
 		JButton btnSair = new JButton("");
+		btnSair.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int resposta = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja encerrar a aplicação?", 
+						"Atenção", JOptionPane.YES_NO_OPTION);
+				
+				if(resposta == 0){
+					dispose();
+				}
+				
+			}
+		});
 		btnSair.setBackground(new Color(255, 255, 255));
 		btnSair.setIcon(new ImageIcon(FrmAcademia.class.getResource("/br/senai/jandira/sp/images/sair.png")));
 		btnSair.setBounds(401, 11, 65, 53);

@@ -9,6 +9,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.Color;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
+import javax.swing.text.MaskFormatter;
 
 import br.senai.jandira.sp.dao.ClienteDAO;
 import br.senai.jandira.sp.model.Cliente;
@@ -24,6 +25,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JTextField;
 import javax.swing.JRadioButton;
 import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -40,11 +42,11 @@ public class FrmClientes extends JFrame {
 
 	private JPanel painelPrincipal;
 	private JTextField txtNome;
-	private JTextField txtCpf;
+	private JFormattedTextField txtCpf;
 	private JTextField txtEmail;
-	private JTextField txtDtNasc;
-	private JTextField txtAltura;
-	private JTextField txtPeso;
+	private JFormattedTextField txtDtNasc;
+	private JFormattedTextField txtAltura;
+	private JFormattedTextField txtPeso;
 	private JRadioButton btnRadioHomem;
 	private JRadioButton btnRadioMulher;
 	private ButtonGroup btnGrupoSexo;
@@ -117,9 +119,9 @@ public class FrmClientes extends JFrame {
 
 		JLabel lblOperacao = new JLabel(operacao);
 		lblOperacao.setHorizontalAlignment(SwingConstants.CENTER);
-		if(operacao.equals("EXCLUIR")){
+		if (operacao.equals("EXCLUIR")) {
 			lblOperacao.setForeground(new Color(255, 0, 0));
-		}else{
+		} else {
 			lblOperacao.setForeground(new Color(0, 255, 0));
 		}
 		lblOperacao.setFont(new Font("Verdana", Font.BOLD, 20));
@@ -168,18 +170,40 @@ public class FrmClientes extends JFrame {
 		painelDados.add(txtNome);
 		txtNome.setColumns(10);
 
-		txtCpf = new JTextField();
+		MaskFormatter cpfMask = null;
+
+		try {
+			cpfMask = new MaskFormatter("###.###.###-##");
+			cpfMask.setPlaceholderCharacter('0');
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+
+		txtCpf = new JFormattedTextField(cpfMask);
 		txtCpf.setBounds(201, 46, 99, 20);
 		painelDados.add(txtCpf);
 		txtCpf.setColumns(10);
+
+		if (operacao.equals("EDITAR") || operacao.equals("EXCLUIR")) {
+			txtCpf.setEditable(false);
+		}
 
 		txtEmail = new JTextField();
 		txtEmail.setBounds(10, 96, 181, 20);
 		painelDados.add(txtEmail);
 		txtEmail.setColumns(10);
 
-		txtDtNasc = new JTextField();
-		txtDtNasc.setBounds(221, 96, 65, 20);
+		MaskFormatter dataMask = null;
+
+		try {
+			dataMask = new MaskFormatter("##/##/####");
+			dataMask.setPlaceholderCharacter('0');
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+
+		txtDtNasc = new JFormattedTextField(dataMask);
+		txtDtNasc.setBounds(218, 96, 70, 20);
 		painelDados.add(txtDtNasc);
 		txtDtNasc.setColumns(10);
 
@@ -199,12 +223,28 @@ public class FrmClientes extends JFrame {
 		btnGrupoSexo.add(btnRadioHomem);
 		btnGrupoSexo.add(btnRadioMulher);
 
-		txtAltura = new JTextField();
+		MaskFormatter alturaMask = null;
+
+		try {
+			alturaMask = new MaskFormatter("#");
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+
+		txtAltura = new JFormattedTextField();
 		txtAltura.setBounds(10, 171, 34, 20);
 		painelDados.add(txtAltura);
 		txtAltura.setColumns(10);
 
-		txtPeso = new JTextField();
+		MaskFormatter pesoMask = null;
+
+		try {
+			pesoMask = new MaskFormatter("#");
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
+		txtPeso = new JFormattedTextField();
 		txtPeso.setColumns(10);
 		txtPeso.setBounds(68, 171, 34, 20);
 		painelDados.add(txtPeso);
@@ -234,11 +274,8 @@ public class FrmClientes extends JFrame {
 				DecimalFormat decimal = new DecimalFormat("0.#");
 
 				SimpleDateFormat data = new SimpleDateFormat("dd/MM/yyyy");
-				Date date = new Date();
-				String dataBase;
-				dataBase = data.format(date);
+				Date dtAtual = new Date();
 				try {
-					Date dtAtual = data.parse(dataBase);
 					Date dtBanco = data.parse(txtDtNasc.getText());
 
 					long diferencaDatas = dtAtual.getTime() - dtBanco.getTime();
@@ -315,6 +352,16 @@ public class FrmClientes extends JFrame {
 		painelResultados.add(lblRespostaIdade);
 
 		JButton btnSair = new JButton("");
+		btnSair.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				int resposta = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja sair?", "Atenção",
+						JOptionPane.YES_NO_OPTION);
+
+				if (resposta == 0) {
+					dispose();
+				}
+			}
+		});
 		btnSair.setBounds(254, 495, 58, 52);
 		painelPrincipal.add(btnSair);
 		btnSair.setBackground(new Color(255, 255, 255));
@@ -389,28 +436,10 @@ public class FrmClientes extends JFrame {
 		txtPeso.setText("");
 		btnGrupoSexo.clearSelection();
 		cbAtividade.setSelectedIndex(0);
+		lblRespostaImc.setText("-");
+		lblRespostaIdade.setText("-");
+		lblRespostaTmb.setText("-");
+		lblRespostaFcm.setText("-");
 		txtNome.requestFocus();
-	}
-
-	private void SubtrairDatas() {
-		SimpleDateFormat data = new SimpleDateFormat("dd/MM/yyyy");
-		Date date = new Date();
-		String dataBase;
-		dataBase = data.format(date);
-		try {
-			Date dtAtual = data.parse(dataBase);
-			Date dtBanco = data.parse(txtDtNasc.getText());
-
-			long diferencaDatas = dtAtual.getTime() - dtBanco.getTime();
-			Long diferencaAnos = diferencaDatas / 1000 / 60 / 60 / 24 / 365;
-
-			int idade = Integer.valueOf(diferencaAnos.intValue());
-
-			Cliente cliente = new Cliente();
-			cliente.setIdade(idade);
-			lblRespostaIdade.setText(String.valueOf(cliente.getIdade() + " anos"));
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
 	}
 }
