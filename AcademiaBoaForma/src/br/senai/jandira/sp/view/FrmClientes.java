@@ -37,6 +37,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.awt.event.ActionEvent;
 import java.awt.Toolkit;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class FrmClientes extends JFrame {
 
@@ -45,8 +47,8 @@ public class FrmClientes extends JFrame {
 	private JFormattedTextField txtCpf;
 	private JTextField txtEmail;
 	private JFormattedTextField txtDtNasc;
-	private JFormattedTextField txtAltura;
-	private JFormattedTextField txtPeso;
+	private JTextField txtAltura;
+	private JTextField txtPeso;
 	private JRadioButton btnRadioHomem;
 	private JRadioButton btnRadioMulher;
 	private ButtonGroup btnGrupoSexo;
@@ -223,28 +225,36 @@ public class FrmClientes extends JFrame {
 		btnGrupoSexo.add(btnRadioHomem);
 		btnGrupoSexo.add(btnRadioMulher);
 
-		MaskFormatter alturaMask = null;
+		txtAltura = new JTextField();
+		txtAltura.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				String numeros = "0987654321";
 
-		try {
-			alturaMask = new MaskFormatter("#");
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
+				if (!numeros.contains(e.getKeyChar() + "")) {
 
-		txtAltura = new JFormattedTextField();
+					e.consume();
+
+				}
+			}
+		});
 		txtAltura.setBounds(10, 171, 34, 20);
 		painelDados.add(txtAltura);
 		txtAltura.setColumns(10);
 
-		MaskFormatter pesoMask = null;
+		txtPeso = new JTextField();
+		txtPeso.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				String numeros = "0987654321";
 
-		try {
-			pesoMask = new MaskFormatter("#");
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		
-		txtPeso = new JFormattedTextField();
+				if (!numeros.contains(e.getKeyChar() + "")) {
+
+					e.consume();
+
+				}
+			}
+		});
 		txtPeso.setColumns(10);
 		txtPeso.setBounds(68, 171, 34, 20);
 		painelDados.add(txtPeso);
@@ -287,16 +297,25 @@ public class FrmClientes extends JFrame {
 					lblRespostaIdade.setText(String.valueOf(cliente.getIdade() + " anos"));
 				} catch (ParseException e) {
 					e.printStackTrace();
+					JOptionPane.showMessageDialog(null, "Por favor, preencha todos os campos.");
 				}
 
-				cliente.setAltura(Double.parseDouble(txtAltura.getText()));
-				cliente.setPeso(Double.parseDouble(txtPeso.getText()));
-				cliente.setSexo(btnGrupoSexo.getSelection().getActionCommand());
-				cliente.setAtividade(cbAtividade.getSelectedItem().toString());
+				try {
+					cliente.setAltura(Double.parseDouble(txtAltura.getText()));
+					cliente.setPeso(Double.parseDouble(txtPeso.getText()));
+					cliente.setSexo(btnGrupoSexo.getSelection().getActionCommand());
+					cliente.setAtividade(cbAtividade.getSelectedItem().toString());
 
-				lblRespostaImc.setText(String.valueOf(decimal.format(cliente.imc()) + " kg/m²"));
-				lblRespostaTmb.setText(String.valueOf(decimal.format(cliente.tmb())));
-				lblRespostaFcm.setText(String.valueOf(decimal.format(cliente.fcm())));
+					int fcm;
+					fcm = (int) cliente.fcm();
+
+					lblRespostaImc.setText(String.valueOf(decimal.format(cliente.imc()) + " kg/m²"));
+					lblRespostaTmb.setText(String.valueOf(decimal.format(cliente.tmb()) + " kcal"));
+					lblRespostaFcm.setText(String.valueOf(fcm) + " bpm");
+
+				} catch (Exception erro) {
+					JOptionPane.showMessageDialog(null, "Por favor, preencha todos os campos.");
+				}
 			}
 		});
 		btnCalcular
@@ -386,34 +405,39 @@ public class FrmClientes extends JFrame {
 					e.printStackTrace();
 				}
 
-				Cliente cliente = new Cliente();
-				cliente.setCpf(txtCpf.getText());
-				cliente.setNome(txtNome.getText());
-				cliente.setEmail(txtEmail.getText());
-				cliente.setSexo(btnGrupoSexo.getSelection().getActionCommand());
-				cliente.setDtNasc(dateBanco);
-				cliente.setAltura(Double.parseDouble(txtAltura.getText()));
-				cliente.setPeso(Double.parseDouble(txtPeso.getText()));
-				cliente.setAtividade(cbAtividade.getSelectedItem().toString());
+				try {
+					Cliente cliente = new Cliente();
+					cliente.setCpf(txtCpf.getText());
+					cliente.setNome(txtNome.getText());
+					cliente.setEmail(txtEmail.getText());
+					cliente.setSexo(btnGrupoSexo.getSelection().getActionCommand());
+					cliente.setDtNasc(dateBanco);
+					cliente.setAltura(Double.parseDouble(txtAltura.getText()));
+					cliente.setPeso(Double.parseDouble(txtPeso.getText()));
+					cliente.setAtividade(cbAtividade.getSelectedItem().toString());
 
-				ClienteDAO clienteDAO = new ClienteDAO();
-				clienteDAO.setCliente(cliente);
+					ClienteDAO clienteDAO = new ClienteDAO();
+					clienteDAO.setCliente(cliente);
 
-				if (lblOperacao.getText().equals("NOVO")) {
-					clienteDAO.gravar();
-					limpar();
-				} else if (lblOperacao.getText().equals("EDITAR")) {
-					clienteDAO.atualizar(txtCpf.getText());
-				} else if (lblOperacao.getText().equals("EXCLUIR")) {
-					int resposta = JOptionPane.showConfirmDialog(null,
-							"Tem certeza que deseja excluir " + cliente.getNome() + "?", "Atenção",
-							JOptionPane.YES_NO_OPTION);
+					if (lblOperacao.getText().equals("NOVO")) {
+						clienteDAO.gravar();
+						limpar();
+					} else if (lblOperacao.getText().equals("EDITAR")) {
+						clienteDAO.atualizar(txtCpf.getText());
+					} else if (lblOperacao.getText().equals("EXCLUIR")) {
+						int resposta = JOptionPane.showConfirmDialog(null,
+								"Tem certeza que deseja excluir " + cliente.getNome() + "?", "Atenção",
+								JOptionPane.YES_NO_OPTION);
 
-					if (resposta == 0) {
-						clienteDAO.excluir(txtCpf.getText());
-						dispose();
+						if (resposta == 0) {
+							clienteDAO.excluir(txtCpf.getText());
+							dispose();
+						}
 					}
+				} catch (Exception erro) {
+					JOptionPane.showMessageDialog(null, "Por favor, preencha todos os campos.");
 				}
+
 			}
 		});
 

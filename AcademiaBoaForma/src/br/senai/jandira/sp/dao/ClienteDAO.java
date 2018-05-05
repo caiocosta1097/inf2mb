@@ -21,7 +21,7 @@ public class ClienteDAO {
 		String sql = "INSERT INTO clientes (cpf, nome, email, sexo, dtNasc, atividade, altura, peso) "
 				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 		stm = null;
-		
+
 		try {
 			stm = Conexao.abrirConexao().prepareStatement(sql);
 			stm.setString(1, cliente.getCpf());
@@ -34,7 +34,7 @@ public class ClienteDAO {
 			stm.setDouble(8, cliente.getPeso());
 			stm.execute();
 			stm.close();
-			
+
 			JOptionPane.showMessageDialog(null, "Cliente gravado com sucesso!");
 		} catch (SQLException erro) {
 			erro.printStackTrace();
@@ -45,7 +45,7 @@ public class ClienteDAO {
 		String sql = "UPDATE clientes SET nome = ?, email = ?, sexo = ?, "
 				+ "dtNasc = ?, atividade = ?, altura = ?, peso = ? WHERE cpf = ?";
 		stm = null;
-		
+
 		try {
 			stm = Conexao.abrirConexao().prepareStatement(sql);
 			stm.setString(1, cliente.getNome());
@@ -67,7 +67,7 @@ public class ClienteDAO {
 	public void excluir(String cpf) {
 		String sql = "DELETE FROM clientes WHERE cpf = ?";
 		stm = null;
-		
+
 		try {
 			stm = Conexao.abrirConexao().prepareStatement(sql);
 			stm.setString(1, cpf);
@@ -81,18 +81,18 @@ public class ClienteDAO {
 
 	public Cliente getCliente(String cpf) {
 		SimpleDateFormat data = new SimpleDateFormat("dd/MM/yyyy");
-		
+
 		cliente = new Cliente();
-		
+
 		String sql = "SELECT * FROM clientes WHERE cpf = ?";
-		
+
 		try {
 			stm = Conexao.abrirConexao().prepareStatement(sql);
 			stm.setString(1, cpf);
 			rs = stm.executeQuery();
-			
+
 			rs.next();
-			
+
 			cliente.setCpf(rs.getString("cpf"));
 			cliente.setNome(rs.getString("nome"));
 			cliente.setEmail(rs.getString("email"));
@@ -102,12 +102,12 @@ public class ClienteDAO {
 			cliente.setAltura(rs.getDouble("altura"));
 			cliente.setPeso(rs.getDouble("peso"));
 			stm.close();
-			
+
 			Conexao.abrirConexao().close();
 		} catch (Exception erro) {
 			System.out.println(erro.getMessage());
 		}
-		
+
 		return cliente;
 	}
 
@@ -136,7 +136,7 @@ public class ClienteDAO {
 				cliente.setAtividade(rs.getString("atividade"));
 				cliente.setAltura(rs.getDouble("altura"));
 				cliente.setPeso(rs.getDouble("peso"));
-				
+
 				clientes.add(cliente);
 			}
 			Conexao.abrirConexao().close();

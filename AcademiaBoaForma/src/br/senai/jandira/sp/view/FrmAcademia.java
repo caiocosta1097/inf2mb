@@ -69,9 +69,9 @@ public class FrmAcademia extends JFrame {
 		lblTitulo.setFont(new Font("Verdana", Font.BOLD, 32));
 		lblTitulo.setBounds(10, 0, 389, 64);
 		painelTitulo.add(lblTitulo);
-		
+
 		SimpleDateFormat data = new SimpleDateFormat("dd/MM/yyyy");
-		
+
 		JLabel lblData = new JLabel("");
 		lblData.setBounds(409, 11, 75, 14);
 		Date dataAtual = new Date();
@@ -132,13 +132,13 @@ public class FrmAcademia extends JFrame {
 		JButton btnSair = new JButton("");
 		btnSair.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int resposta = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja encerrar a aplicação?", 
+				int resposta = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja encerrar a aplicação?",
 						"Atenção", JOptionPane.YES_NO_OPTION);
-				
-				if(resposta == 0){
+
+				if (resposta == 0) {
 					dispose();
 				}
-				
+
 			}
 		});
 		btnSair.setBackground(new Color(255, 255, 255));
@@ -189,19 +189,23 @@ public class FrmAcademia extends JFrame {
 
 			ClienteDAO clienteDAO = new ClienteDAO();
 			Cliente cliente = clienteDAO.getCliente(cpf);
-			cliente.setIntAltura((int) cliente.getAltura());
-			cliente.setIntPeso((int) cliente.getPeso());
-			
+
+			int altura;
+			int peso;
+
+			altura = (int) cliente.getAltura();
+			peso = (int) cliente.getPeso();
+
 			FrmClientes frmClientes = new FrmClientes(operacao);
 			frmClientes.setTxtCpf(cliente.getCpf());
 			frmClientes.setTxtNome(cliente.getNome());
 			frmClientes.setTxtEmail(cliente.getEmail());
 			frmClientes.setTxtDtNasc(String.valueOf(cliente.getDtNasc()));
-			frmClientes.setTxtAltura(String.valueOf(cliente.getIntAltura()));
-			frmClientes.setTxtPeso(String.valueOf(cliente.getIntPeso()));
+			frmClientes.setTxtAltura(String.valueOf(altura));
+			frmClientes.setTxtPeso(String.valueOf(peso));
 			frmClientes.setSexo(cliente.getSexo());
 			frmClientes.setCbAtividade(cliente.getAtividade());
-			
+
 			frmClientes.setVisible(true);
 		} catch (Exception erro) {
 			JOptionPane.showMessageDialog(null, "Selecione um contato!", "Atenção", JOptionPane.INFORMATION_MESSAGE);

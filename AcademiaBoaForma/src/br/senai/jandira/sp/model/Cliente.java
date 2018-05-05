@@ -10,9 +10,7 @@ public class Cliente {
 	private String respostaImc;
 	private int idade;
 	private double altura;
-	private int intAltura;
 	private double peso;
-	private int intPeso;
 	private double imc;
 	private double tmb;
 	private double fcm;
@@ -81,28 +79,12 @@ public class Cliente {
 		this.altura = altura;
 	}
 
-	public int getIntAltura() {
-		return intAltura;
-	}
-
-	public void setIntAltura(int intAltura) {
-		this.intAltura = intAltura;
-	}
-
 	public double getPeso() {
 		return peso;
 	}
 
 	public void setPeso(double peso) {
 		this.peso = peso;
-	}
-
-	public int getIntPeso() {
-		return intPeso;
-	}
-
-	public void setIntPeso(int intPeso) {
-		this.intPeso = intPeso;
 	}
 
 	public double getImc() {
