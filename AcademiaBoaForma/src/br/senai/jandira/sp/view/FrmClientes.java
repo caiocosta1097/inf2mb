@@ -126,6 +126,7 @@ public class FrmClientes extends JFrame {
 		} else {
 			lblOperacao.setForeground(new Color(0, 255, 0));
 		}
+		
 		lblOperacao.setFont(new Font("Verdana", Font.BOLD, 20));
 		lblOperacao.setBounds(172, 2, 159, 64);
 		painelTitulo.add(lblOperacao);
@@ -185,10 +186,6 @@ public class FrmClientes extends JFrame {
 		txtCpf.setBounds(201, 46, 99, 20);
 		painelDados.add(txtCpf);
 		txtCpf.setColumns(10);
-
-		if (operacao.equals("EDITAR") || operacao.equals("EXCLUIR")) {
-			txtCpf.setEditable(false);
-		}
 
 		txtEmail = new JTextField();
 		txtEmail.setBounds(10, 96, 181, 20);
@@ -440,6 +437,8 @@ public class FrmClientes extends JFrame {
 
 			}
 		});
+		
+		
 
 		if (operacao.equals("EXCLUIR")) {
 			btnDinamico
@@ -449,6 +448,22 @@ public class FrmClientes extends JFrame {
 		}
 
 		btnDinamico.setBackground(new Color(255, 255, 255));
+		
+		if (operacao.equals("EDITAR")){
+			txtCpf.setEditable(false);
+		}
+		else if (operacao.equals("EXCLUIR")){
+			txtCpf.setEditable(false);
+			txtNome.setEditable(false);
+			txtDtNasc.setEditable(false);
+			txtEmail.setEditable(false);
+			txtAltura.setEditable(false);
+			txtPeso.setEditable(false);
+			btnRadioHomem.setEnabled(false);
+			btnRadioMulher.setEnabled(false);
+			cbAtividade.setEnabled(false);
+			btnCalcular.setEnabled(false);
+		}
 	}
 
 	private void limpar() {
