@@ -42,7 +42,8 @@ public class FrmAcademia extends JFrame {
 	private JTable tabelaClientes;
 	private JScrollPane scrollTabela;
 	private JPanel painelTabela;
-
+	
+	// Método construtor de 'FrmAcademia'
 	public FrmAcademia() {
 		setResizable(false);
 		setTitle("Boa Forma");
@@ -72,6 +73,7 @@ public class FrmAcademia extends JFrame {
 
 		SimpleDateFormat data = new SimpleDateFormat("dd/MM/yyyy");
 
+		// Inserindo a data de hoje no 'lblData'
 		JLabel lblData = new JLabel("");
 		lblData.setBounds(409, 11, 75, 14);
 		Date dataAtual = new Date();
@@ -85,7 +87,8 @@ public class FrmAcademia extends JFrame {
 		painelTabela.setBounds(10, 75, 475, 145);
 		painelPrincipal.add(painelTabela);
 		painelTabela.setLayout(null);
-
+		
+		// Chamando o 'criarTabela()'
 		criarTabela();
 
 		JPanel painelBotoes = new JPanel();
@@ -94,8 +97,10 @@ public class FrmAcademia extends JFrame {
 		painelBotoes.setBounds(0, 231, 494, 75);
 		painelPrincipal.add(painelBotoes);
 		painelBotoes.setLayout(null);
-
+		
 		JButton btnAdicionar = new JButton("");
+		
+		// Evento do 'btnAdicionar' para abrir o 'FrmClientes'
 		btnAdicionar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				FrmClientes frmClientes = new FrmClientes("NOVO");
@@ -108,6 +113,8 @@ public class FrmAcademia extends JFrame {
 		painelBotoes.add(btnAdicionar);
 
 		JButton btnEditar = new JButton("");
+		
+		// Evento do 'btnEditar' para abrir o 'FrmClientes'
 		btnEditar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				abrirJanelaCliente("EDITAR");
@@ -119,6 +126,8 @@ public class FrmAcademia extends JFrame {
 		painelBotoes.add(btnEditar);
 
 		JButton btnExcluir = new JButton("");
+		
+		// Evento do 'btnExcluir' para abrir o 'FrmClientes'
 		btnExcluir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				abrirJanelaCliente("EXCLUIR");
@@ -128,7 +137,8 @@ public class FrmAcademia extends JFrame {
 		btnExcluir.setIcon(new ImageIcon(FrmAcademia.class.getResource("/br/senai/jandira/sp/images/deletar.png")));
 		btnExcluir.setBounds(189, 11, 65, 53);
 		painelBotoes.add(btnExcluir);
-
+		
+		// Evento do 'btnSair' para encerrar a aplicação
 		JButton btnSair = new JButton("");
 		btnSair.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -146,7 +156,8 @@ public class FrmAcademia extends JFrame {
 		btnSair.setBounds(401, 11, 65, 53);
 		painelBotoes.add(btnSair);
 	}
-
+	
+	// Método para criar uma tabela
 	public void criarTabela() {
 		scrollTabela = new JScrollPane();
 		scrollTabela.setBounds(10, 20, 455, 114);
@@ -178,7 +189,8 @@ public class FrmAcademia extends JFrame {
 		tabelaClientes.getColumnModel().getColumn(2).setPreferredWidth(190);
 		scrollTabela.setViewportView(tabelaClientes);
 	}
-
+	
+	// Método para selecionar um cliente na tabela e puxar seus dados no Banco de Dados
 	public void abrirJanelaCliente(String operacao) {
 		try {
 			int linha;
@@ -189,10 +201,11 @@ public class FrmAcademia extends JFrame {
 
 			ClienteDAO clienteDAO = new ClienteDAO();
 			Cliente cliente = clienteDAO.getCliente(cpf);
-
+			
 			int altura;
 			int peso;
-
+			
+			// Convertendo os atributos 'altura' e 'peso' em inteiros
 			altura = (int) cliente.getAltura();
 			peso = (int) cliente.getPeso();
 

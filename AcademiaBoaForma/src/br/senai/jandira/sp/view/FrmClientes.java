@@ -58,6 +58,7 @@ public class FrmClientes extends JFrame {
 	private JLabel lblRespostaFcm;
 	private JLabel lblRespostaTmb;
 
+	// Métodos setters do 'FrmClientes' para os campos
 	public void setTxtNome(String nome) {
 		this.txtNome.setText(nome);
 	}
@@ -94,6 +95,7 @@ public class FrmClientes extends JFrame {
 		this.cbAtividade.setSelectedItem(atividade);
 	}
 
+	// Método construtor de 'FrmClientes'
 	public FrmClientes(String operacao) {
 		setIconImage(Toolkit.getDefaultToolkit()
 				.getImage(FrmClientes.class.getResource("/br/senai/jandira/sp/images/academia.png")));
@@ -121,6 +123,10 @@ public class FrmClientes extends JFrame {
 
 		JLabel lblOperacao = new JLabel(operacao);
 		lblOperacao.setHorizontalAlignment(SwingConstants.CENTER);
+		/*
+		 * Mudando a cor do 'lblOperacao' para vermelho se for para deletar ou
+		 * verde se for para adicionar ou editar
+		 */
 		if (operacao.equals("EXCLUIR")) {
 			lblOperacao.setForeground(new Color(255, 0, 50));
 		} else {
@@ -175,6 +181,7 @@ public class FrmClientes extends JFrame {
 
 		MaskFormatter cpfMask = null;
 
+		// formatando uma máscara para o 'txtCpf'
 		try {
 			cpfMask = new MaskFormatter("###.###.###-##");
 			cpfMask.setPlaceholderCharacter('0');
@@ -194,6 +201,7 @@ public class FrmClientes extends JFrame {
 
 		MaskFormatter dataMask = null;
 
+		// formatando uma máscara para o 'txtDtNasc'
 		try {
 			dataMask = new MaskFormatter("##/##/####");
 			dataMask.setPlaceholderCharacter('_');
@@ -223,6 +231,8 @@ public class FrmClientes extends JFrame {
 		btnGrupoSexo.add(btnRadioMulher);
 
 		txtAltura = new JTextField();
+
+		// Evento para aceitar somento números no 'txtAltura'
 		txtAltura.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent e) {
@@ -240,6 +250,8 @@ public class FrmClientes extends JFrame {
 		txtAltura.setColumns(10);
 
 		txtPeso = new JTextField();
+
+		// Evento para aceitar somento números no 'txtPeso'
 		txtPeso.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent e) {
@@ -278,6 +290,8 @@ public class FrmClientes extends JFrame {
 		btnCalcular.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Cliente cliente = new Cliente();
+
+				// formatar para até uma casa decimal
 				DecimalFormat decimal = new DecimalFormat("0.#");
 
 				SimpleDateFormat data = new SimpleDateFormat("dd/MM/yyyy");
@@ -285,27 +299,36 @@ public class FrmClientes extends JFrame {
 				try {
 					Date dtBanco = data.parse(txtDtNasc.getText());
 
+					// Código para subtrair duas datas
 					long diferencaDatas = dtAtual.getTime() - dtBanco.getTime();
 					Long diferencaAnos = diferencaDatas / 1000 / 60 / 60 / 24 / 365;
 
 					int idade = Integer.valueOf(diferencaAnos.intValue());
 
+					/*
+					 * pegando os valores dos campos e dar um set nos atributos:
+					 * 'idade', 'altura', 'peso', 'sexo' e 'atividade'
+					 */
 					cliente.setIdade(idade);
-					lblRespostaIdade.setText(String.valueOf(cliente.getIdade() + " anos"));
-					lblRespostaIdade.setForeground(new Color(0, 142, 11));
-
 					cliente.setAltura(Double.parseDouble(txtAltura.getText()));
 					cliente.setPeso(Double.parseDouble(txtPeso.getText()));
 					cliente.setSexo(btnGrupoSexo.getSelection().getActionCommand());
 					cliente.setAtividade(cbAtividade.getSelectedItem().toString());
 
 					int fcm;
+
+					// Convertendo o atributo 'fcm' em inteiro
 					fcm = (int) cliente.fcm();
+
+					lblRespostaIdade.setText(String.valueOf(cliente.getIdade() + " anos"));
+					lblRespostaIdade.setForeground(new Color(0, 142, 11));
 
 					lblRespostaImc.setText(String.valueOf(decimal.format(cliente.imc()) + " kg/m²"));
 					lblRespostaImc.setForeground(new Color(0, 142, 11));
+
 					lblRespostaTmb.setText(String.valueOf(decimal.format(cliente.tmb()) + " kcal"));
 					lblRespostaTmb.setForeground(new Color(0, 142, 11));
+
 					lblRespostaFcm.setText(String.valueOf(fcm) + " bpm");
 					lblRespostaFcm.setForeground(new Color(0, 142, 11));
 
@@ -367,6 +390,8 @@ public class FrmClientes extends JFrame {
 		painelResultados.add(lblRespostaIdade);
 
 		JButton btnSair = new JButton("");
+
+		// Evento do 'btnSair' para fechar o 'FrmClientes'
 		btnSair.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int resposta = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja sair?", "Atenção",
@@ -394,6 +419,7 @@ public class FrmClientes extends JFrame {
 				Date usuarioDate = null;
 				String dateBanco = null;
 
+				// Pegando os valores dos campos e inserindo no Banco de Dados
 				try {
 					usuarioDate = toDate.parse(txtDtNasc.getText());
 					dateBanco = toDataBase.format(usuarioDate);
@@ -410,7 +436,9 @@ public class FrmClientes extends JFrame {
 
 					ClienteDAO clienteDAO = new ClienteDAO();
 					clienteDAO.setCliente(cliente);
-
+					
+					/* Chamar os métodos: 'gravar()', 'atualizar()' ou 'excluir()' 
+					dependendo do 'lblOperacao' */
 					if (lblOperacao.getText().equals("NOVO")) {
 						clienteDAO.gravar();
 						limpar();
@@ -432,7 +460,8 @@ public class FrmClientes extends JFrame {
 
 			}
 		});
-
+		
+		// Mudar o ícone se o 'lblOperacao' for 'EXCLUIR'
 		if (operacao.equals("EXCLUIR")) {
 			btnDinamico
 					.setIcon(new ImageIcon(FrmClientes.class.getResource("/br/senai/jandira/sp/images/deletar.png")));
@@ -442,8 +471,11 @@ public class FrmClientes extends JFrame {
 
 		btnDinamico.setBackground(new Color(255, 255, 255));
 
+		// Bloquear o 'txtCpf' se for 'EDITAR'
 		if (operacao.equals("EDITAR")) {
 			txtCpf.setEditable(false);
+
+		// Bloquear todos os campos e 'btnCalcular' se for 'EXCLUIR'
 		} else if (operacao.equals("EXCLUIR")) {
 			txtCpf.setEditable(false);
 			txtNome.setEditable(false);
@@ -458,6 +490,7 @@ public class FrmClientes extends JFrame {
 		}
 	}
 
+	// Limpar os campos após usar o método 'gravar()'
 	private void limpar() {
 		txtCpf.setText("");
 		txtNome.setText("");

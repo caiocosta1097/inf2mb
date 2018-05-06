@@ -1,6 +1,8 @@
 package br.senai.jandira.sp.model;
 
 public class Cliente {
+	
+	// Atributos de 'Cliente'
 	private String cpf;
 	private String nome;
 	private String email;
@@ -14,7 +16,8 @@ public class Cliente {
 	private double imc;
 	private double tmb;
 	private double fcm;
-
+	
+	// Métodos getters e setters de 'Cliente'
 	public String getCpf() {
 		return cpf;
 	}
@@ -118,7 +121,8 @@ public class Cliente {
 	public void setRespostaImc(String respostaImc) {
 		this.respostaImc = respostaImc;
 	}
-
+	
+	// Métodos dos calculos do 'IMC', 'TMB' e 'FCM'
 	public double imc() {
 
 		imc = peso / (altura / 100 * altura / 100);

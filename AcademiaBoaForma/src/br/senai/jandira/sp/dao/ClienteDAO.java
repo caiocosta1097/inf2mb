@@ -16,7 +16,8 @@ public class ClienteDAO {
 	private Cliente cliente;
 	private PreparedStatement stm;
 	private ResultSet rs;
-
+	
+	// Método para gravar um novo cliente no banco de dados
 	public void gravar() {
 		String sql = "INSERT INTO clientes (cpf, nome, email, sexo, dtNasc, atividade, altura, peso) "
 				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
@@ -40,7 +41,8 @@ public class ClienteDAO {
 			erro.printStackTrace();
 		}
 	}
-
+	
+	// Método para atualizar informações de cliente no Banco de Dados
 	public void atualizar(String cpf) {
 		String sql = "UPDATE clientes SET nome = ?, email = ?, sexo = ?, "
 				+ "dtNasc = ?, atividade = ?, altura = ?, peso = ? WHERE cpf = ?";
@@ -63,7 +65,8 @@ public class ClienteDAO {
 			e.printStackTrace();
 		}
 	}
-
+	
+	// Método para deletar um cliente do Banco de Dados
 	public void excluir(String cpf) {
 		String sql = "DELETE FROM clientes WHERE cpf = ?";
 		stm = null;
@@ -78,7 +81,8 @@ public class ClienteDAO {
 			e.printStackTrace();
 		}
 	}
-
+	
+	// Método para puxar as informações do cliente do Danco de Dados
 	public Cliente getCliente(String cpf) {
 		SimpleDateFormat data = new SimpleDateFormat("dd/MM/yyyy");
 
@@ -114,7 +118,8 @@ public class ClienteDAO {
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
-
+	
+	// Método para inserir os dados do cliente na tabela
 	public ArrayList<Cliente> getClientes() {
 		ArrayList<Cliente> clientes = new ArrayList<>();
 
