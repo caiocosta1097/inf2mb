@@ -122,9 +122,9 @@ public class FrmClientes extends JFrame {
 		JLabel lblOperacao = new JLabel(operacao);
 		lblOperacao.setHorizontalAlignment(SwingConstants.CENTER);
 		if (operacao.equals("EXCLUIR")) {
-			lblOperacao.setForeground(new Color(255, 0, 0));
+			lblOperacao.setForeground(new Color(255, 0, 50));
 		} else {
-			lblOperacao.setForeground(new Color(0, 255, 0));
+			lblOperacao.setForeground(new Color(0, 142, 11));
 		}
 		
 		lblOperacao.setFont(new Font("Verdana", Font.BOLD, 20));
@@ -196,7 +196,7 @@ public class FrmClientes extends JFrame {
 
 		try {
 			dataMask = new MaskFormatter("##/##/####");
-			dataMask.setPlaceholderCharacter('0');
+			dataMask.setPlaceholderCharacter('_');
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
@@ -292,9 +292,9 @@ public class FrmClientes extends JFrame {
 
 					cliente.setIdade(idade);
 					lblRespostaIdade.setText(String.valueOf(cliente.getIdade() + " anos"));
+					lblRespostaIdade.setForeground(new Color(0, 142, 11));
 				} catch (ParseException e) {
 					e.printStackTrace();
-					JOptionPane.showMessageDialog(null, "Por favor, preencha todos os campos.");
 				}
 
 				try {
@@ -307,8 +307,12 @@ public class FrmClientes extends JFrame {
 					fcm = (int) cliente.fcm();
 
 					lblRespostaImc.setText(String.valueOf(decimal.format(cliente.imc()) + " kg/m²"));
+					lblRespostaImc.setForeground(new Color(0, 142, 11));
 					lblRespostaTmb.setText(String.valueOf(decimal.format(cliente.tmb()) + " kcal"));
+					lblRespostaTmb.setForeground(new Color(0, 142, 11));
 					lblRespostaFcm.setText(String.valueOf(fcm) + " bpm");
+					lblRespostaFcm.setForeground(new Color(0, 142, 11));
+					
 
 				} catch (Exception erro) {
 					JOptionPane.showMessageDialog(null, "Por favor, preencha todos os campos.");
@@ -476,9 +480,13 @@ public class FrmClientes extends JFrame {
 		btnGrupoSexo.clearSelection();
 		cbAtividade.setSelectedIndex(0);
 		lblRespostaImc.setText("-");
+		lblRespostaImc.setForeground(new Color(0, 0, 0));
 		lblRespostaIdade.setText("-");
+		lblRespostaIdade.setForeground(new Color(0, 0, 0));
 		lblRespostaTmb.setText("-");
+		lblRespostaTmb.setForeground(new Color(0, 0, 0));
 		lblRespostaFcm.setText("-");
+		lblRespostaFcm.setForeground(new Color(0, 0, 0));
 		txtNome.requestFocus();
 	}
 }
