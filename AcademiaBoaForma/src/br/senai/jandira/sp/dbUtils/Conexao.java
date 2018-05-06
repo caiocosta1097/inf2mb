@@ -14,7 +14,7 @@ public class Conexao {
 			Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
 			// String dbURL =
 			// "jdbc:ucanaccess://C:/Users/17259196/Documents/GitInf2mb/inf2mb/academia.accdb";
-			String dbURL = "jdbc:ucanaccess://C:/Users/Caio/Documents/SENAI/GItInf2mb/inf2mb/academia.accdb";
+			String dbURL = "jdbc:ucanaccess://C:/Users/Caio/Documents/GItInf2mb/inf2mb/academia.accdb";
 			con = DriverManager.getConnection(dbURL);
 			System.out.println("Banco conectado com sucesso...");
 		} catch (Exception erro) {

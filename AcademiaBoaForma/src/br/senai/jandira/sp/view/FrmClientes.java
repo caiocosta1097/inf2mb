@@ -126,7 +126,7 @@ public class FrmClientes extends JFrame {
 		} else {
 			lblOperacao.setForeground(new Color(0, 142, 11));
 		}
-		
+
 		lblOperacao.setFont(new Font("Verdana", Font.BOLD, 20));
 		lblOperacao.setBounds(172, 2, 159, 64);
 		painelTitulo.add(lblOperacao);
@@ -293,11 +293,7 @@ public class FrmClientes extends JFrame {
 					cliente.setIdade(idade);
 					lblRespostaIdade.setText(String.valueOf(cliente.getIdade() + " anos"));
 					lblRespostaIdade.setForeground(new Color(0, 142, 11));
-				} catch (ParseException e) {
-					e.printStackTrace();
-				}
 
-				try {
 					cliente.setAltura(Double.parseDouble(txtAltura.getText()));
 					cliente.setPeso(Double.parseDouble(txtPeso.getText()));
 					cliente.setSexo(btnGrupoSexo.getSelection().getActionCommand());
@@ -312,7 +308,6 @@ public class FrmClientes extends JFrame {
 					lblRespostaTmb.setForeground(new Color(0, 142, 11));
 					lblRespostaFcm.setText(String.valueOf(fcm) + " bpm");
 					lblRespostaFcm.setForeground(new Color(0, 142, 11));
-					
 
 				} catch (Exception erro) {
 					JOptionPane.showMessageDialog(null, "Por favor, preencha todos os campos.");
@@ -402,11 +397,7 @@ public class FrmClientes extends JFrame {
 				try {
 					usuarioDate = toDate.parse(txtDtNasc.getText());
 					dateBanco = toDataBase.format(usuarioDate);
-				} catch (ParseException e) {
-					e.printStackTrace();
-				}
 
-				try {
 					Cliente cliente = new Cliente();
 					cliente.setCpf(txtCpf.getText());
 					cliente.setNome(txtNome.getText());
@@ -441,8 +432,6 @@ public class FrmClientes extends JFrame {
 
 			}
 		});
-		
-		
 
 		if (operacao.equals("EXCLUIR")) {
 			btnDinamico
@@ -452,11 +441,10 @@ public class FrmClientes extends JFrame {
 		}
 
 		btnDinamico.setBackground(new Color(255, 255, 255));
-		
-		if (operacao.equals("EDITAR")){
+
+		if (operacao.equals("EDITAR")) {
 			txtCpf.setEditable(false);
-		}
-		else if (operacao.equals("EXCLUIR")){
+		} else if (operacao.equals("EXCLUIR")) {
 			txtCpf.setEditable(false);
 			txtNome.setEditable(false);
 			txtDtNasc.setEditable(false);
