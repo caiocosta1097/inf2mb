@@ -511,7 +511,7 @@ public class FrmClientes extends JFrame {
 		cbAtividade.setSelectedIndex(0);
 		lblRespostaImc.setText("-");
 		lblRespostaImc.setForeground(new Color(0, 0, 0));
-		lblInformacaoImc.setText("");
+//		lblInformacaoImc.setText("");
 		lblRespostaIdade.setText("-");
 		lblRespostaIdade.setForeground(new Color(0, 0, 0));
 		lblRespostaTmb.setText("-");
