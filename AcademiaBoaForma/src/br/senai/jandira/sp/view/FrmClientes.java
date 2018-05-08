@@ -123,10 +123,9 @@ public class FrmClientes extends JFrame {
 
 		JLabel lblOperacao = new JLabel(operacao);
 		lblOperacao.setHorizontalAlignment(SwingConstants.CENTER);
-		/*
-		 * Mudando a cor do 'lblOperacao' para vermelho se for para deletar ou
-		 * verde se for para adicionar ou editar
-		 */
+		
+		/* Mudando a cor do 'lblOperacao' para vermelho se for para deletar ou
+		verde se for para adicionar ou editar */
 		if (operacao.equals("EXCLUIR")) {
 			lblOperacao.setForeground(new Color(255, 0, 50));
 		} else {
@@ -390,6 +389,7 @@ public class FrmClientes extends JFrame {
 		painelResultados.add(lblRespostaIdade);
 
 		JButton btnSair = new JButton("");
+		btnSair.setToolTipText("Sair");
 
 		// Evento do 'btnSair' para fechar o 'FrmClientes'
 		btnSair.addActionListener(new ActionListener() {
@@ -436,9 +436,11 @@ public class FrmClientes extends JFrame {
 
 					ClienteDAO clienteDAO = new ClienteDAO();
 					clienteDAO.setCliente(cliente);
-					
-					/* Chamar os métodos: 'gravar()', 'atualizar()' ou 'excluir()' 
-					dependendo do 'lblOperacao' */
+
+					/*
+					 * Chamar os métodos: 'gravar()', 'atualizar()' ou
+					 * 'excluir()' dependendo do 'lblOperacao'
+					 */
 					if (lblOperacao.getText().equals("NOVO")) {
 						clienteDAO.gravar();
 						limpar();
@@ -460,13 +462,15 @@ public class FrmClientes extends JFrame {
 
 			}
 		});
-		
+
 		// Mudar o ícone se o 'lblOperacao' for 'EXCLUIR'
 		if (operacao.equals("EXCLUIR")) {
-			btnDinamico
-					.setIcon(new ImageIcon(FrmClientes.class.getResource("/br/senai/jandira/sp/images/deletar.png")));
+			btnDinamico.setIcon(new ImageIcon(FrmClientes.class.getResource("/br/senai/jandira/sp/images/deletar.png")));
+			btnDinamico.setToolTipText("Excluir");
+
 		} else {
 			btnDinamico.setIcon(new ImageIcon(FrmClientes.class.getResource("/br/senai/jandira/sp/images/salvar.png")));
+			btnDinamico.setToolTipText("Salvar");
 		}
 
 		btnDinamico.setBackground(new Color(255, 255, 255));
@@ -475,7 +479,7 @@ public class FrmClientes extends JFrame {
 		if (operacao.equals("EDITAR")) {
 			txtCpf.setEditable(false);
 
-		// Bloquear todos os campos e 'btnCalcular' se for 'EXCLUIR'
+			// Bloquear todos os campos e 'btnCalcular' se for 'EXCLUIR'
 		} else if (operacao.equals("EXCLUIR")) {
 			txtCpf.setEditable(false);
 			txtNome.setEditable(false);
