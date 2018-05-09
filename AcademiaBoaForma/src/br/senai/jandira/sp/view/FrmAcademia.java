@@ -169,7 +169,15 @@ public class FrmAcademia extends JFrame {
 
 		tabelaClientes = new JTable();
 
-		DefaultTableModel modeloTabela = new DefaultTableModel();
+		DefaultTableModel modeloTabela = new DefaultTableModel(){
+			
+			// Deixar as células da tabela não editáveis
+			@Override
+			public boolean isCellEditable(int row, int col)
+			{
+			return false;
+			}
+		};
 		String[] nomesColunas = { "CPF", "NOME", "E-MAIL" };
 		modeloTabela.setColumnIdentifiers(nomesColunas);
 
@@ -188,6 +196,9 @@ public class FrmAcademia extends JFrame {
 			modeloTabela.addRow(linha);
 		}
 		tabelaClientes.setModel(modeloTabela);
+		
+		// Deixar as colunas da tabela fixas
+		tabelaClientes.getTableHeader().setReorderingAllowed(false);
 		tabelaClientes.getColumnModel().getColumn(0).setPreferredWidth(120);
 		tabelaClientes.getColumnModel().getColumn(1).setPreferredWidth(210);
 		tabelaClientes.getColumnModel().getColumn(2).setPreferredWidth(190);
