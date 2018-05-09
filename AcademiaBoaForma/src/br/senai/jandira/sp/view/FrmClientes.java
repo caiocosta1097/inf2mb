@@ -55,7 +55,7 @@ public class FrmClientes extends JFrame {
 	private JComboBox cbAtividade;
 	private JLabel lblRespostaIdade;
 	private JLabel lblRespostaImc;
-	private JLabel lblInformacaoImc;
+	private JLabel lblCaixaImc;
 	private JLabel lblRespostaFcm;
 	private JLabel lblRespostaTmb;
 
@@ -102,7 +102,7 @@ public class FrmClientes extends JFrame {
 		setIconImage(Toolkit.getDefaultToolkit()
 				.getImage(FrmClientes.class.getResource("/br/senai/jandira/sp/images/academia.png")));
 		setResizable(false);
-		setBounds(100, 100, 334, 600);
+		setBounds(100, 100, 334, 608);
 		painelPrincipal = new JPanel();
 		painelPrincipal.setBackground(new Color(255, 255, 225));
 		painelPrincipal.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -327,7 +327,7 @@ public class FrmClientes extends JFrame {
 					lblRespostaImc.setText(String.valueOf(decimal.format(cliente.imc()) + " kg/m²"));
 					lblRespostaImc.setForeground(new Color(0, 142, 11));
 					
-					lblInformacaoImc.setText(cliente.getRespostaImc());
+					lblCaixaImc.setText(cliente.getRespostaImc());
 
 					lblRespostaTmb.setText(String.valueOf(decimal.format(cliente.tmb()) + " kcal"));
 					lblRespostaTmb.setForeground(new Color(0, 142, 11));
@@ -351,7 +351,7 @@ public class FrmClientes extends JFrame {
 		painelResultados.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), "Resultados:",
 				TitledBorder.LEADING, TitledBorder.TOP, null, new Color(37, 183, 211)));
 		painelResultados.setBackground(new Color(255, 255, 225));
-		painelResultados.setBounds(10, 344, 310, 153);
+		painelResultados.setBounds(10, 344, 310, 170);
 		painelPrincipal.add(painelResultados);
 		painelResultados.setLayout(null);
 
@@ -360,30 +360,31 @@ public class FrmClientes extends JFrame {
 		painelResultados.add(lblImc);
 
 		JLabel lblTmb = new JLabel("TMB:");
-		lblTmb.setBounds(10, 103, 38, 14);
+		lblTmb.setBounds(10, 116, 38, 14);
 		painelResultados.add(lblTmb);
 
 		JLabel lblFcm = new JLabel("FCM:");
-		lblFcm.setBounds(10, 128, 39, 14);
+		lblFcm.setBounds(10, 141, 39, 14);
 		painelResultados.add(lblFcm);
 
 		lblRespostaImc = new JLabel("-");
-		lblRespostaImc.setBounds(62, 22, 111, 14);
+		lblRespostaImc.setBounds(59, 22, 111, 14);
 		painelResultados.add(lblRespostaImc);
 
 		lblRespostaFcm = new JLabel("-");
-		lblRespostaFcm.setBounds(59, 128, 238, 14);
+		lblRespostaFcm.setBounds(59, 141, 238, 14);
 		painelResultados.add(lblRespostaFcm);
 
 		lblRespostaTmb = new JLabel("-");
-		lblRespostaTmb.setBounds(59, 103, 238, 14);
+		lblRespostaTmb.setBounds(59, 116, 238, 14);
 		painelResultados.add(lblRespostaTmb);
 
-		lblInformacaoImc = new JLabel();
-		lblInformacaoImc.setBackground(new Color(255, 255, 255));
-		lblInformacaoImc.setOpaque(true);
-		lblInformacaoImc.setBounds(37, 47, 260, 42);
-		painelResultados.add(lblInformacaoImc);
+		lblCaixaImc = new JLabel();
+		lblCaixaImc.setBorder(new LineBorder(new Color(0, 0, 0)));
+		lblCaixaImc.setBackground(new Color(255, 255, 255));
+		lblCaixaImc.setOpaque(true);
+		lblCaixaImc.setBounds(59, 47, 238, 58);
+		painelResultados.add(lblCaixaImc);
 
 		JLabel lblIdade = new JLabel("Idade:");
 		lblIdade.setBounds(183, 22, 46, 14);
@@ -407,13 +408,13 @@ public class FrmClientes extends JFrame {
 				}
 			}
 		});
-		btnSair.setBounds(254, 508, 58, 52);
+		btnSair.setBounds(254, 520, 58, 52);
 		painelPrincipal.add(btnSair);
 		btnSair.setBackground(new Color(255, 255, 255));
 		btnSair.setIcon(new ImageIcon(FrmClientes.class.getResource("/br/senai/jandira/sp/images/sair.png")));
 
 		JButton btnDinamico = new JButton("");
-		btnDinamico.setBounds(20, 508, 58, 52);
+		btnDinamico.setBounds(20, 520, 58, 52);
 		painelPrincipal.add(btnDinamico);
 		btnDinamico.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -511,7 +512,7 @@ public class FrmClientes extends JFrame {
 		cbAtividade.setSelectedIndex(0);
 		lblRespostaImc.setText("-");
 		lblRespostaImc.setForeground(new Color(0, 0, 0));
-		lblInformacaoImc.setText("");
+		lblCaixaImc.setText("");
 		lblRespostaIdade.setText("-");
 		lblRespostaIdade.setForeground(new Color(0, 0, 0));
 		lblRespostaTmb.setText("-");
