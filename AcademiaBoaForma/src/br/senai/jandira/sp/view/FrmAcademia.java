@@ -109,7 +109,7 @@ public class FrmAcademia extends JFrame {
 			}
 		});
 		btnAdicionar.setBackground(new Color(255, 255, 255));
-		btnAdicionar.setIcon(new ImageIcon(FrmAcademia.class.getResource("/br/senai/jandira/sp/images/adicionar.png")));
+		btnAdicionar.setIcon(new ImageIcon(FrmAcademia.class.getResource("/br/senai/jandira/sp/images/add_cliente.png")));
 		btnAdicionar.setBounds(10, 11, 65, 53);
 		painelBotoes.add(btnAdicionar);
 
@@ -123,7 +123,7 @@ public class FrmAcademia extends JFrame {
 			}
 		});
 		btnEditar.setBackground(new Color(255, 255, 255));
-		btnEditar.setIcon(new ImageIcon(FrmAcademia.class.getResource("/br/senai/jandira/sp/images/editar.png")));
+		btnEditar.setIcon(new ImageIcon(FrmAcademia.class.getResource("/br/senai/jandira/sp/images/editar_cliente.png")));
 		btnEditar.setBounds(100, 11, 65, 53);
 		painelBotoes.add(btnEditar);
 
@@ -137,7 +137,7 @@ public class FrmAcademia extends JFrame {
 			}
 		});
 		btnExcluir.setBackground(new Color(255, 255, 255));
-		btnExcluir.setIcon(new ImageIcon(FrmAcademia.class.getResource("/br/senai/jandira/sp/images/deletar.png")));
+		btnExcluir.setIcon(new ImageIcon(FrmAcademia.class.getResource("/br/senai/jandira/sp/images/deletar_cliente.png")));
 		btnExcluir.setBounds(189, 11, 65, 53);
 		painelBotoes.add(btnExcluir);
 

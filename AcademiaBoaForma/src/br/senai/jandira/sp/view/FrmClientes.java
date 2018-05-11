@@ -159,7 +159,7 @@ public class FrmClientes extends JFrame {
 		painelDados.add(lblEmail);
 
 		JLabel lblSexo = new JLabel("Sexo:");
-		lblSexo.setBounds(10, 127, 46, 14);
+		lblSexo.setBounds(10, 131, 46, 14);
 		painelDados.add(lblSexo);
 
 		JLabel lblDtNasc = new JLabel("Data Nascimento:");
@@ -168,15 +168,15 @@ public class FrmClientes extends JFrame {
 		painelDados.add(lblDtNasc);
 
 		JLabel lblAltura = new JLabel("Altura:");
-		lblAltura.setBounds(10, 152, 46, 14);
+		lblAltura.setBounds(10, 156, 46, 14);
 		painelDados.add(lblAltura);
 
 		JLabel lblPeso = new JLabel("Peso:");
-		lblPeso.setBounds(68, 152, 46, 14);
+		lblPeso.setBounds(68, 156, 46, 14);
 		painelDados.add(lblPeso);
 
 		txtNome = new JTextField();
-		txtNome.setBounds(10, 46, 181, 20);
+		txtNome.setBounds(10, 46, 181, 30);
 		painelDados.add(txtNome);
 		txtNome.setColumns(10);
 
@@ -191,12 +191,12 @@ public class FrmClientes extends JFrame {
 		}
 
 		txtCpf = new JFormattedTextField(cpfMask);
-		txtCpf.setBounds(201, 46, 99, 20);
+		txtCpf.setBounds(201, 46, 99, 30);
 		painelDados.add(txtCpf);
 		txtCpf.setColumns(10);
 
 		txtEmail = new JTextField();
-		txtEmail.setBounds(10, 96, 181, 20);
+		txtEmail.setBounds(10, 96, 181, 30);
 		painelDados.add(txtEmail);
 		txtEmail.setColumns(10);
 
@@ -211,19 +211,19 @@ public class FrmClientes extends JFrame {
 		}
 
 		txtDtNasc = new JFormattedTextField(dataMask);
-		txtDtNasc.setBounds(218, 96, 70, 20);
+		txtDtNasc.setBounds(215, 96, 75, 30);
 		painelDados.add(txtDtNasc);
 		txtDtNasc.setColumns(10);
 
 		btnRadioHomem = new JRadioButton("Homem");
 		btnRadioHomem.setBackground(new Color(255, 255, 225));
-		btnRadioHomem.setBounds(49, 123, 76, 23);
+		btnRadioHomem.setBounds(49, 127, 76, 23);
 		btnRadioHomem.setActionCommand("M");
 		painelDados.add(btnRadioHomem);
 
 		btnRadioMulher = new JRadioButton("Mulher");
 		btnRadioMulher.setBackground(new Color(255, 255, 225));
-		btnRadioMulher.setBounds(127, 123, 65, 23);
+		btnRadioMulher.setBounds(127, 127, 65, 23);
 		btnRadioMulher.setActionCommand("F");
 		painelDados.add(btnRadioMulher);
 
@@ -246,7 +246,7 @@ public class FrmClientes extends JFrame {
 				}
 			}
 		});
-		txtAltura.setBounds(10, 171, 34, 20);
+		txtAltura.setBounds(10, 175, 34, 25);
 		painelDados.add(txtAltura);
 		txtAltura.setColumns(10);
 
@@ -266,25 +266,25 @@ public class FrmClientes extends JFrame {
 			}
 		});
 		txtPeso.setColumns(10);
-		txtPeso.setBounds(68, 171, 34, 20);
+		txtPeso.setBounds(68, 175, 34, 25);
 		painelDados.add(txtPeso);
 
 		JLabel lblCm = new JLabel("cm");
-		lblCm.setBounds(47, 174, 18, 14);
+		lblCm.setBounds(47, 180, 18, 14);
 		painelDados.add(lblCm);
 
 		JLabel lblQuilos = new JLabel("quilos");
-		lblQuilos.setBounds(105, 174, 34, 14);
+		lblQuilos.setBounds(105, 180, 34, 14);
 		painelDados.add(lblQuilos);
 
 		JLabel lblAtividade = new JLabel("N\u00EDvel de Atividade:");
-		lblAtividade.setBounds(151, 152, 125, 14);
+		lblAtividade.setBounds(151, 156, 125, 14);
 		painelDados.add(lblAtividade);
 
 		cbAtividade = new JComboBox();
 		cbAtividade.setModel(new DefaultComboBoxModel(new String[] { "Sedent\u00E1rio ", "Levemente Ativo",
 				"Moderadamente Ativo", "Bastante Ativo", "Muito Ativo" }));
-		cbAtividade.setBounds(151, 171, 149, 20);
+		cbAtividade.setBounds(151, 175, 149, 20);
 		painelDados.add(cbAtividade);
 
 		JButton btnCalcular = new JButton("Calcular");
@@ -483,16 +483,16 @@ public class FrmClientes extends JFrame {
 
 		// Bloquear o 'txtCpf' se for 'EDITAR'
 		if (operacao.equals("EDITAR")) {
-			txtCpf.setEditable(false);
+			txtCpf.setEnabled(false);
 
 			// Bloquear todos os campos e 'btnCalcular' se for 'EXCLUIR'
 		} else if (operacao.equals("EXCLUIR")) {
-			txtCpf.setEditable(false);
-			txtNome.setEditable(false);
-			txtDtNasc.setEditable(false);
-			txtEmail.setEditable(false);
-			txtAltura.setEditable(false);
-			txtPeso.setEditable(false);
+			txtCpf.setEnabled(false);
+			txtNome.setEnabled(false);
+			txtDtNasc.setEnabled(false);
+			txtEmail.setEnabled(false);
+			txtAltura.setEnabled(false);
+			txtPeso.setEnabled(false);
 			btnRadioHomem.setEnabled(false);
 			btnRadioMulher.setEnabled(false);
 			cbAtividade.setEnabled(false);
