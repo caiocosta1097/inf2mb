@@ -104,7 +104,7 @@ public class FrmClientes extends JFrame {
 		setResizable(false);
 		setBounds(100, 100, 334, 608);
 		painelPrincipal = new JPanel();
-		painelPrincipal.setBackground(new Color(255, 255, 225));
+		painelPrincipal.setBackground(new Color(37, 183, 211));
 		painelPrincipal.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(painelPrincipal);
 		painelPrincipal.setLayout(null);
@@ -139,9 +139,8 @@ public class FrmClientes extends JFrame {
 		painelTitulo.add(lblOperacao);
 
 		JPanel painelDados = new JPanel();
-		painelDados.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), "Dados:", TitledBorder.LEADING,
-				TitledBorder.TOP, null, new Color(37, 183, 211)));
-		painelDados.setBackground(new Color(255, 255, 225));
+		painelDados.setBorder(new TitledBorder(new LineBorder(null), "Dados:", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		painelDados.setBackground(new Color(37, 183, 211));
 		painelDados.setBounds(10, 75, 310, 265);
 		painelPrincipal.add(painelDados);
 		painelDados.setLayout(null);
@@ -216,13 +215,13 @@ public class FrmClientes extends JFrame {
 		txtDtNasc.setColumns(10);
 
 		btnRadioHomem = new JRadioButton("Homem");
-		btnRadioHomem.setBackground(new Color(255, 255, 225));
+		btnRadioHomem.setBackground(new Color(37, 183, 211));
 		btnRadioHomem.setBounds(49, 127, 76, 23);
 		btnRadioHomem.setActionCommand("M");
 		painelDados.add(btnRadioHomem);
 
 		btnRadioMulher = new JRadioButton("Mulher");
-		btnRadioMulher.setBackground(new Color(255, 255, 225));
+		btnRadioMulher.setBackground(new Color(37, 183, 211));
 		btnRadioMulher.setBounds(127, 127, 65, 23);
 		btnRadioMulher.setActionCommand("F");
 		painelDados.add(btnRadioMulher);
@@ -348,9 +347,8 @@ public class FrmClientes extends JFrame {
 		painelDados.add(btnCalcular);
 
 		JPanel painelResultados = new JPanel();
-		painelResultados.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), "Resultados:",
-				TitledBorder.LEADING, TitledBorder.TOP, null, new Color(37, 183, 211)));
-		painelResultados.setBackground(new Color(255, 255, 225));
+		painelResultados.setBorder(new TitledBorder(new LineBorder(null), "Resultados:", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		painelResultados.setBackground(new Color(37, 183, 211));
 		painelResultados.setBounds(10, 344, 310, 170);
 		painelPrincipal.add(painelResultados);
 		painelResultados.setLayout(null);

@@ -38,7 +38,7 @@ public class ClienteDAO {
 
 			JOptionPane.showMessageDialog(null, "Cliente gravado com sucesso!");
 		} catch (SQLException erro) {
-			erro.printStackTrace();
+			JOptionPane.showMessageDialog(null, "CPF já cadastrado.");
 		}
 	}
 	
