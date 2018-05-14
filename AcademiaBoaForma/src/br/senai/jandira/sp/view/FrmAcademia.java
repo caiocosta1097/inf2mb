@@ -50,7 +50,7 @@ public class FrmAcademia extends JFrame {
 		setIconImage(Toolkit.getDefaultToolkit()
 				.getImage(FrmAcademia.class.getResource("/br/senai/jandira/sp/images/academia.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 500, 335);
+		setBounds(100, 100, 500, 400);
 		painelPrincipal = new JPanel();
 		painelPrincipal.setBackground(new Color(37, 183, 211));
 		setContentPane(painelPrincipal);
@@ -83,7 +83,7 @@ public class FrmAcademia extends JFrame {
 		painelTabela = new JPanel();
 		painelTabela.setBorder(new TitledBorder(new LineBorder(null), "Clientes:", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		painelTabela.setBackground(new Color(37, 183, 211));
-		painelTabela.setBounds(10, 75, 475, 145);
+		painelTabela.setBounds(10, 75, 475, 210);
 		painelPrincipal.add(painelTabela);
 		painelTabela.setLayout(null);
 
@@ -93,7 +93,7 @@ public class FrmAcademia extends JFrame {
 		JPanel painelBotoes = new JPanel();
 		painelBotoes.setBorder(new EtchedBorder(EtchedBorder.RAISED, null, null));
 		painelBotoes.setBackground(new Color(37, 183, 211));
-		painelBotoes.setBounds(0, 231, 494, 75);
+		painelBotoes.setBounds(0, 296, 494, 75);
 		painelPrincipal.add(painelBotoes);
 		painelBotoes.setLayout(null);
 
@@ -163,7 +163,7 @@ public class FrmAcademia extends JFrame {
 	// Método para criar uma tabela
 	public void criarTabela() {
 		scrollTabela = new JScrollPane();
-		scrollTabela.setBounds(10, 20, 455, 114);
+		scrollTabela.setBounds(10, 20, 455, 179);
 		painelTabela.add(scrollTabela);
 
 		tabelaClientes = new JTable();

@@ -321,18 +321,18 @@ public class FrmClientes extends JFrame {
 					fcm = (int) cliente.fcm();
 
 					lblRespostaIdade.setText(String.valueOf(cliente.getIdade() + " anos"));
-					lblRespostaIdade.setForeground(new Color(0, 142, 11));
+//					lblRespostaIdade.setForeground(new Color(0, 142, 11));
 
 					lblRespostaImc.setText(String.valueOf(decimal.format(cliente.imc()) + " kg/m²"));
-					lblRespostaImc.setForeground(new Color(0, 142, 11));
+//					lblRespostaImc.setForeground(new Color(0, 142, 11));
 					
 					lblCaixaImc.setText(cliente.getRespostaImc());
 
 					lblRespostaTmb.setText(String.valueOf(decimal.format(cliente.tmb()) + " kcal"));
-					lblRespostaTmb.setForeground(new Color(0, 142, 11));
+//					lblRespostaTmb.setForeground(new Color(0, 142, 11));
 
 					lblRespostaFcm.setText(String.valueOf(fcm) + " bpm");
-					lblRespostaFcm.setForeground(new Color(0, 142, 11));
+//					lblRespostaFcm.setForeground(new Color(0, 142, 11));
 
 				} catch (Exception erro) {
 					JOptionPane.showMessageDialog(null, "Por favor, preencha todos os campos.");
@@ -366,14 +366,17 @@ public class FrmClientes extends JFrame {
 		painelResultados.add(lblFcm);
 
 		lblRespostaImc = new JLabel("-");
+		lblRespostaImc.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblRespostaImc.setBounds(59, 22, 111, 14);
 		painelResultados.add(lblRespostaImc);
 
 		lblRespostaFcm = new JLabel("-");
+		lblRespostaFcm.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblRespostaFcm.setBounds(59, 141, 238, 14);
 		painelResultados.add(lblRespostaFcm);
 
 		lblRespostaTmb = new JLabel("-");
+		lblRespostaTmb.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblRespostaTmb.setBounds(59, 116, 238, 14);
 		painelResultados.add(lblRespostaTmb);
 
@@ -389,6 +392,7 @@ public class FrmClientes extends JFrame {
 		painelResultados.add(lblIdade);
 
 		lblRespostaIdade = new JLabel("-");
+		lblRespostaIdade.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblRespostaIdade.setBounds(239, 22, 61, 14);
 		painelResultados.add(lblRespostaIdade);
 
@@ -509,14 +513,14 @@ public class FrmClientes extends JFrame {
 		btnGrupoSexo.clearSelection();
 		cbAtividade.setSelectedIndex(0);
 		lblRespostaImc.setText("-");
-		lblRespostaImc.setForeground(new Color(0, 0, 0));
+//		lblRespostaImc.setForeground(new Color(0, 0, 0));
 		lblCaixaImc.setText("");
 		lblRespostaIdade.setText("-");
-		lblRespostaIdade.setForeground(new Color(0, 0, 0));
+//		lblRespostaIdade.setForeground(new Color(0, 0, 0));
 		lblRespostaTmb.setText("-");
-		lblRespostaTmb.setForeground(new Color(0, 0, 0));
+//		lblRespostaTmb.setForeground(new Color(0, 0, 0));
 		lblRespostaFcm.setText("-");
-		lblRespostaFcm.setForeground(new Color(0, 0, 0));
+//		lblRespostaFcm.setForeground(new Color(0, 0, 0));
 		txtNome.requestFocus();
 	}
 }
