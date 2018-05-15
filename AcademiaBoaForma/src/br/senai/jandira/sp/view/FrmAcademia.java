@@ -52,7 +52,7 @@ public class FrmAcademia extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 400);
 		painelPrincipal = new JPanel();
-		painelPrincipal.setBackground(new Color(37, 183, 211));
+		painelPrincipal.setBackground(new Color(0, 153, 102));
 		setContentPane(painelPrincipal);
 		painelPrincipal.setLayout(null);
 
@@ -66,7 +66,7 @@ public class FrmAcademia extends JFrame {
 		JLabel lblTitulo = new JLabel(" Boa Forma");
 		lblTitulo.setIcon(new ImageIcon(FrmAcademia.class.getResource("/br/senai/jandira/sp/images/academia.png")));
 		lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTitulo.setForeground(new Color(37, 183, 211));
+		lblTitulo.setForeground(new Color(0, 153, 102));
 		lblTitulo.setFont(new Font("Verdana", Font.BOLD, 32));
 		lblTitulo.setBounds(10, 0, 389, 64);
 		painelTitulo.add(lblTitulo);
@@ -82,7 +82,7 @@ public class FrmAcademia extends JFrame {
 
 		painelTabela = new JPanel();
 		painelTabela.setBorder(new TitledBorder(new LineBorder(null), "Clientes:", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		painelTabela.setBackground(new Color(37, 183, 211));
+		painelTabela.setBackground(new Color(153, 255, 204));
 		painelTabela.setBounds(10, 75, 475, 210);
 		painelPrincipal.add(painelTabela);
 		painelTabela.setLayout(null);
@@ -92,7 +92,7 @@ public class FrmAcademia extends JFrame {
 
 		JPanel painelBotoes = new JPanel();
 		painelBotoes.setBorder(new EtchedBorder(EtchedBorder.RAISED, null, null));
-		painelBotoes.setBackground(new Color(37, 183, 211));
+		painelBotoes.setBackground(new Color(0, 153, 102));
 		painelBotoes.setBounds(0, 296, 494, 75);
 		painelPrincipal.add(painelBotoes);
 		painelBotoes.setLayout(null);
