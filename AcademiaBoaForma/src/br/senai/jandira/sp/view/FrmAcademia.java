@@ -68,15 +68,16 @@ public class FrmAcademia extends JFrame {
 		lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTitulo.setForeground(new Color(255, 255, 255));
 		lblTitulo.setFont(new Font("Monotype Corsiva", Font.BOLD, 40));
-		lblTitulo.setBounds(10, 0, 389, 64);
+		lblTitulo.setBounds(10, 0, 379, 64);
 		painelTitulo.add(lblTitulo);
 
 		SimpleDateFormat data = new SimpleDateFormat("dd/MM/yyyy");
 
 		// Inserindo a data de hoje no 'lblData'
 		JLabel lblData = new JLabel("");
+		lblData.setFont(new Font("Verdana", Font.BOLD, 11));
 		lblData.setForeground(new Color(255, 255, 255));
-		lblData.setBounds(409, 11, 75, 14);
+		lblData.setBounds(394, 11, 90, 14);
 		Date dataAtual = new Date();
 		lblData.setText(data.format(dataAtual));
 		painelTitulo.add(lblData);
