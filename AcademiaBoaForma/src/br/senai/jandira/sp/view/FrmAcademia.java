@@ -23,7 +23,9 @@ import javax.swing.SwingConstants;
 import javax.swing.ImageIcon;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 
 import br.senai.jandira.sp.dao.ClienteDAO;
 import br.senai.jandira.sp.model.Cliente;
@@ -83,7 +85,8 @@ public class FrmAcademia extends JFrame {
 		painelTitulo.add(lblData);
 
 		painelTabela = new JPanel();
-		painelTabela.setBorder(new TitledBorder(new LineBorder(null), "Clientes:", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		painelTabela.setBorder(new TitledBorder(new LineBorder(null), "Clientes:", TitledBorder.LEADING,
+				TitledBorder.TOP, null, null));
 		painelTabela.setBackground(new Color(216, 235, 255));
 		painelTabela.setBounds(10, 75, 475, 210);
 		painelPrincipal.add(painelTabela);
@@ -110,7 +113,8 @@ public class FrmAcademia extends JFrame {
 			}
 		});
 		btnAdicionar.setBackground(new Color(255, 255, 255));
-		btnAdicionar.setIcon(new ImageIcon(FrmAcademia.class.getResource("/br/senai/jandira/sp/images/add_cliente.png")));
+		btnAdicionar
+				.setIcon(new ImageIcon(FrmAcademia.class.getResource("/br/senai/jandira/sp/images/add_cliente.png")));
 		btnAdicionar.setBounds(10, 11, 65, 53);
 		painelBotoes.add(btnAdicionar);
 
@@ -124,7 +128,8 @@ public class FrmAcademia extends JFrame {
 			}
 		});
 		btnEditar.setBackground(new Color(255, 255, 255));
-		btnEditar.setIcon(new ImageIcon(FrmAcademia.class.getResource("/br/senai/jandira/sp/images/editar_cliente.png")));
+		btnEditar.setIcon(
+				new ImageIcon(FrmAcademia.class.getResource("/br/senai/jandira/sp/images/editar_cliente.png")));
 		btnEditar.setBounds(100, 11, 65, 53);
 		painelBotoes.add(btnEditar);
 
@@ -138,7 +143,8 @@ public class FrmAcademia extends JFrame {
 			}
 		});
 		btnExcluir.setBackground(new Color(255, 255, 255));
-		btnExcluir.setIcon(new ImageIcon(FrmAcademia.class.getResource("/br/senai/jandira/sp/images/deletar_cliente.png")));
+		btnExcluir.setIcon(
+				new ImageIcon(FrmAcademia.class.getResource("/br/senai/jandira/sp/images/deletar_cliente.png")));
 		btnExcluir.setBounds(189, 11, 65, 53);
 		painelBotoes.add(btnExcluir);
 
@@ -167,16 +173,15 @@ public class FrmAcademia extends JFrame {
 		scrollTabela = new JScrollPane();
 		scrollTabela.setBounds(10, 20, 455, 179);
 		painelTabela.add(scrollTabela);
-
+		
 		tabelaClientes = new JTable();
 
-		DefaultTableModel modeloTabela = new DefaultTableModel(){
-			
+		DefaultTableModel modeloTabela = new DefaultTableModel() {
+
 			// Deixar as células da tabela não editáveis
 			@Override
-			public boolean isCellEditable(int row, int col)
-			{
-			return false;
+			public boolean isCellEditable(int row, int col) {
+				return false;
 			}
 		};
 		String[] nomesColunas = { "CPF", "NOME", "E-MAIL" };
@@ -188,7 +193,7 @@ public class FrmAcademia extends JFrame {
 		clientes = clienteDAO.getClientes();
 
 		Object[] linha = new Object[3];
-
+		
 		for (Cliente cliente : clientes) {
 			linha[0] = cliente.getCpf();
 			linha[1] = cliente.getNome();
@@ -196,20 +201,28 @@ public class FrmAcademia extends JFrame {
 
 			modeloTabela.addRow(linha);
 		}
+		
 		tabelaClientes.setModel(modeloTabela);
-		tabelaClientes.setBackground(Color.WHITE);
 		
 		// Deixar as colunas da tabela fixas
 		tabelaClientes.getTableHeader().setReorderingAllowed(false);
-		tabelaClientes.getColumnModel().getColumn(0).setPreferredWidth(120);
-		tabelaClientes.getColumnModel().getColumn(1).setPreferredWidth(200);
-		tabelaClientes.getColumnModel().getColumn(2).setPreferredWidth(200);
+		
+		// Deixar o cabeçalho centralizado
+		((DefaultTableCellRenderer) tabelaClientes.getTableHeader().getDefaultRenderer())
+				.setHorizontalAlignment(SwingConstants.CENTER);
+		
+		tabelaClientes.getColumnModel().getColumn(0).setMinWidth(100);
+		tabelaClientes.getColumnModel().getColumn(1).setMinWidth(170);
+		tabelaClientes.getColumnModel().getColumn(2).setMinWidth(190);
 		tabelaClientes.setFont(new Font("Verdana", Font.PLAIN, 11));
 		scrollTabela.setViewportView(tabelaClientes);
+		scrollTabela.getViewport().setBackground(new Color(255, 255, 255));
 	}
 
-	/* Método para selecionar um cliente na tabela e puxar seus dados no Banco
-	de Dados */
+	/*
+	 * Método para selecionar um cliente na tabela e puxar seus dados no Banco
+	 * de Dados
+	 */
 	public void abrirJanelaCliente(String operacao) {
 		try {
 			int linha;
