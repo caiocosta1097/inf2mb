@@ -105,14 +105,14 @@ public class FrmClientes extends JFrame {
 		setResizable(false);
 		setBounds(100, 100, 334, 608);
 		painelPrincipal = new JPanel();
-		painelPrincipal.setBackground(new Color(21, 104, 104));
+		painelPrincipal.setBackground(new Color(83, 125, 193));
 		painelPrincipal.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(painelPrincipal);
 		painelPrincipal.setLayout(null);
 
 		JPanel painelTitulo = new JPanel();
 		painelTitulo.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-		painelTitulo.setBackground(new Color(21, 104, 104));
+		painelTitulo.setBackground(new Color(83, 125, 193));
 		painelTitulo.setBounds(0, 0, 328, 64);
 		painelPrincipal.add(painelTitulo);
 		painelTitulo.setLayout(null);

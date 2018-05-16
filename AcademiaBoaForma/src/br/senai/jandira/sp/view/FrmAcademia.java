@@ -52,12 +52,12 @@ public class FrmAcademia extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 400);
 		painelPrincipal = new JPanel();
-		painelPrincipal.setBackground(new Color(21, 104, 104));
+		painelPrincipal.setBackground(new Color(83, 125, 193));
 		setContentPane(painelPrincipal);
 		painelPrincipal.setLayout(null);
 
 		JPanel painelTitulo = new JPanel();
-		painelTitulo.setBackground(new Color(21, 104, 104));
+		painelTitulo.setBackground(new Color(83, 125, 193));
 		painelTitulo.setBorder(new EtchedBorder(EtchedBorder.RAISED, null, null));
 		painelTitulo.setBounds(0, 0, 494, 64);
 		painelPrincipal.add(painelTitulo);
@@ -94,7 +94,7 @@ public class FrmAcademia extends JFrame {
 
 		JPanel painelBotoes = new JPanel();
 		painelBotoes.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-		painelBotoes.setBackground(new Color(21, 104, 104));
+		painelBotoes.setBackground(new Color(83, 125, 193));
 		painelBotoes.setBounds(0, 296, 494, 75);
 		painelPrincipal.add(painelBotoes);
 		painelBotoes.setLayout(null);
