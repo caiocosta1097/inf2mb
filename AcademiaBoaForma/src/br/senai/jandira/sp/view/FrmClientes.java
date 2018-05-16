@@ -120,8 +120,8 @@ public class FrmClientes extends JFrame {
 		JLabel lblTitulo = new JLabel(" Boa Forma");
 		lblTitulo.setForeground(new Color(0, 153, 102));
 		lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTitulo.setFont(new Font("Verdana", Font.BOLD, 26));
-		lblTitulo.setBounds(0, 0, 166, 64);
+		lblTitulo.setFont(new Font("Monotype Corsiva", Font.BOLD, 39));
+		lblTitulo.setBounds(0, 0, 195, 64);
 		painelTitulo.add(lblTitulo);
 
 		JLabel lblOperacao = new JLabel(operacao);
@@ -136,8 +136,8 @@ public class FrmClientes extends JFrame {
 			lblOperacao.setForeground(new Color(0, 153, 102));
 		}
 
-		lblOperacao.setFont(new Font("Verdana", Font.BOLD, 20));
-		lblOperacao.setBounds(172, 2, 159, 64);
+		lblOperacao.setFont(new Font("Verdana", Font.BOLD, 18));
+		lblOperacao.setBounds(205, 2, 126, 64);
 		painelTitulo.add(lblOperacao);
 
 		JPanel painelDados = new JPanel();
@@ -148,36 +148,44 @@ public class FrmClientes extends JFrame {
 		painelDados.setLayout(null);
 
 		JLabel lblNome = new JLabel("Nome:");
-		lblNome.setBounds(10, 27, 46, 14);
+		lblNome.setFont(new Font("Verdana", Font.PLAIN, 11));
+		lblNome.setBounds(10, 22, 46, 14);
 		painelDados.add(lblNome);
 
 		JLabel lblCpf = new JLabel("CPF:");
-		lblCpf.setBounds(201, 27, 46, 14);
+		lblCpf.setFont(new Font("Verdana", Font.PLAIN, 11));
+		lblCpf.setBounds(195, 22, 46, 14);
 		painelDados.add(lblCpf);
 
 		JLabel lblEmail = new JLabel("E-mail:");
+		lblEmail.setFont(new Font("Verdana", Font.PLAIN, 11));
 		lblEmail.setBounds(10, 77, 46, 14);
 		painelDados.add(lblEmail);
 
 		JLabel lblSexo = new JLabel("Sexo:");
+		lblSexo.setFont(new Font("Verdana", Font.PLAIN, 11));
 		lblSexo.setBounds(10, 131, 46, 14);
 		painelDados.add(lblSexo);
 
 		JLabel lblDtNasc = new JLabel("Data Nascimento:");
+		lblDtNasc.setFont(new Font("Verdana", Font.PLAIN, 11));
 		lblDtNasc.setHorizontalAlignment(SwingConstants.CENTER);
 		lblDtNasc.setBounds(201, 77, 105, 14);
 		painelDados.add(lblDtNasc);
 
 		JLabel lblAltura = new JLabel("Altura:");
+		lblAltura.setFont(new Font("Verdana", Font.PLAIN, 11));
 		lblAltura.setBounds(10, 156, 46, 14);
 		painelDados.add(lblAltura);
 
 		JLabel lblPeso = new JLabel("Peso:");
+		lblPeso.setFont(new Font("Verdana", Font.PLAIN, 11));
 		lblPeso.setBounds(68, 156, 46, 14);
 		painelDados.add(lblPeso);
 
 		txtNome = new JTextField();
-		txtNome.setBounds(10, 46, 181, 30);
+		txtNome.setFont(new Font("Verdana", Font.PLAIN, 11));
+		txtNome.setBounds(10, 41, 175, 30);
 		painelDados.add(txtNome);
 		txtNome.setColumns(10);
 
@@ -192,11 +200,13 @@ public class FrmClientes extends JFrame {
 		}
 
 		txtCpf = new JFormattedTextField(cpfMask);
-		txtCpf.setBounds(201, 46, 99, 30);
+		txtCpf.setFont(new Font("Verdana", Font.PLAIN, 11));
+		txtCpf.setBounds(195, 41, 105, 30);
 		painelDados.add(txtCpf);
 		txtCpf.setColumns(10);
 
 		txtEmail = new JTextField();
+		txtEmail.setFont(new Font("Verdana", Font.PLAIN, 11));
 		txtEmail.setBounds(10, 96, 181, 30);
 		painelDados.add(txtEmail);
 		txtEmail.setColumns(10);
@@ -212,18 +222,21 @@ public class FrmClientes extends JFrame {
 		}
 
 		txtDtNasc = new JFormattedTextField(dataMask);
-		txtDtNasc.setBounds(215, 96, 75, 30);
+		txtDtNasc.setFont(new Font("Verdana", Font.PLAIN, 11));
+		txtDtNasc.setBounds(211, 96, 82, 30);
 		painelDados.add(txtDtNasc);
 		txtDtNasc.setColumns(10);
 
 		btnRadioHomem = new JRadioButton("Homem");
-		btnRadioHomem.setBackground(new Color(255, 255, 255));
+		btnRadioHomem.setFont(new Font("Verdana", Font.PLAIN, 11));
+		btnRadioHomem.setBackground(new Color(153, 255, 204));
 		btnRadioHomem.setBounds(49, 127, 76, 23);
 		btnRadioHomem.setActionCommand("M");
 		painelDados.add(btnRadioHomem);
 
 		btnRadioMulher = new JRadioButton("Mulher");
-		btnRadioMulher.setBackground(new Color(255, 255, 255));
+		btnRadioMulher.setFont(new Font("Verdana", Font.PLAIN, 11));
+		btnRadioMulher.setBackground(new Color(153, 255, 204));
 		btnRadioMulher.setBounds(127, 127, 65, 23);
 		btnRadioMulher.setActionCommand("F");
 		painelDados.add(btnRadioMulher);
@@ -271,18 +284,22 @@ public class FrmClientes extends JFrame {
 		painelDados.add(txtPeso);
 
 		JLabel lblCm = new JLabel("cm");
+		lblCm.setFont(new Font("Verdana", Font.PLAIN, 11));
 		lblCm.setBounds(47, 180, 18, 14);
 		painelDados.add(lblCm);
 
 		JLabel lblQuilos = new JLabel("quilos");
+		lblQuilos.setFont(new Font("Verdana", Font.PLAIN, 11));
 		lblQuilos.setBounds(105, 180, 34, 14);
 		painelDados.add(lblQuilos);
 
 		JLabel lblAtividade = new JLabel("N\u00EDvel de Atividade:");
+		lblAtividade.setFont(new Font("Verdana", Font.PLAIN, 11));
 		lblAtividade.setBounds(151, 156, 125, 14);
 		painelDados.add(lblAtividade);
 
 		cbAtividade = new JComboBox();
+		cbAtividade.setFont(new Font("Verdana", Font.PLAIN, 11));
 		cbAtividade.setModel(new DefaultComboBoxModel(new String[] { "Sedent\u00E1rio ", "Levemente Ativo",
 				"Moderadamente Ativo", "Bastante Ativo", "Muito Ativo" }));
 		cbAtividade.setBounds(151, 175, 149, 20);
@@ -343,7 +360,7 @@ public class FrmClientes extends JFrame {
 		});
 		btnCalcular
 				.setIcon(new ImageIcon(FrmClientes.class.getResource("/br/senai/jandira/sp/images/calculadora.png")));
-		btnCalcular.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnCalcular.setFont(new Font("Verdana", Font.PLAIN, 20));
 		btnCalcular.setBackground(new Color(255, 255, 255));
 		btnCalcular.setBounds(68, 213, 159, 41);
 		painelDados.add(btnCalcular);
@@ -356,33 +373,37 @@ public class FrmClientes extends JFrame {
 		painelResultados.setLayout(null);
 
 		JLabel lblImc = new JLabel("IMC:");
+		lblImc.setFont(new Font("Verdana", Font.PLAIN, 11));
 		lblImc.setBounds(10, 22, 38, 14);
 		painelResultados.add(lblImc);
 
 		JLabel lblTmb = new JLabel("TMB:");
+		lblTmb.setFont(new Font("Verdana", Font.PLAIN, 11));
 		lblTmb.setBounds(10, 116, 38, 14);
 		painelResultados.add(lblTmb);
 
 		JLabel lblFcm = new JLabel("FCM:");
+		lblFcm.setFont(new Font("Verdana", Font.PLAIN, 11));
 		lblFcm.setBounds(10, 141, 39, 14);
 		painelResultados.add(lblFcm);
 
 		lblRespostaImc = new JLabel("-");
-		lblRespostaImc.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblRespostaImc.setFont(new Font("Verdana", Font.BOLD, 11));
 		lblRespostaImc.setBounds(59, 22, 111, 14);
 		painelResultados.add(lblRespostaImc);
 
 		lblRespostaFcm = new JLabel("-");
-		lblRespostaFcm.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblRespostaFcm.setFont(new Font("Verdana", Font.BOLD, 11));
 		lblRespostaFcm.setBounds(59, 141, 238, 14);
 		painelResultados.add(lblRespostaFcm);
 
 		lblRespostaTmb = new JLabel("-");
-		lblRespostaTmb.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblRespostaTmb.setFont(new Font("Verdana", Font.BOLD, 11));
 		lblRespostaTmb.setBounds(59, 116, 238, 14);
 		painelResultados.add(lblRespostaTmb);
 
 		lblCaixaImc = new JLabel();
+		lblCaixaImc.setFont(new Font("Verdana", Font.PLAIN, 11));
 		lblCaixaImc.setBorder(new LineBorder(new Color(0, 0, 0)));
 		lblCaixaImc.setBackground(new Color(255, 255, 255));
 		lblCaixaImc.setOpaque(true);
@@ -390,11 +411,12 @@ public class FrmClientes extends JFrame {
 		painelResultados.add(lblCaixaImc);
 
 		JLabel lblIdade = new JLabel("Idade:");
+		lblIdade.setFont(new Font("Verdana", Font.PLAIN, 11));
 		lblIdade.setBounds(183, 22, 46, 14);
 		painelResultados.add(lblIdade);
 
 		lblRespostaIdade = new JLabel("-");
-		lblRespostaIdade.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblRespostaIdade.setFont(new Font("Verdana", Font.BOLD, 11));
 		lblRespostaIdade.setBounds(239, 22, 61, 14);
 		painelResultados.add(lblRespostaIdade);
 

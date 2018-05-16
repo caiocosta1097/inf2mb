@@ -67,7 +67,7 @@ public class FrmAcademia extends JFrame {
 		lblTitulo.setIcon(new ImageIcon(FrmAcademia.class.getResource("/br/senai/jandira/sp/images/academia.png")));
 		lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTitulo.setForeground(new Color(0, 153, 102));
-		lblTitulo.setFont(new Font("Verdana", Font.BOLD, 32));
+		lblTitulo.setFont(new Font("Monotype Corsiva", Font.BOLD, 40));
 		lblTitulo.setBounds(10, 0, 389, 64);
 		painelTitulo.add(lblTitulo);
 
@@ -91,7 +91,7 @@ public class FrmAcademia extends JFrame {
 		criarTabela();
 
 		JPanel painelBotoes = new JPanel();
-		painelBotoes.setBorder(new EtchedBorder(EtchedBorder.RAISED, null, null));
+		painelBotoes.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		painelBotoes.setBackground(new Color(0, 153, 102));
 		painelBotoes.setBounds(0, 296, 494, 75);
 		painelPrincipal.add(painelBotoes);
@@ -199,8 +199,9 @@ public class FrmAcademia extends JFrame {
 		// Deixar as colunas da tabela fixas
 		tabelaClientes.getTableHeader().setReorderingAllowed(false);
 		tabelaClientes.getColumnModel().getColumn(0).setPreferredWidth(120);
-		tabelaClientes.getColumnModel().getColumn(1).setPreferredWidth(210);
-		tabelaClientes.getColumnModel().getColumn(2).setPreferredWidth(190);
+		tabelaClientes.getColumnModel().getColumn(1).setPreferredWidth(200);
+		tabelaClientes.getColumnModel().getColumn(2).setPreferredWidth(200);
+		tabelaClientes.setFont(new Font("Verdana", Font.PLAIN, 11));
 		scrollTabela.setViewportView(tabelaClientes);
 	}
 
