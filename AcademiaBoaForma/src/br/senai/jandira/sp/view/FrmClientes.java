@@ -131,9 +131,9 @@ public class FrmClientes extends JFrame {
 		/* Mudando a cor do 'lblOperacao' para vermelho se for para deletar ou
 		verde se for para adicionar ou editar */
 		if (operacao.equals("EXCLUIR")) {
-			lblOperacao.setForeground(new Color(186, 0, 0));
+			lblOperacao.setForeground(new Color(224, 48, 42));
 		} else {
-			lblOperacao.setForeground(new Color(0, 153, 102));
+			lblOperacao.setForeground(new Color(48, 224, 42));
 		}
 
 		lblOperacao.setFont(new Font("Verdana", Font.BOLD, 18));
@@ -340,18 +340,14 @@ public class FrmClientes extends JFrame {
 					fcm = (int) cliente.fcm();
 
 					lblRespostaIdade.setText(String.valueOf(cliente.getIdade() + " anos"));
-//					lblRespostaIdade.setForeground(new Color(0, 142, 11));
 
 					lblRespostaImc.setText(String.valueOf(decimal.format(cliente.imc()) + " kg/m²"));
-//					lblRespostaImc.setForeground(new Color(0, 142, 11));
 					
 					lblCaixaImc.setText(cliente.getRespostaImc());
 
 					lblRespostaTmb.setText(String.valueOf(decimal.format(cliente.tmb()) + " kcal"));
-//					lblRespostaTmb.setForeground(new Color(0, 142, 11));
 
 					lblRespostaFcm.setText(String.valueOf(fcm) + " bpm");
-//					lblRespostaFcm.setForeground(new Color(0, 142, 11));
 
 				} catch (Exception erro) {
 					JOptionPane.showMessageDialog(null, "Por favor, preencha todos os campos.");
@@ -537,14 +533,10 @@ public class FrmClientes extends JFrame {
 		btnGrupoSexo.clearSelection();
 		cbAtividade.setSelectedIndex(0);
 		lblRespostaImc.setText("-");
-//		lblRespostaImc.setForeground(new Color(0, 0, 0));
 		lblCaixaImc.setText("");
 		lblRespostaIdade.setText("-");
-//		lblRespostaIdade.setForeground(new Color(0, 0, 0));
 		lblRespostaTmb.setText("-");
-//		lblRespostaTmb.setForeground(new Color(0, 0, 0));
 		lblRespostaFcm.setText("-");
-//		lblRespostaFcm.setForeground(new Color(0, 0, 0));
 		txtNome.requestFocus();
 	}
 }

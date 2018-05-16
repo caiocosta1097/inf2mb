@@ -197,6 +197,7 @@ public class FrmAcademia extends JFrame {
 			modeloTabela.addRow(linha);
 		}
 		tabelaClientes.setModel(modeloTabela);
+		tabelaClientes.setBackground(Color.WHITE);
 		
 		// Deixar as colunas da tabela fixas
 		tabelaClientes.getTableHeader().setReorderingAllowed(false);
