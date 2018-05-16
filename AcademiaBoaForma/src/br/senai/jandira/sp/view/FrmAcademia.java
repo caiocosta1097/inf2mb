@@ -52,12 +52,12 @@ public class FrmAcademia extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 400);
 		painelPrincipal = new JPanel();
-		painelPrincipal.setBackground(new Color(0, 153, 102));
+		painelPrincipal.setBackground(new Color(21, 104, 104));
 		setContentPane(painelPrincipal);
 		painelPrincipal.setLayout(null);
 
 		JPanel painelTitulo = new JPanel();
-		painelTitulo.setBackground(new Color(255, 255, 255));
+		painelTitulo.setBackground(new Color(21, 104, 104));
 		painelTitulo.setBorder(new EtchedBorder(EtchedBorder.RAISED, null, null));
 		painelTitulo.setBounds(0, 0, 494, 64);
 		painelPrincipal.add(painelTitulo);
@@ -66,7 +66,7 @@ public class FrmAcademia extends JFrame {
 		JLabel lblTitulo = new JLabel(" Boa Forma");
 		lblTitulo.setIcon(new ImageIcon(FrmAcademia.class.getResource("/br/senai/jandira/sp/images/academia.png")));
 		lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTitulo.setForeground(new Color(0, 153, 102));
+		lblTitulo.setForeground(new Color(255, 255, 255));
 		lblTitulo.setFont(new Font("Monotype Corsiva", Font.BOLD, 40));
 		lblTitulo.setBounds(10, 0, 389, 64);
 		painelTitulo.add(lblTitulo);
@@ -75,6 +75,7 @@ public class FrmAcademia extends JFrame {
 
 		// Inserindo a data de hoje no 'lblData'
 		JLabel lblData = new JLabel("");
+		lblData.setForeground(new Color(255, 255, 255));
 		lblData.setBounds(409, 11, 75, 14);
 		Date dataAtual = new Date();
 		lblData.setText(data.format(dataAtual));
@@ -82,7 +83,7 @@ public class FrmAcademia extends JFrame {
 
 		painelTabela = new JPanel();
 		painelTabela.setBorder(new TitledBorder(new LineBorder(null), "Clientes:", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		painelTabela.setBackground(new Color(153, 255, 204));
+		painelTabela.setBackground(new Color(216, 235, 255));
 		painelTabela.setBounds(10, 75, 475, 210);
 		painelPrincipal.add(painelTabela);
 		painelTabela.setLayout(null);
@@ -92,7 +93,7 @@ public class FrmAcademia extends JFrame {
 
 		JPanel painelBotoes = new JPanel();
 		painelBotoes.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-		painelBotoes.setBackground(new Color(0, 153, 102));
+		painelBotoes.setBackground(new Color(21, 104, 104));
 		painelBotoes.setBounds(0, 296, 494, 75);
 		painelPrincipal.add(painelBotoes);
 		painelBotoes.setLayout(null);

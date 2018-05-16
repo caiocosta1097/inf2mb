@@ -105,20 +105,20 @@ public class FrmClientes extends JFrame {
 		setResizable(false);
 		setBounds(100, 100, 334, 608);
 		painelPrincipal = new JPanel();
-		painelPrincipal.setBackground(new Color(0, 153, 102));
+		painelPrincipal.setBackground(new Color(21, 104, 104));
 		painelPrincipal.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(painelPrincipal);
 		painelPrincipal.setLayout(null);
 
 		JPanel painelTitulo = new JPanel();
 		painelTitulo.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-		painelTitulo.setBackground(new Color(255, 255, 255));
+		painelTitulo.setBackground(new Color(21, 104, 104));
 		painelTitulo.setBounds(0, 0, 328, 64);
 		painelPrincipal.add(painelTitulo);
 		painelTitulo.setLayout(null);
 
 		JLabel lblTitulo = new JLabel(" Boa Forma");
-		lblTitulo.setForeground(new Color(0, 153, 102));
+		lblTitulo.setForeground(new Color(255, 255, 255));
 		lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTitulo.setFont(new Font("Monotype Corsiva", Font.BOLD, 39));
 		lblTitulo.setBounds(0, 0, 195, 64);
@@ -142,7 +142,7 @@ public class FrmClientes extends JFrame {
 
 		JPanel painelDados = new JPanel();
 		painelDados.setBorder(new TitledBorder(new LineBorder(null), "Dados:", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		painelDados.setBackground(new Color(153, 255, 204));
+		painelDados.setBackground(new Color(216, 235, 255));
 		painelDados.setBounds(10, 75, 310, 265);
 		painelPrincipal.add(painelDados);
 		painelDados.setLayout(null);
@@ -229,14 +229,14 @@ public class FrmClientes extends JFrame {
 
 		btnRadioHomem = new JRadioButton("Homem");
 		btnRadioHomem.setFont(new Font("Verdana", Font.PLAIN, 11));
-		btnRadioHomem.setBackground(new Color(153, 255, 204));
+		btnRadioHomem.setBackground(new Color(216, 235, 255));
 		btnRadioHomem.setBounds(49, 127, 76, 23);
 		btnRadioHomem.setActionCommand("M");
 		painelDados.add(btnRadioHomem);
 
 		btnRadioMulher = new JRadioButton("Mulher");
 		btnRadioMulher.setFont(new Font("Verdana", Font.PLAIN, 11));
-		btnRadioMulher.setBackground(new Color(153, 255, 204));
+		btnRadioMulher.setBackground(new Color(216, 235, 255));
 		btnRadioMulher.setBounds(127, 127, 65, 23);
 		btnRadioMulher.setActionCommand("F");
 		painelDados.add(btnRadioMulher);
@@ -367,7 +367,7 @@ public class FrmClientes extends JFrame {
 
 		JPanel painelResultados = new JPanel();
 		painelResultados.setBorder(new TitledBorder(new LineBorder(null), "Resultados:", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		painelResultados.setBackground(new Color(153, 255, 204));
+		painelResultados.setBackground(new Color(216, 235, 255));
 		painelResultados.setBounds(10, 344, 310, 170);
 		painelPrincipal.add(painelResultados);
 		painelResultados.setLayout(null);
