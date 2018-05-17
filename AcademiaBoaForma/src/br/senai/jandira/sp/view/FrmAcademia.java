@@ -45,6 +45,7 @@ public class FrmAcademia extends JFrame {
 	private JScrollPane scrollTabela;
 	private JPanel painelTabela;
 	private DefaultTableModel modeloTabela;
+	private FrmClientes frmClientes;
 
 	// Método construtor de 'FrmAcademia'
 	public FrmAcademia() {
@@ -108,9 +109,10 @@ public class FrmAcademia extends JFrame {
 		// Evento do 'btnAdicionar' para abrir o 'FrmClientes'
 		btnAdicionar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				FrmClientes frmClientes = new FrmClientes("NOVO");
-				frmClientes.setVisible(true);
+				frmClientes = new FrmClientes("NOVO");
 				
+				// Abrir o 'FrmClientes'
+				frmClientes.criarFrmClientes(FrmAcademia.this);			
 			}
 		});
 		btnAdicionar
@@ -164,16 +166,6 @@ public class FrmAcademia extends JFrame {
 		btnSair.setBounds(401, 11, 65, 53);
 		painelBotoes.add(btnSair);
 		
-		JButton btnAtualizar = new JButton("");
-		btnAtualizar.setIcon(new ImageIcon(FrmAcademia.class.getResource("/br/senai/jandira/sp/images/atualizar.png")));
-		btnAtualizar.setToolTipText("Atualizar tabela");
-		btnAtualizar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				atualizarTabela();
-			}
-		});
-		btnAtualizar.setBounds(280, 11, 65, 53);
-		painelBotoes.add(btnAtualizar);
 	}
 
 	// Método para criar uma tabela
@@ -226,11 +218,12 @@ public class FrmAcademia extends JFrame {
 		scrollTabela.getViewport().setBackground(new Color(255, 255, 255));
 	}
 	
+	// Apagando o modelo e colocando outro na 'tabelaClientes'
 	public void atualizarTabela(){
-		DefaultTableModel modelo = (DefaultTableModel)tabelaClientes.getModel();
+		DefaultTableModel modeloAtualizado = (DefaultTableModel)tabelaClientes.getModel();
 		modeloTabela.setRowCount(0);
 		
-		modelo = new DefaultTableModel() {
+		modeloAtualizado = new DefaultTableModel() {
 
 			// Deixar as células da tabela não editáveis
 			@Override
@@ -239,7 +232,7 @@ public class FrmAcademia extends JFrame {
 			}
 		};
 		String[] nomesColunas = { "CPF", "NOME", "E-MAIL" };
-		modelo.setColumnIdentifiers(nomesColunas);
+		modeloAtualizado.setColumnIdentifiers(nomesColunas);
 
 		ClienteDAO clienteDAO = new ClienteDAO();
 		ArrayList<Cliente> clientes = new ArrayList<>();
@@ -253,9 +246,9 @@ public class FrmAcademia extends JFrame {
 			linha[1] = cliente.getNome();
 			linha[2] = cliente.getEmail();
 
-			modelo.addRow(linha);
+			modeloAtualizado.addRow(linha);
 		}
-		tabelaClientes.setModel(modelo);
+		tabelaClientes.setModel(modeloAtualizado);
 		
 		// Deixar as colunas da tabela fixas
 		tabelaClientes.getTableHeader().setReorderingAllowed(false);
@@ -294,7 +287,10 @@ public class FrmAcademia extends JFrame {
 			altura = (int) cliente.getAltura();
 			peso = (int) cliente.getPeso();
 
-			FrmClientes frmClientes = new FrmClientes(operacao);
+			frmClientes = new FrmClientes(operacao);
+			
+			// Abrir o 'FrmClientes'
+			frmClientes.criarFrmClientes(FrmAcademia.this);
 			frmClientes.setTxtCpf(cliente.getCpf());
 			frmClientes.setTxtNome(cliente.getNome());
 			frmClientes.setTxtEmail(cliente.getEmail());

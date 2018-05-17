@@ -63,6 +63,7 @@ public class FrmClientes extends JFrame {
 	private JTextPane TxtCaixaImc;
 	private JLabel lblRespostaFcm;
 	private JLabel lblRespostaTmb;
+	private FrmAcademia frmAcademia;
 
 	// Métodos setters do 'FrmClientes' para os campos
 	public void setTxtNome(String nome) {
@@ -447,16 +448,16 @@ public class FrmClientes extends JFrame {
 		btnDinamico.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
-				SimpleDateFormat toDate = new SimpleDateFormat("dd/MM/yyyy");
-				SimpleDateFormat toDataBase = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSSSSS");
+				SimpleDateFormat data = new SimpleDateFormat("dd/MM/yyyy");
+				SimpleDateFormat formatoBanco = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSSSSS");
 
 				Date usuarioDate = null;
 				String dateBanco = null;
 
 				// Pegando os valores dos campos e inserindo no Banco de Dados
 				try {
-					usuarioDate = toDate.parse(txtDtNasc.getText());
-					dateBanco = toDataBase.format(usuarioDate);
+					usuarioDate = data.parse(txtDtNasc.getText());
+					dateBanco = formatoBanco.format(usuarioDate);
 
 					Cliente cliente = new Cliente();
 					cliente.setCpf(txtCpf.getText());
@@ -494,6 +495,9 @@ public class FrmClientes extends JFrame {
 				} catch (Exception erro) {
 					JOptionPane.showMessageDialog(null, "Por favor, preencha todos os campos.");
 				}
+				
+				// Chamando o método do outro JFrame
+				frmAcademia.atualizarTabela();
 			}
 		});
 
@@ -544,4 +548,14 @@ public class FrmClientes extends JFrame {
 		lblRespostaFcm.setText("-");
 		txtNome.requestFocus();
 	}
+	
+	// Método para abrir o 'FrmClientes' e vincular com 'FrmAcademia'
+	public void criarFrmClientes(FrmAcademia frmAcademia){
+		this.frmAcademia = frmAcademia;
+		setVisible(true);
+	}
+	
+//	public void atualizarTabela(){
+//		frmAcademia.atualizarTabela();
+//	}
 }
