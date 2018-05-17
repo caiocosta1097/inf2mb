@@ -9,6 +9,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.Color;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
 
 import br.senai.jandira.sp.dao.ClienteDAO;
@@ -25,6 +26,7 @@ import java.awt.Insets;
 import javax.swing.SwingConstants;
 import javax.swing.ImageIcon;
 import javax.swing.JTextField;
+import javax.swing.JTextPane;
 import javax.swing.JRadioButton;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
@@ -58,7 +60,7 @@ public class FrmClientes extends JFrame {
 	private JComboBox cbAtividade;
 	private JLabel lblRespostaIdade;
 	private JLabel lblRespostaImc;
-	private JTextArea TxtCaixaImc;
+	private JTextPane TxtCaixaImc;
 	private JLabel lblRespostaFcm;
 	private JLabel lblRespostaTmb;
 
@@ -129,9 +131,11 @@ public class FrmClientes extends JFrame {
 		JLabel lblOperacao = new JLabel(operacao);
 		lblOperacao.setBackground(new Color(255, 255, 255));
 		lblOperacao.setHorizontalAlignment(SwingConstants.CENTER);
-		
-		/* Mudando a cor do 'lblOperacao' para vermelho se for para deletar ou
-		verde se for para adicionar ou editar */
+
+		/*
+		 * Mudando a cor do 'lblOperacao' para vermelho se for para deletar ou
+		 * verde se for para adicionar ou editar
+		 */
 		if (operacao.equals("EXCLUIR")) {
 			lblOperacao.setForeground(new Color(224, 48, 42));
 		} else {
@@ -143,7 +147,8 @@ public class FrmClientes extends JFrame {
 		painelTitulo.add(lblOperacao);
 
 		JPanel painelDados = new JPanel();
-		painelDados.setBorder(new TitledBorder(new LineBorder(null), "Dados:", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		painelDados.setBorder(
+				new TitledBorder(new LineBorder(null), "Dados:", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		painelDados.setBackground(new Color(216, 235, 255));
 		painelDados.setBounds(10, 75, 310, 265);
 		painelPrincipal.add(painelDados);
@@ -290,9 +295,9 @@ public class FrmClientes extends JFrame {
 		lblCm.setBounds(47, 180, 18, 14);
 		painelDados.add(lblCm);
 
-		JLabel lblQuilos = new JLabel("quilos");
+		JLabel lblQuilos = new JLabel("kg");
 		lblQuilos.setFont(new Font("Verdana", Font.PLAIN, 11));
-		lblQuilos.setBounds(105, 180, 34, 14);
+		lblQuilos.setBounds(105, 180, 24, 14);
 		painelDados.add(lblQuilos);
 
 		JLabel lblAtividade = new JLabel("N\u00EDvel de Atividade:");
@@ -344,7 +349,7 @@ public class FrmClientes extends JFrame {
 					lblRespostaIdade.setText(String.valueOf(cliente.getIdade() + " anos"));
 
 					lblRespostaImc.setText(String.valueOf(decimal.format(cliente.imc()) + " kg/m²"));
-					
+
 					TxtCaixaImc.setText(cliente.getRespostaImc());
 
 					lblRespostaTmb.setText(String.valueOf(decimal.format(cliente.tmb()) + " kcal"));
@@ -359,12 +364,12 @@ public class FrmClientes extends JFrame {
 		btnCalcular
 				.setIcon(new ImageIcon(FrmClientes.class.getResource("/br/senai/jandira/sp/images/calculadora.png")));
 		btnCalcular.setFont(new Font("Verdana", Font.PLAIN, 20));
-		btnCalcular.setBackground(new Color(255, 255, 255));
 		btnCalcular.setBounds(68, 213, 159, 41);
 		painelDados.add(btnCalcular);
 
 		JPanel painelResultados = new JPanel();
-		painelResultados.setBorder(new TitledBorder(new LineBorder(null), "Resultados:", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		painelResultados.setBorder(new TitledBorder(new LineBorder(null), "Resultados:", TitledBorder.LEADING,
+				TitledBorder.TOP, null, null));
 		painelResultados.setBackground(new Color(216, 235, 255));
 		painelResultados.setBounds(10, 344, 310, 170);
 		painelPrincipal.add(painelResultados);
@@ -400,9 +405,9 @@ public class FrmClientes extends JFrame {
 		lblRespostaTmb.setBounds(59, 116, 238, 14);
 		painelResultados.add(lblRespostaTmb);
 
-		TxtCaixaImc = new JTextArea();
-		TxtCaixaImc.setWrapStyleWord(true);
-		TxtCaixaImc.setLineWrap(true);
+		TxtCaixaImc = new JTextPane();
+//		TxtCaixaImc.setWrapStyleWord(true);
+//		TxtCaixaImc.setLineWrap(true);
 		TxtCaixaImc.setEditable(false);
 		TxtCaixaImc.setFont(new Font("Verdana", Font.PLAIN, 11));
 		TxtCaixaImc.setBounds(59, 47, 238, 58);
@@ -434,7 +439,6 @@ public class FrmClientes extends JFrame {
 		});
 		btnSair.setBounds(254, 520, 58, 52);
 		painelPrincipal.add(btnSair);
-		btnSair.setBackground(new Color(255, 255, 255));
 		btnSair.setIcon(new ImageIcon(FrmClientes.class.getResource("/br/senai/jandira/sp/images/sair.png")));
 
 		JButton btnDinamico = new JButton("");
@@ -474,6 +478,7 @@ public class FrmClientes extends JFrame {
 					if (lblOperacao.getText().equals("NOVO")) {
 						clienteDAO.gravar();
 						limpar();
+
 					} else if (lblOperacao.getText().equals("EDITAR")) {
 						clienteDAO.atualizar(txtCpf.getText());
 					} else if (lblOperacao.getText().equals("EXCLUIR")) {
@@ -494,15 +499,14 @@ public class FrmClientes extends JFrame {
 
 		// Mudar o ícone se o 'lblOperacao' for 'EXCLUIR'
 		if (operacao.equals("EXCLUIR")) {
-			btnDinamico.setIcon(new ImageIcon(FrmClientes.class.getResource("/br/senai/jandira/sp/images/deletar.png")));
+			btnDinamico
+					.setIcon(new ImageIcon(FrmClientes.class.getResource("/br/senai/jandira/sp/images/deletar.png")));
 			btnDinamico.setToolTipText("Excluir");
 
 		} else {
 			btnDinamico.setIcon(new ImageIcon(FrmClientes.class.getResource("/br/senai/jandira/sp/images/salvar.png")));
 			btnDinamico.setToolTipText("Salvar");
 		}
-
-		btnDinamico.setBackground(new Color(255, 255, 255));
 
 		// Bloquear o 'txtCpf' se for 'EDITAR'
 		if (operacao.equals("EDITAR")) {

@@ -44,7 +44,7 @@ public class FrmAcademia extends JFrame {
 	private JTable tabelaClientes;
 	private JScrollPane scrollTabela;
 	private JPanel painelTabela;
-	DefaultTableModel modeloTabela;
+	private DefaultTableModel modeloTabela;
 
 	// Método construtor de 'FrmAcademia'
 	public FrmAcademia() {
@@ -111,9 +111,9 @@ public class FrmAcademia extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				FrmClientes frmClientes = new FrmClientes("NOVO");
 				frmClientes.setVisible(true);
+				
 			}
 		});
-		btnAdicionar.setBackground(new Color(255, 255, 255));
 		btnAdicionar
 				.setIcon(new ImageIcon(FrmAcademia.class.getResource("/br/senai/jandira/sp/images/add_cliente.png")));
 		btnAdicionar.setBounds(10, 11, 65, 53);
@@ -128,7 +128,6 @@ public class FrmAcademia extends JFrame {
 				abrirJanelaCliente("EDITAR");
 			}
 		});
-		btnEditar.setBackground(new Color(255, 255, 255));
 		btnEditar.setIcon(
 				new ImageIcon(FrmAcademia.class.getResource("/br/senai/jandira/sp/images/editar_cliente.png")));
 		btnEditar.setBounds(100, 11, 65, 53);
@@ -143,10 +142,9 @@ public class FrmAcademia extends JFrame {
 				abrirJanelaCliente("EXCLUIR");
 			}
 		});
-		btnExcluir.setBackground(new Color(255, 255, 255));
 		btnExcluir.setIcon(
 				new ImageIcon(FrmAcademia.class.getResource("/br/senai/jandira/sp/images/deletar_cliente.png")));
-		btnExcluir.setBounds(189, 11, 65, 53);
+		btnExcluir.setBounds(190, 11, 65, 53);
 		painelBotoes.add(btnExcluir);
 
 		// Evento do 'btnSair' para encerrar a aplicação
@@ -163,10 +161,20 @@ public class FrmAcademia extends JFrame {
 
 			}
 		});
-		btnSair.setBackground(new Color(255, 255, 255));
 		btnSair.setIcon(new ImageIcon(FrmAcademia.class.getResource("/br/senai/jandira/sp/images/sair.png")));
 		btnSair.setBounds(401, 11, 65, 53);
 		painelBotoes.add(btnSair);
+		
+		JButton btnAtualizar = new JButton("");
+		btnAtualizar.setIcon(new ImageIcon(FrmAcademia.class.getResource("/br/senai/jandira/sp/images/atualizar.png")));
+		btnAtualizar.setToolTipText("Atualizar tabela");
+		btnAtualizar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				atualizarTabela();
+			}
+		});
+		btnAtualizar.setBounds(280, 11, 65, 53);
+		painelBotoes.add(btnAtualizar);
 	}
 
 	// Método para criar uma tabela
@@ -220,7 +228,49 @@ public class FrmAcademia extends JFrame {
 	}
 	
 	public void atualizarTabela(){
-		modeloTabela.fireTableDataChanged();
+		DefaultTableModel modelo = (DefaultTableModel)tabelaClientes.getModel();
+		modeloTabela.setRowCount(0);
+		
+		modelo = new DefaultTableModel() {
+
+			// Deixar as células da tabela não editáveis
+			@Override
+			public boolean isCellEditable(int row, int col) {
+				return false;
+			}
+		};
+		String[] nomesColunas = { "CPF", "NOME", "E-MAIL" };
+		modelo.setColumnIdentifiers(nomesColunas);
+
+		ClienteDAO clienteDAO = new ClienteDAO();
+		ArrayList<Cliente> clientes = new ArrayList<>();
+
+		clientes = clienteDAO.getClientes();
+
+		Object[] linha = new Object[3];
+		
+		for (Cliente cliente : clientes) {
+			linha[0] = cliente.getCpf();
+			linha[1] = cliente.getNome();
+			linha[2] = cliente.getEmail();
+
+			modelo.addRow(linha);
+		}
+		tabelaClientes.setModel(modelo);
+		
+		// Deixar as colunas da tabela fixas
+		tabelaClientes.getTableHeader().setReorderingAllowed(false);
+		
+		// Deixar o cabeçalho centralizado
+		((DefaultTableCellRenderer) tabelaClientes.getTableHeader().getDefaultRenderer())
+				.setHorizontalAlignment(SwingConstants.CENTER);
+		
+		tabelaClientes.getColumnModel().getColumn(0).setMinWidth(100);
+		tabelaClientes.getColumnModel().getColumn(1).setMinWidth(170);
+		tabelaClientes.getColumnModel().getColumn(2).setMinWidth(190);
+		tabelaClientes.setFont(new Font("Verdana", Font.PLAIN, 11));
+		scrollTabela.setViewportView(tabelaClientes);
+		scrollTabela.getViewport().setBackground(new Color(255, 255, 255));
 	}
 	
 	/*
