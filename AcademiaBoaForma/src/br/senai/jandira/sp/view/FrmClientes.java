@@ -115,9 +115,9 @@ public class FrmClientes extends JFrame {
 		painelPrincipal.setLayout(null);
 
 		JPanel painelTitulo = new JPanel();
-		painelTitulo.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+		painelTitulo.setBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), null));
 		painelTitulo.setBackground(new Color(83, 125, 193));
-		painelTitulo.setBounds(0, 0, 328, 64);
+		painelTitulo.setBounds(-5, 0, 338, 64);
 		painelPrincipal.add(painelTitulo);
 		painelTitulo.setLayout(null);
 

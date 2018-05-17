@@ -61,8 +61,8 @@ public class FrmAcademia extends JFrame {
 
 		JPanel painelTitulo = new JPanel();
 		painelTitulo.setBackground(new Color(83, 125, 193));
-		painelTitulo.setBorder(new EtchedBorder(EtchedBorder.RAISED, null, null));
-		painelTitulo.setBounds(0, 0, 494, 64);
+		painelTitulo.setBorder(new EtchedBorder(EtchedBorder.RAISED, new Color(255, 255, 255), null));
+		painelTitulo.setBounds(-5, 0, 504, 64);
 		painelPrincipal.add(painelTitulo);
 		painelTitulo.setLayout(null);
 
@@ -97,7 +97,6 @@ public class FrmAcademia extends JFrame {
 		criarTabela();
 
 		JPanel painelBotoes = new JPanel();
-		painelBotoes.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		painelBotoes.setBackground(new Color(83, 125, 193));
 		painelBotoes.setBounds(0, 296, 494, 75);
 		painelPrincipal.add(painelBotoes);
