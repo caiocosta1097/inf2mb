@@ -20,6 +20,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.Font;
+import java.awt.Insets;
+
 import javax.swing.SwingConstants;
 import javax.swing.ImageIcon;
 import javax.swing.JTextField;
@@ -56,7 +58,7 @@ public class FrmClientes extends JFrame {
 	private JComboBox cbAtividade;
 	private JLabel lblRespostaIdade;
 	private JLabel lblRespostaImc;
-	private JLabel lblCaixaImc;
+	private JTextArea TxtCaixaImc;
 	private JLabel lblRespostaFcm;
 	private JLabel lblRespostaTmb;
 
@@ -343,7 +345,7 @@ public class FrmClientes extends JFrame {
 
 					lblRespostaImc.setText(String.valueOf(decimal.format(cliente.imc()) + " kg/m²"));
 					
-					lblCaixaImc.setText(cliente.getRespostaImc());
+					TxtCaixaImc.setText(cliente.getRespostaImc());
 
 					lblRespostaTmb.setText(String.valueOf(decimal.format(cliente.tmb()) + " kcal"));
 
@@ -398,13 +400,13 @@ public class FrmClientes extends JFrame {
 		lblRespostaTmb.setBounds(59, 116, 238, 14);
 		painelResultados.add(lblRespostaTmb);
 
-		lblCaixaImc = new JLabel();
-		lblCaixaImc.setFont(new Font("Verdana", Font.PLAIN, 11));
-		lblCaixaImc.setBorder(new LineBorder(new Color(0, 0, 0)));
-		lblCaixaImc.setBackground(new Color(255, 255, 255));
-		lblCaixaImc.setOpaque(true);
-		lblCaixaImc.setBounds(59, 47, 238, 58);
-		painelResultados.add(lblCaixaImc);
+		TxtCaixaImc = new JTextArea();
+		TxtCaixaImc.setWrapStyleWord(true);
+		TxtCaixaImc.setLineWrap(true);
+		TxtCaixaImc.setEditable(false);
+		TxtCaixaImc.setFont(new Font("Verdana", Font.PLAIN, 11));
+		TxtCaixaImc.setBounds(59, 47, 238, 58);
+		painelResultados.add(TxtCaixaImc);
 
 		JLabel lblIdade = new JLabel("Idade:");
 		lblIdade.setFont(new Font("Verdana", Font.PLAIN, 11));
@@ -487,7 +489,6 @@ public class FrmClientes extends JFrame {
 				} catch (Exception erro) {
 					JOptionPane.showMessageDialog(null, "Por favor, preencha todos os campos.");
 				}
-
 			}
 		});
 
@@ -533,7 +534,7 @@ public class FrmClientes extends JFrame {
 		btnGrupoSexo.clearSelection();
 		cbAtividade.setSelectedIndex(0);
 		lblRespostaImc.setText("-");
-		lblCaixaImc.setText("");
+		TxtCaixaImc.setText("");
 		lblRespostaIdade.setText("-");
 		lblRespostaTmb.setText("-");
 		lblRespostaFcm.setText("-");

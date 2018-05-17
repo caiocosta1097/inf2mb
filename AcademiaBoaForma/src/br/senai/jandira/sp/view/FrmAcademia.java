@@ -44,6 +44,7 @@ public class FrmAcademia extends JFrame {
 	private JTable tabelaClientes;
 	private JScrollPane scrollTabela;
 	private JPanel painelTabela;
+	DefaultTableModel modeloTabela;
 
 	// Método construtor de 'FrmAcademia'
 	public FrmAcademia() {
@@ -176,7 +177,7 @@ public class FrmAcademia extends JFrame {
 		
 		tabelaClientes = new JTable();
 
-		DefaultTableModel modeloTabela = new DefaultTableModel() {
+		modeloTabela = new DefaultTableModel() {
 
 			// Deixar as células da tabela não editáveis
 			@Override
@@ -201,7 +202,6 @@ public class FrmAcademia extends JFrame {
 
 			modeloTabela.addRow(linha);
 		}
-		
 		tabelaClientes.setModel(modeloTabela);
 		
 		// Deixar as colunas da tabela fixas
@@ -218,7 +218,11 @@ public class FrmAcademia extends JFrame {
 		scrollTabela.setViewportView(tabelaClientes);
 		scrollTabela.getViewport().setBackground(new Color(255, 255, 255));
 	}
-
+	
+	public void atualizarTabela(){
+		modeloTabela.fireTableDataChanged();
+	}
+	
 	/*
 	 * Método para selecionar um cliente na tabela e puxar seus dados no Banco
 	 * de Dados

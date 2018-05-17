@@ -128,19 +128,19 @@ public class Cliente {
 		imc = peso / (altura / 100 * altura / 100);
 
 		if (imc <= 16.9) {
-			respostaImc = "<html><body>Muito abaixo do peso:<br>Queda de cabelo, infertilidade, ausência menstrual.";
+			respostaImc = "Muito abaixo do peso:\nQueda de cabelo, infertilidade, ausência menstrual.";
 		} else if (imc <= 18.4) {
-			respostaImc = "<html><body>Abaixo do peso:<br>Fadiga, stress, ansiedade.";
+			respostaImc = "Abaixo do peso:\nFadiga, stress, ansiedade.";
 		} else if (imc <= 24.9) {
-			respostaImc = "<html><body>Peso normal:<br>Menor risco de doenças cardíacas e vasculares.";
+			respostaImc = "Peso normal:\nMenor risco de doenças cardíacas e vasculares.";
 		} else if (imc <= 29.9) {
-			respostaImc = "<html><body>Acima do peso:<br>Fadiga, má circulação, varizes.";
+			respostaImc = "Acima do peso:\nFadiga, má circulação, varizes.";
 		} else if (imc <= 34.9) {
-			respostaImc = "<html><body>Obesidade Grau I:<br>Diabetes, angina, infarto, aterosclerose.";
+			respostaImc = "Obesidade Grau I:\nDiabetes, angina, infarto, aterosclerose.";
 		} else if (imc <= 40) {
-			respostaImc = "<html><body>Obesidade Grau II:<br>Apneia do sono, falta de ar.";
+			respostaImc = "Obesidade Grau II:\nApneia do sono, falta de ar.";
 		} else if (imc > 40) {
-			respostaImc = "<html><body>Obesidade Grau III:<br>Refluxo, dificuldade para se mover, escaras, diabetes, infarto, AVC.";
+			respostaImc = "Obesidade Grau III:\nRefluxo, dificuldade para se mover, escaras, diabetes, infarto, AVC.";
 		}
 
 		return imc;
