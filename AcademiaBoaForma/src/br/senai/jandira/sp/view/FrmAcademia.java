@@ -198,9 +198,12 @@ public class FrmAcademia extends JFrame {
 		((DefaultTableCellRenderer) tabelaClientes.getTableHeader().getDefaultRenderer())
 				.setHorizontalAlignment(SwingConstants.CENTER);
 		
-		tabelaClientes.getColumnModel().getColumn(0).setMinWidth(100);
-		tabelaClientes.getColumnModel().getColumn(1).setMinWidth(170);
-		tabelaClientes.getColumnModel().getColumn(2).setMinWidth(190);
+		tabelaClientes.getColumnModel().getColumn(0).setPreferredWidth(110);
+		tabelaClientes.getColumnModel().getColumn(0).setResizable(false);
+		tabelaClientes.getColumnModel().getColumn(1).setPreferredWidth(180);
+		tabelaClientes.getColumnModel().getColumn(1).setResizable(false);
+		tabelaClientes.getColumnModel().getColumn(2).setPreferredWidth(200);
+		tabelaClientes.getColumnModel().getColumn(2).setResizable(false);
 		tabelaClientes.setFont(new Font("Verdana", Font.PLAIN, 11));
 		scrollTabela.setViewportView(tabelaClientes);
 		scrollTabela.getViewport().setBackground(new Color(255, 255, 255));
