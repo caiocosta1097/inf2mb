@@ -54,7 +54,7 @@ public class FrmAcademia extends JFrame {
 		setIconImage(Toolkit.getDefaultToolkit()
 				.getImage(FrmAcademia.class.getResource("/br/senai/jandira/sp/images/academia.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 500, 400);
+		setBounds(100, 100, 500, 403);
 		painelPrincipal = new JPanel();
 		painelPrincipal.setBackground(new Color(83, 125, 193));
 		setContentPane(painelPrincipal);
@@ -180,27 +180,15 @@ public class FrmAcademia extends JFrame {
 
 			// Deixar as células da tabela não editáveis
 			@Override
-			public boolean isCellEditable(int row, int col) {
+			public boolean isCellEditable(int linha, int coluna) {
 				return false;
 			}
 		};
 		String[] nomesColunas = { "CPF", "NOME", "E-MAIL" };
 		modeloTabela.setColumnIdentifiers(nomesColunas);
-
-		ClienteDAO clienteDAO = new ClienteDAO();
-		ArrayList<Cliente> clientes = new ArrayList<>();
-
-		clientes = clienteDAO.getClientes();
-
-		Object[] linha = new Object[3];
 		
-		for (Cliente cliente : clientes) {
-			linha[0] = cliente.getCpf();
-			linha[1] = cliente.getNome();
-			linha[2] = cliente.getEmail();
-
-			modeloTabela.addRow(linha);
-		}
+		// Gerando os clientes na tabela
+		gerarClientes();
 		tabelaClientes.setModel(modeloTabela);
 		
 		// Deixar as colunas da tabela fixas
@@ -218,22 +206,14 @@ public class FrmAcademia extends JFrame {
 		scrollTabela.getViewport().setBackground(new Color(255, 255, 255));
 	}
 	
-	// Apagando o modelo e colocando outro na 'tabelaClientes'
+	// Apaga toda a tabela e gera os clientes novamente
 	public void atualizarTabela(){
-		DefaultTableModel modeloAtualizado = (DefaultTableModel)tabelaClientes.getModel();
 		modeloTabela.setRowCount(0);
-		
-		modeloAtualizado = new DefaultTableModel() {
-
-			// Deixar as células da tabela não editáveis
-			@Override
-			public boolean isCellEditable(int row, int col) {
-				return false;
-			}
-		};
-		String[] nomesColunas = { "CPF", "NOME", "E-MAIL" };
-		modeloAtualizado.setColumnIdentifiers(nomesColunas);
-
+		gerarClientes();
+	}
+	
+	// gerando os clientes a partir do Banco de Dados
+	public void gerarClientes(){
 		ClienteDAO clienteDAO = new ClienteDAO();
 		ArrayList<Cliente> clientes = new ArrayList<>();
 
@@ -246,23 +226,8 @@ public class FrmAcademia extends JFrame {
 			linha[1] = cliente.getNome();
 			linha[2] = cliente.getEmail();
 
-			modeloAtualizado.addRow(linha);
+			modeloTabela.addRow(linha);
 		}
-		tabelaClientes.setModel(modeloAtualizado);
-		
-		// Deixar as colunas da tabela fixas
-		tabelaClientes.getTableHeader().setReorderingAllowed(false);
-		
-		// Deixar o cabeçalho centralizado
-		((DefaultTableCellRenderer) tabelaClientes.getTableHeader().getDefaultRenderer())
-				.setHorizontalAlignment(SwingConstants.CENTER);
-		
-		tabelaClientes.getColumnModel().getColumn(0).setMinWidth(100);
-		tabelaClientes.getColumnModel().getColumn(1).setMinWidth(170);
-		tabelaClientes.getColumnModel().getColumn(2).setMinWidth(190);
-		tabelaClientes.setFont(new Font("Verdana", Font.PLAIN, 11));
-		scrollTabela.setViewportView(tabelaClientes);
-		scrollTabela.getViewport().setBackground(new Color(255, 255, 255));
 	}
 	
 	/*
@@ -288,9 +253,6 @@ public class FrmAcademia extends JFrame {
 			peso = (int) cliente.getPeso();
 
 			frmClientes = new FrmClientes(operacao);
-			
-			// Abrir o 'FrmClientes'
-			frmClientes.criarFrmClientes(FrmAcademia.this);
 			frmClientes.setTxtCpf(cliente.getCpf());
 			frmClientes.setTxtNome(cliente.getNome());
 			frmClientes.setTxtEmail(cliente.getEmail());
@@ -299,8 +261,9 @@ public class FrmAcademia extends JFrame {
 			frmClientes.setTxtPeso(String.valueOf(peso));
 			frmClientes.setSexo(cliente.getSexo());
 			frmClientes.setCbAtividade(cliente.getAtividade());
-
-			frmClientes.setVisible(true);
+			
+			// Abrir o 'FrmClientes'
+			frmClientes.criarFrmClientes(FrmAcademia.this);
 		} catch (Exception erro) {
 			JOptionPane.showMessageDialog(null, "Selecione um contato!", "Atenção", JOptionPane.INFORMATION_MESSAGE);
 		}

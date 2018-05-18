@@ -554,8 +554,4 @@ public class FrmClientes extends JFrame {
 		this.frmAcademia = frmAcademia;
 		setVisible(true);
 	}
-	
-//	public void atualizarTabela(){
-//		frmAcademia.atualizarTabela();
-//	}
 }
